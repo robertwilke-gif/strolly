@@ -17,6 +17,13 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { findPoiInRadius, haversineDistance, type LatLng } from '@/lib/geo'
+import {
+  buildViewport,
+  osmTileUrl,
+  projectToViewport,
+  TILE_SIZE,
+  type TileViewport,
+} from '@/lib/tiles'
 import type { Tour, TourPoi } from '@/content/tours/altstadt'
 
 type Status = 'idle' | 'walking' | 'playing' | 'paused' | 'completed'
@@ -132,7 +139,7 @@ export function TourPlayer({ tour }: TourPlayerProps) {
 
   return (
     <section className="max-w-container mx-auto px-6 pb-16 grid lg:grid-cols-[1.4fr_1fr] gap-6">
-      <div className="bg-navy rounded-lg overflow-hidden border border-navy-soft aspect-[4/5] lg:aspect-auto lg:min-h-[560px] relative">
+      <div className="bg-gray-100 rounded-lg overflow-hidden border border-gray-200 aspect-[4/5] lg:aspect-auto lg:min-h-[560px] relative">
         <TourMap
           pois={tour.pois}
           currentIndex={currentIndex}
@@ -440,12 +447,6 @@ function computeBounds(pois: TourPoi[]): MapBounds {
   }
 }
 
-function project(p: LatLng, bounds: MapBounds, width: number, height: number) {
-  const x = ((p.lng - bounds.minLng) / (bounds.maxLng - bounds.minLng)) * width
-  const y = ((bounds.maxLat - p.lat) / (bounds.maxLat - bounds.minLat)) * height
-  return { x, y }
-}
-
 function TourMap({
   pois,
   currentIndex,
@@ -459,135 +460,156 @@ function TourMap({
   bounds: MapBounds
   showRoute: boolean
 }) {
-  const W = 400
-  const H = 500
+  const W = 700
+  const H = 700
+  const vp: TileViewport = buildViewport(bounds, { width: W, height: H })
 
-  const points = pois.map((p) => ({ poi: p, ...project(p, bounds, W, H) }))
-  const userPoint = userPos ? project(userPos, bounds, W, H) : null
+  const tiles: { x: number; y: number; left: number; top: number }[] = []
+  for (let x = vp.xMin; x <= vp.xMax; x++) {
+    for (let y = vp.yMin; y <= vp.yMax; y++) {
+      tiles.push({
+        x,
+        y,
+        left: x * TILE_SIZE - vp.originPx.x,
+        top: y * TILE_SIZE - vp.originPx.y,
+      })
+    }
+  }
+
+  const points = pois.map((p) => ({ poi: p, ...projectToViewport(p, vp) }))
+  const userPoint = userPos ? projectToViewport(userPos, vp) : null
   const target = pois[currentIndex] ? points[currentIndex] : null
 
   return (
-    <svg
-      viewBox={`0 0 ${W} ${H}`}
-      preserveAspectRatio="xMidYMid slice"
-      className="absolute inset-0 w-full h-full"
-    >
-      <defs>
-        <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
-          <path
-            d="M 32 0 L 0 0 0 32"
-            fill="none"
-            stroke="#ffffff"
-            strokeOpacity="0.05"
-            strokeWidth="1"
+    <>
+      <svg
+        viewBox={`0 0 ${W} ${H}`}
+        preserveAspectRatio="xMidYMid slice"
+        className="absolute inset-0 w-full h-full"
+      >
+        {/* OSM raster tiles inside the SVG so they scale and crop with the markers */}
+        {tiles.map((t) => (
+          <image
+            key={`${t.x}-${t.y}`}
+            href={osmTileUrl(t.x, t.y, vp.zoom)}
+            x={t.left}
+            y={t.top}
+            width={TILE_SIZE}
+            height={TILE_SIZE}
           />
-        </pattern>
-      </defs>
+        ))}
 
-      <rect width={W} height={H} fill="#15263A" />
-      <rect width={W} height={H} fill="url(#grid)" />
-
-      {/* Connecting path along all PoI in order (the planned tour) */}
-      <polyline
-        points={points.map((p) => `${p.x},${p.y}`).join(' ')}
-        fill="none"
-        stroke="#ffffff"
-        strokeOpacity="0.12"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-
-      {/* Active route from user to target */}
-      {showRoute && userPoint && target && (
-        <line
-          x1={userPoint.x}
-          y1={userPoint.y}
-          x2={target.x}
-          y2={target.y}
-          stroke="#00B3B3"
-          strokeWidth="2.5"
+        {/* Connecting path along all PoI in order (the planned tour) */}
+        <polyline
+          points={points.map((p) => `${p.x},${p.y}`).join(' ')}
+          fill="none"
+          stroke="#0D1B2A"
+          strokeOpacity="0.35"
+          strokeWidth="2"
           strokeLinecap="round"
-          strokeDasharray="4 6"
-          className="animate-route-walk"
+          strokeLinejoin="round"
         />
-      )}
 
-      {/* PoI markers */}
-      {points.map(({ poi, x, y }, i) => {
-        const isPast = i < currentIndex
-        const isCurrent = i === currentIndex
-        const color = isPast ? '#14723E' : isCurrent ? '#00B3B3' : '#ffffff'
-        const radius = isCurrent ? 11 : 8
-        return (
-          <g key={poi.id}>
-            {isCurrent && (
-              <circle cx={x} cy={y} r="20" fill="#00B3B3" fillOpacity="0.25">
-                <animate
-                  attributeName="r"
-                  values="14;26;14"
-                  dur="2.4s"
-                  repeatCount="indefinite"
-                />
-                <animate
-                  attributeName="fill-opacity"
-                  values="0.35;0;0.35"
-                  dur="2.4s"
-                  repeatCount="indefinite"
-                />
-              </circle>
-            )}
+        {/* Active route from user to target */}
+        {showRoute && userPoint && target && (
+          <line
+            x1={userPoint.x}
+            y1={userPoint.y}
+            x2={target.x}
+            y2={target.y}
+            stroke="#00B3B3"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            strokeDasharray="5 8"
+            className="animate-route-walk"
+          />
+        )}
+
+        {/* PoI markers */}
+        {points.map(({ poi, x, y }, i) => {
+          const isPast = i < currentIndex
+          const isCurrent = i === currentIndex
+          const color = isPast ? '#14723E' : isCurrent ? '#00B3B3' : '#ffffff'
+          const radius = isCurrent ? 13 : 10
+          return (
+            <g key={poi.id}>
+              {isCurrent && (
+                <circle cx={x} cy={y} r="20" fill="#00B3B3" fillOpacity="0.25">
+                  <animate
+                    attributeName="r"
+                    values="16;30;16"
+                    dur="2.4s"
+                    repeatCount="indefinite"
+                  />
+                  <animate
+                    attributeName="fill-opacity"
+                    values="0.4;0;0.4"
+                    dur="2.4s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+              )}
+              <circle
+                cx={x}
+                cy={y}
+                r={radius}
+                fill={color}
+                stroke="#0D1B2A"
+                strokeWidth="2"
+              />
+              <text
+                x={x}
+                y={y + 3}
+                textAnchor="middle"
+                fontFamily="var(--font-head)"
+                fontSize="11"
+                fontWeight="700"
+                fill={isCurrent || isPast ? '#ffffff' : '#0D1B2A'}
+              >
+                {poi.order}
+              </text>
+            </g>
+          )
+        })}
+
+        {/* User position (only when known) */}
+        {userPoint && (
+          <g>
+            <circle cx={userPoint.x} cy={userPoint.y} r="16" fill="#FFC107" fillOpacity="0.22">
+              <animate
+                attributeName="r"
+                values="12;24;12"
+                dur="1.8s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="fill-opacity"
+                values="0.35;0;0.35"
+                dur="1.8s"
+                repeatCount="indefinite"
+              />
+            </circle>
             <circle
-              cx={x}
-              cy={y}
-              r={radius}
-              fill={color}
+              cx={userPoint.x}
+              cy={userPoint.y}
+              r="7"
+              fill="#FFC107"
               stroke="#0D1B2A"
               strokeWidth="2"
             />
-            <text
-              x={x}
-              y={y + 3}
-              textAnchor="middle"
-              fontFamily="var(--font-head)"
-              fontSize="10"
-              fontWeight="700"
-              fill={isCurrent || isPast ? '#ffffff' : '#0D1B2A'}
-            >
-              {poi.order}
-            </text>
           </g>
-        )
-      })}
+        )}
+      </svg>
 
-      {/* User position (only when known) */}
-      {userPoint && (
-        <g>
-          <circle
-            cx={userPoint.x}
-            cy={userPoint.y}
-            r="6"
-            fill="#FFC107"
-            stroke="#0D1B2A"
-            strokeWidth="2"
-          />
-          <circle cx={userPoint.x} cy={userPoint.y} r="14" fill="#FFC107" fillOpacity="0.18">
-            <animate
-              attributeName="r"
-              values="10;22;10"
-              dur="1.8s"
-              repeatCount="indefinite"
-            />
-            <animate
-              attributeName="fill-opacity"
-              values="0.3;0;0.3"
-              dur="1.8s"
-              repeatCount="indefinite"
-            />
-          </circle>
-        </g>
-      )}
-    </svg>
+      <a
+        href="https://www.openstreetmap.org/copyright"
+        target="_blank"
+        rel="noreferrer"
+        className="absolute bottom-1 right-1 text-[10px] bg-white/85 text-navy hover:text-teal-dark px-1.5 py-0.5 rounded"
+      >
+        © OpenStreetMap
+      </a>
+    </>
   )
 }
 
