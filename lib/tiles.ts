@@ -56,8 +56,9 @@ export function chooseZoom(
 export function buildViewport(
   bounds: { minLat: number; maxLat: number; minLng: number; maxLng: number },
   viewportPx: { width: number; height: number },
+  explicitZoom?: number,
 ): TileViewport {
-  const zoom = chooseZoom(bounds, viewportPx)
+  const zoom = explicitZoom ?? chooseZoom(bounds, viewportPx)
   const ne = latLngToPixel({ lat: bounds.maxLat, lng: bounds.maxLng }, zoom)
   const sw = latLngToPixel({ lat: bounds.minLat, lng: bounds.minLng }, zoom)
 

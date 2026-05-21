@@ -9,16 +9,19 @@ import {
   CircleCheck,
   Headphones,
   MapPin,
+  Minus,
   Navigation,
   Pause,
   Play,
+  Plus,
+  SkipForward,
   Sparkles,
-  Square,
 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { findPoiInRadius, haversineDistance, type LatLng } from '@/lib/geo'
 import {
   buildViewport,
+  chooseZoom,
   osmTileUrl,
   projectToViewport,
   TILE_SIZE,
@@ -47,6 +50,21 @@ export function TourPlayer({ tour }: TourPlayerProps) {
   const isDone = currentIndex >= tour.pois.length
 
   const bounds = useMemo(() => computeBounds(tour.pois), [tour.pois])
+  const initialZoom = useMemo(
+    () => chooseZoom(bounds, { width: 700, height: 700 }),
+    [bounds],
+  )
+  const [mapZoom, setMapZoom] = useState(initialZoom)
+
+  const minMapZoom = initialZoom - 2
+  const maxMapZoom = initialZoom + 3
+
+  function zoomIn() {
+    setMapZoom((z) => Math.min(z + 1, maxMapZoom))
+  }
+  function zoomOut() {
+    setMapZoom((z) => Math.max(z - 1, minMapZoom))
+  }
 
   // Cleanup on unmount
   useEffect(() => {
@@ -145,7 +163,14 @@ export function TourPlayer({ tour }: TourPlayerProps) {
           currentIndex={currentIndex}
           userPos={userPos}
           bounds={bounds}
+          zoom={mapZoom}
           showRoute={status === 'walking' && !isDone}
+        />
+        <MapZoomControls
+          onZoomIn={zoomIn}
+          onZoomOut={zoomOut}
+          canZoomIn={mapZoom < maxMapZoom}
+          canZoomOut={mapZoom > minMapZoom}
         />
       </div>
 
@@ -335,8 +360,8 @@ function PlayingPanel({
           onClick={onStop}
           className="!bg-transparent !border-white/30 !text-white hover:!border-white"
         >
-          <Square size={14} fill="currentColor" />
-          Stopp
+          <SkipForward size={14} fill="currentColor" />
+          Überspringen
         </Button>
       </div>
     </div>
@@ -452,17 +477,19 @@ function TourMap({
   currentIndex,
   userPos,
   bounds,
+  zoom,
   showRoute,
 }: {
   pois: TourPoi[]
   currentIndex: number
   userPos: LatLng | null
   bounds: MapBounds
+  zoom: number
   showRoute: boolean
 }) {
   const W = 700
   const H = 700
-  const vp: TileViewport = buildViewport(bounds, { width: W, height: H })
+  const vp: TileViewport = buildViewport(bounds, { width: W, height: H }, zoom)
 
   const tiles: { x: number; y: number; left: number; top: number }[] = []
   for (let x = vp.xMin; x <= vp.xMax; x++) {
@@ -610,6 +637,41 @@ function TourMap({
         © OpenStreetMap
       </a>
     </>
+  )
+}
+
+function MapZoomControls({
+  onZoomIn,
+  onZoomOut,
+  canZoomIn,
+  canZoomOut,
+}: {
+  onZoomIn: () => void
+  onZoomOut: () => void
+  canZoomIn: boolean
+  canZoomOut: boolean
+}) {
+  return (
+    <div className="absolute top-3 right-3 flex flex-col gap-1 z-10">
+      <button
+        type="button"
+        onClick={onZoomIn}
+        disabled={!canZoomIn}
+        aria-label="Reinzoomen"
+        className="w-10 h-10 bg-white text-navy rounded-md shadow-md grid place-items-center hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+      >
+        <Plus size={18} strokeWidth={2.5} />
+      </button>
+      <button
+        type="button"
+        onClick={onZoomOut}
+        disabled={!canZoomOut}
+        aria-label="Rauszoomen"
+        className="w-10 h-10 bg-white text-navy rounded-md shadow-md grid place-items-center hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+      >
+        <Minus size={18} strokeWidth={2.5} />
+      </button>
+    </div>
   )
 }
 
