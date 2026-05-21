@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="Strolly Mark (monochrome)">
+  
+  <g fill="currentColor">
+    
+    <path d="M128,16 C72,16 28,58 28,112 C28,156 60,190 104,222 L128,242 L152,222 C196,190 228,156 228,112 C228,58 184,16 128,16 Z"></path>
+  </g>
+  
+  <g fill="#FFFFFF">
+    
+    <path d="M86,108 q14,-14 28,0" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round"></path>
+    
+    <circle cx="168" cy="108" r="9"></circle>
+    
+    <path d="M98,146 Q128,174 158,146" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round"></path>
+  </g>
+  <g fill="currentColor">
+    
+    <path d="M32,104 C32,32 96,-12 128,-12 C160,-12 224,32 224,104 L216,104 C216,46 168,8 128,8 C88,8 40,46 40,104 Z"></path>
+    <rect x="18" y="92" width="40" height="60" rx="14" ry="14"></rect>
+    <rect x="198" y="92" width="40" height="60" rx="14" ry="14"></rect>
+  </g>
+</svg>

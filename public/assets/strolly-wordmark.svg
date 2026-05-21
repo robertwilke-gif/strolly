@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" width="720" height="220" role="img" aria-label="Strolly — Audio Guide">
+  
+
+  
+  <g transform="translate(20,28)">
+    
+    <path d="M85,8 C49,8 20,36 20,72 C20,101 41,123 70,144 L85,156 L100,144 C129,123 150,101 150,72 C150,36 121,8 85,8 Z" fill="#0D1B2A"></path>
+    
+    <path d="M85,20 C54,20 32,44 32,74 C32,98 50,118 75,136 L85,144 L95,136 C120,118 138,98 138,74 C138,44 116,20 85,20 Z" fill="#FFFFFF"></path>
+    
+    <path d="M55,70 q10,-10 20,0" fill="none" stroke="#0D1B2A" stroke-width="5" stroke-linecap="round"></path>
+    
+    <circle cx="105" cy="70" r="6" fill="#0D1B2A"></circle>
+    
+    <path d="M62,96 Q85,114 108,96" fill="none" stroke="#0D1B2A" stroke-width="5" stroke-linecap="round"></path>
+
+    
+    <g fill="#0D1B2A">
+      <path d="M22,68 C22,22 60,-8 85,-8 C110,-8 148,22 148,68 L142,68 C142,30 116,4 85,4 C54,4 28,30 28,68 Z"></path>
+      <rect x="10" y="60" width="28" height="42" rx="10" ry="10"></rect>
+      <circle cx="24" cy="80" r="7" fill="#00B3B3"></circle>
+      <rect x="132" y="60" width="28" height="42" rx="10" ry="10"></rect>
+      <circle cx="146" cy="80" r="7" fill="#00B3B3"></circle>
+    </g>
+  </g>
+
+  
+  <g transform="translate(220,0)">
+    <text x="0" y="120" font-family="Poppins, system-ui, sans-serif" font-weight="800" font-size="110" fill="#0D1B2A" letter-spacing="-3">str</text>
+    <text x="0" y="120" font-family="Poppins, system-ui, sans-serif" font-weight="800" font-size="110" fill="#0D1B2A" letter-spacing="-3" dx="180">lly</text>
+    
+    <circle cx="206" cy="92" r="30" fill="#00B3B3"></circle>
+    <path d="M198,78 L222,92 L198,106 Z" fill="#FFFFFF"></path>
+
+    
+    <g>
+      <line x1="0" y1="158" x2="40" y2="158" stroke="#00B3B3" stroke-width="2.5"></line>
+      <text x="50" y="164" font-family="Poppins, system-ui, sans-serif" font-weight="700" font-size="20" fill="#00B3B3" letter-spacing="3">AUDIO GUIDE</text>
+      <line x1="244" y1="158" x2="284" y2="158" stroke="#00B3B3" stroke-width="2.5"></line>
+    </g>
+
+    
+    <g>
+      <rect x="76" y="180" width="140" height="32" rx="16" ry="16" fill="#00B3B3"></rect>
+      <text x="146" y="202" text-anchor="middle" font-family="Poppins, system-ui, sans-serif" font-weight="700" font-size="16" letter-spacing="3" fill="#0D1B2A">MÜNCHEN</text>
+    </g>
+  </g>
+</svg>

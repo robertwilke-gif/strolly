@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Strolly Audio Guide München">
+  
+  <defs>
+    <clipPath id="iconClip"><rect width="512" height="512" rx="96" ry="96"></rect></clipPath>
+  </defs>
+
+  <g clip-path="url(#iconClip)">
+    
+    <rect width="512" height="512" fill="#00B3B3"></rect>
+    <path d="M0,360 C140,330 380,330 512,360 L512,512 L0,512 Z" fill="#0D1B2A"></path>
+
+    
+    <g fill="#0D1B2A" opacity="0.95">
+      
+      <path d="M60,360 L60,250 L78,250 L78,232 Q86,225 86,215 Q86,205 78,200 L78,192 L92,192 L92,200 Q84,205 84,215 Q84,225 92,232 L92,250 L110,250 L110,360 Z"></path>
+      <path d="M112,360 L112,255 L130,255 L130,237 Q138,230 138,220 Q138,210 130,205 L130,197 L144,197 L144,205 Q136,210 136,220 Q136,230 144,237 L144,255 L162,255 L162,360 Z"></path>
+      
+      <path d="M178,360 L178,230 L186,224 L186,210 L184,210 L184,200 L188,196 L192,200 L192,210 L190,210 L190,224 L198,230 L198,360 Z"></path>
+      
+      <path d="M214,360 L214,250 Q214,225 232,220 Q232,210 240,210 Q248,210 248,220 Q266,225 266,250 L266,360 Z"></path>
+      <path d="M238,210 L238,196 L242,196 L242,210 Z"></path>
+      
+      <path d="M282,360 L282,240 L294,240 L294,215 L298,210 L302,215 L302,240 L314,240 L314,360 Z"></path>
+      
+      <path d="M328,360 L328,260 L348,260 L348,240 L368,240 L368,260 L388,260 L388,360 Z"></path>
+      
+      <path d="M440,360 L440,180 L442,170 Q442,165 446,165 L450,165 L454,165 Q458,165 458,170 L460,180 L460,360 Z"></path>
+      <path d="M438,200 L462,200 L460,212 L440,212 Z"></path>
+      
+      <circle cx="408" cy="305" r="32" fill="none" stroke="#0D1B2A" stroke-width="3"></circle>
+      <circle cx="408" cy="305" r="3"></circle>
+      <path d="M408,273 L408,337 M376,305 L440,305 M385,282 L431,328 M431,282 L385,328" stroke="#0D1B2A" stroke-width="2" fill="none"></path>
+      <path d="M408,338 L390,360 L426,360 Z"></path>
+    </g>
+
+    
+    <g>
+      
+      <path d="M256,116 C200,116 156,158 156,212 C156,256 188,290 232,322 L256,342 L280,322 C324,290 356,256 356,212 C356,158 312,116 256,116 Z" fill="#0D1B2A" opacity="0.25" transform="translate(2,4)"></path>
+
+      
+      <path d="M256,108 C200,108 156,150 156,204 C156,248 188,282 232,314 L256,334 L280,314 C324,282 356,248 356,204 C356,150 312,108 256,108 Z" fill="#FFFFFF"></path>
+
+      
+      <path d="M256,124 C209,124 172,160 172,206 C172,242 198,272 236,300 L256,316 L276,300 C314,272 340,242 340,206 C340,160 303,124 256,124 Z" fill="none" stroke="#00B3B3" stroke-width="3" opacity="0.55"></path>
+
+      
+      <path d="M214,200 q14,-14 28,0" fill="none" stroke="#0D1B2A" stroke-width="7" stroke-linecap="round"></path>
+      
+      <circle cx="296" cy="200" r="9" fill="#0D1B2A"></circle>
+      
+      <path d="M226,238 Q256,266 286,238" fill="none" stroke="#0D1B2A" stroke-width="7" stroke-linecap="round"></path>
+      
+      <circle cx="256" cy="254" r="3" fill="#FF6B6B" opacity="0.5"></circle>
+    </g>
+
+    
+    <g fill="#0D1B2A">
+      
+      <path d="M160,196 C160,124 224,80 256,80 C288,80 352,124 352,196 L344,196 C344,138 296,100 256,100 C216,100 168,138 168,196 Z"></path>
+      
+      <rect x="146" y="184" width="40" height="60" rx="14" ry="14"></rect>
+      <circle cx="166" cy="214" r="11" fill="#00B3B3"></circle>
+      
+      <rect x="326" y="184" width="40" height="60" rx="14" ry="14"></rect>
+      <circle cx="346" cy="214" r="11" fill="#00B3B3"></circle>
+    </g>
+
+    
+    <g fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round">
+      <path d="M380,194 Q392,214 380,234"></path>
+      <path d="M394,180 Q414,214 394,248"></path>
+    </g>
+
+    
+    <g font-family="Poppins, system-ui, sans-serif" font-weight="800" fill="#FFFFFF">
+      <text x="256" y="430" text-anchor="middle" font-size="84" letter-spacing="-2">str</text>
+      <text x="256" y="430" text-anchor="middle" font-size="84" letter-spacing="-2" dx="58">lly</text>
+      
+      <circle cx="256" cy="408" r="22" fill="#FFFFFF"></circle>
+      <path d="M250,398 L268,408 L250,418 Z" fill="#0D1B2A"></path>
+    </g>
+
+    
+    <g font-family="Poppins, system-ui, sans-serif" font-weight="700" fill="#00B3B3">
+      <line x1="192" y1="452" x2="216" y2="452" stroke="#00B3B3" stroke-width="2"></line>
+      <text x="256" y="458" text-anchor="middle" font-size="16" letter-spacing="2">AUDIO GUIDE</text>
+      <line x1="296" y1="452" x2="320" y2="452" stroke="#00B3B3" stroke-width="2"></line>
+    </g>
+
+    
+    <g>
+      <rect x="210" y="472" width="92" height="26" rx="13" ry="13" fill="#00B3B3"></rect>
+      <text x="256" y="490" text-anchor="middle" font-family="Poppins, system-ui, sans-serif" font-weight="700" font-size="14" letter-spacing="2" fill="#0D1B2A">MÜNCHEN</text>
+    </g>
+  </g>
+</svg>

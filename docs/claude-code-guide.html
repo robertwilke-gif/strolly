@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Strolly · Claude Code Prompting Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --teal:#00B3B3; --teal-dark:#00908E; --teal-light:#E6F7F7;
+    --navy:#0D1B2A; --navy-soft:#15263A;
+    --yellow:#FFC107;
+    --gray-50:#F8FAFB; --gray-100:#F4F6F8; --gray-200:#E6EAEE;
+    --text:#333B45; --text-soft:#5B6573;
+    --font-head:'Poppins',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'JetBrains Mono', ui-monospace, Menlo, monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0; padding:0; background: var(--gray-50); color: var(--text); font-family: var(--font-body); line-height:1.65}
+  h1,h2,h3,h4{font-family: var(--font-head); color: var(--navy); margin:0; letter-spacing:-0.01em}
+  a{color: var(--teal-dark); text-decoration:none}
+  a:hover{text-decoration: underline}
+  code{font-family: var(--font-mono); font-size: .9em; background: var(--gray-100); padding: 2px 6px; border-radius: 6px}
+
+  .wrap{max-width: 980px; margin: 0 auto; padding: 60px 32px 100px}
+
+  /* Header */
+  .head{
+    background: var(--navy); color: #fff; border-radius: 24px;
+    padding: 48px 48px; margin-bottom: 40px;
+    position: relative; overflow: hidden;
+  }
+  .head::after{
+    content:""; position:absolute; right:-80px; top:-80px;
+    width: 260px; height: 260px; border-radius:50%;
+    background: radial-gradient(circle, rgba(0,179,179,.3), transparent 70%);
+  }
+  .head .kicker{
+    font-family: var(--font-head); color: var(--teal);
+    font-size: 13px; font-weight:600; letter-spacing:.15em;
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .head h1{ color:#fff; font-size: 44px; font-weight:800; letter-spacing:-0.02em; max-width: 600px }
+  .head p{ color: rgba(255,255,255,.78); font-size: 18px; max-width: 640px; margin: 16px 0 0 }
+
+  /* TOC */
+  .toc{
+    background:#fff; border: 1px solid var(--gray-200);
+    border-radius: 16px; padding: 22px 28px; margin-bottom: 40px;
+  }
+  .toc h4{ font-family: var(--font-head); font-size:12px; font-weight:700;
+           letter-spacing:.12em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 12px }
+  .toc ol{ margin:0; padding: 0 0 0 20px; columns: 2; gap: 24px }
+  .toc li{ margin-bottom: 6px; break-inside: avoid }
+  @media(max-width:680px){ .toc ol{columns:1} }
+
+  /* Section */
+  section{ margin-bottom: 56px }
+  section > h2{
+    font-size: 30px; font-weight:700; margin-bottom: 8px;
+    display:flex; align-items: baseline; gap: 14px;
+  }
+  section > h2 .num{
+    font-family: var(--font-mono); color: var(--teal);
+    font-size: 18px; font-weight:600;
+  }
+  section > p.lead{ color: var(--text-soft); font-size: 17px; margin: 4px 0 24px }
+
+  h3{ font-size: 19px; font-weight:600; margin: 28px 0 10px }
+
+  /* Card */
+  .card{
+    background:#fff; border:1px solid var(--gray-200);
+    border-radius: 16px; padding: 24px 28px; margin: 14px 0;
+  }
+
+  /* Code blocks */
+  pre{
+    background: var(--navy); color: #cdd6f4; padding: 22px 24px;
+    border-radius: 14px; overflow-x: auto;
+    font-family: var(--font-mono); font-size: 13.5px; line-height: 1.65;
+    margin: 14px 0;
+  }
+  pre code{ background: transparent; padding: 0; color: inherit; font-size: inherit }
+  .tok-com{ color: #6c7086 }
+  .tok-kw { color: #cba6f7 }
+  .tok-str{ color: #a6e3a1 }
+  .tok-fn { color: #89b4fa }
+  .tok-acc{ color: var(--teal) }
+  .tok-yel{ color: #f9e2af }
+
+  /* Prompt blocks */
+  .prompt{
+    background: var(--teal-light);
+    border-left: 4px solid var(--teal);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin: 14px 0;
+    font-family: var(--font-mono); font-size: 14px;
+    color: var(--navy);
+    white-space: pre-wrap;
+  }
+  .prompt.bad{
+    background: #FBE9EA; border-left-color: #B33A47; color: #6E1B25;
+  }
+  .prompt-label{
+    font-family: var(--font-head); font-size: 11px; font-weight:700;
+    letter-spacing: .12em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .prompt-label.good{ color: #14723E }
+  .prompt-label.bad{ color: #8E1F2A }
+  .prompt-label.good::before{ content: "✓  " }
+  .prompt-label.bad::before{ content: "✗  " }
+
+  /* Steps */
+  .steps{ counter-reset: step; display:flex; flex-direction:column; gap: 12px; margin: 12px 0 }
+  .steps .s{
+    counter-increment: step;
+    background:#fff; border:1px solid var(--gray-200);
+    border-radius: 14px; padding: 18px 22px 18px 60px;
+    position: relative;
+  }
+  .steps .s::before{
+    content: counter(step);
+    position:absolute; left: 18px; top: 18px;
+    width: 28px; height: 28px; border-radius:50%;
+    background: var(--teal); color:#fff;
+    font-family: var(--font-head); font-weight:700; font-size:14px;
+    display:grid; place-items:center;
+  }
+  .steps .s b{ font-family: var(--font-head); color: var(--navy) }
+
+  /* Table */
+  table{ width:100%; border-collapse: collapse; margin: 12px 0; background:#fff; border:1px solid var(--gray-200); border-radius: 14px; overflow:hidden }
+  th, td{ padding: 12px 16px; text-align:left; border-bottom: 1px solid var(--gray-200); font-size: 14px }
+  th{ font-family: var(--font-head); font-weight:600; color: var(--navy); background: var(--gray-100); font-size: 13px; text-transform: uppercase; letter-spacing:.05em }
+  tr:last-child td{ border-bottom: 0 }
+
+  /* Callout */
+  .callout{
+    background: var(--teal-light); border-radius: 14px;
+    padding: 18px 22px; margin: 14px 0;
+    border-left: 4px solid var(--teal);
+  }
+  .callout.tip{ background: #FFF8E1; border-left-color: var(--yellow) }
+  .callout.warn{ background: #FBE9EA; border-left-color: #B33A47 }
+  .callout strong{ color: var(--navy); font-family: var(--font-head) }
+
+  /* Inline kbd */
+  kbd{
+    background: var(--gray-100); border:1px solid var(--gray-200);
+    border-bottom-width: 2px; border-radius: 6px;
+    padding: 2px 8px; font-family: var(--font-mono); font-size: 12px;
+    color: var(--navy);
+  }
+
+  ul.clean{ list-style:none; padding:0; margin:14px 0 }
+  ul.clean li{ padding-left: 26px; position:relative; margin-bottom:8px }
+  ul.clean li::before{
+    content:""; position:absolute; left:0; top:9px;
+    width: 8px; height: 8px; border-radius:50%; background: var(--teal);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <header class="head">
+    <div class="kicker">Anleitung</div>
+    <h1>Wie du Strolly mit Claude&nbsp;Code baust.</h1>
+    <p>Von <code style="background: rgba(255,255,255,.1); color: #fff">CLAUDE.md</code>-Setup über die ersten Prompts bis zum produktiven Daily-Workflow. Lies einmal, dann arbeitest du in halber Zeit.</p>
+  </header>
+
+  <!-- TOC -->
+  <nav class="toc">
+    <h4>Inhalt</h4>
+    <ol>
+      <li><a href="#setup">Setup im Repo (5 Minuten)</a></li>
+      <li><a href="#prinzipien">Die 5 Prompting-Prinzipien</a></li>
+      <li><a href="#patterns">Prompt-Patterns für Strolly</a></li>
+      <li><a href="#beispiele">Konkrete Beispiel-Prompts</a></li>
+      <li><a href="#workflow">Daily Workflow</a></li>
+      <li><a href="#fehler">Was du vermeiden solltest</a></li>
+      <li><a href="#cheatsheet">Cheatsheet</a></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================================
+       1. SETUP
+       ============================================================ -->
+  <section id="setup">
+    <h2><span class="num">01</span> Setup im Repo (5 Minuten)</h2>
+    <p class="lead">Damit Claude Code dein Strolly‑Universum kennt, lege drei Dateien an. Mehr braucht es nicht.</p>
+
+    <div class="steps">
+      <div class="s">
+        <b>Dateien ins Repo legen.</b> Im Root deines Projekts:
+        <pre><code><span class="tok-com">/dein-repo/</span>
+├── <span class="tok-acc">CLAUDE.md</span>      <span class="tok-com"># Was Claude Code beachten soll (Workflow, Konventionen)</span>
+├── <span class="tok-acc">BRAND.md</span>       <span class="tok-com"># Design Tokens, Voice, Komponenten</span>
+└── <span class="tok-acc">assets/</span>
+    ├── strolly-logo.svg
+    ├── strolly-mark.svg
+    └── strolly-wordmark.svg</code></pre>
+      </div>
+
+      <div class="s">
+        <b>Claude Code starten</b> im Projekt‑Root:
+        <pre><code><span class="tok-fn">claude</span></code></pre>
+        Beim ersten Start liest Claude automatisch <code>CLAUDE.md</code> – es muss nicht im Prompt erwähnt werden.
+      </div>
+
+      <div class="s">
+        <b>Verifizieren, dass es geladen ist.</b> Frag im Chat:
+        <div class="prompt">Welche Brand-Tokens stehen in BRAND.md für Primary und Navy?</div>
+        Wenn er #00B3B3 und #0D1B2A nennt → alles gut.
+      </div>
+
+      <div class="s">
+        <b>Optional: <code>.cursorrules</code> für Cursor-User</b> mit derselben Quintessenz – aber wenn du wirklich Claude Code nutzt, reicht <code>CLAUDE.md</code>.
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Tipp:</strong> Lege <code>BRAND.md</code> nicht in einen Unterordner. Im Root bleibt es für alle Tools auffindbar (Claude Code, IDE‑Suche, GitHub‑Preview).
+    </div>
+  </section>
+
+  <!-- ============================================================
+       2. PRINZIPIEN
+       ============================================================ -->
+  <section id="prinzipien">
+    <h2><span class="num">02</span> Die 5 Prompting‑Prinzipien</h2>
+    <p class="lead">Diese fünf Punkte machen 90 % des Unterschieds zwischen „funktioniert irgendwie" und „liefert wie ein Senior Dev".</p>
+
+    <h3>① Kontext zuerst, Aufgabe danach</h3>
+    <p>Sag Claude erst, <em>wo</em> er hinschauen soll, bevor du sagst, <em>was</em> zu tun ist.</p>
+    <div class="prompt"><span class="prompt-label good">GUT</span>Lies BRAND.md (Voice + Tokens) und components/ui/Card.tsx.
+Baue dann eine Section &lt;UpcomingCities /&gt; für die Landing.</div>
+    <div class="prompt bad"><span class="prompt-label bad">SCHLECHT</span>Bau mir eine Section für kommende Städte.</div>
+
+    <h3>② Constraints explizit machen</h3>
+    <p>Was darf er <em>nicht</em>? Welche Lib? Welcher Style? Sei kleinlich – Claude liebt klare Grenzen.</p>
+    <div class="prompt"><span class="prompt-label good">GUT</span>Constraints:
+- Keine neuen Dependencies
+- Icons nur aus lucide-react
+- Komponente unter components/sections/UpcomingCities.tsx
+- Tailwind-Klassen, keine inline Styles
+- Server Component (kein 'use client')</div>
+
+    <h3>③ Output-Format vorgeben</h3>
+    <p>Plan, Code, Test, PR-Beschreibung – nenne, was du am Ende sehen willst.</p>
+    <div class="prompt"><span class="prompt-label good">GUT</span>Liefere:
+1. Plan (3-5 Bullets, was du anfasst)
+2. Code mit Datei-Pfaden
+3. Vitest-Test für die Helper-Funktion
+4. PR-Beschreibung (Was / Warum / Brand-Compliance)</div>
+
+    <h3>④ Brand‑Compliance immer mit‑adressieren</h3>
+    <p>Mache es zur Routine, am Ende „BRAND‑Check" zu verlangen.</p>
+    <div class="prompt"><span class="prompt-label good">GUT</span>Am Ende: prüfe gegen BRAND.md §7 (Voice) und §2 (Tokens).
+Liste auf, welche Tokens du verwendet hast.</div>
+
+    <h3>⑤ Iteriere klein</h3>
+    <p>Lieber 5 Prompts à „mach Schritt 2" als 1 Prompt mit allem. Kleine Diffs = einfache Reviews = wenig Bugs.</p>
+  </section>
+
+  <!-- ============================================================
+       3. PATTERNS
+       ============================================================ -->
+  <section id="patterns">
+    <h2><span class="num">03</span> Prompt‑Patterns für Strolly</h2>
+    <p class="lead">Vier wiederkehrende Muster, die du immer wieder brauchst. Kopier‑Vorlagen.</p>
+
+    <h3>🆕 Pattern A — Neue UI‑Komponente</h3>
+    <div class="prompt">Lies BRAND.md (§2 Tokens, §5 Komponenten, §7 Voice).
+Baue eine neue Komponente &lt;TourCard&gt; unter components/ui/TourCard.tsx.
+
+Props:
+- title: string
+- duration: number (Minuten)
+- stations: number
+- coverUrl: string
+
+Design:
+- Card-Style aus BRAND.md (border-radius lg, shadow-sm)
+- Cover oben (aspect 16/10)
+- Badge oben mit Bezirk-Name (Pill, teal-light/teal-dark)
+- Title in Poppins 700 22px
+- Meta-Row: Uhr-Icon + Pin-Icon (lucide)
+
+Liefere: Plan → Code → Storybook-Story.</div>
+
+    <h3>🛠 Pattern B — Refactor</h3>
+    <div class="prompt">Refactor: Ersetze alle hardgecodeten Farben in /app/landing
+durch Tailwind-Tokens (siehe BRAND.md §2).
+
+Schritte:
+1. Liste mir zuerst alle Vorkommen auf (grep, kein Code-Change).
+2. Warte auf mein OK.
+3. Dann den Refactor in einem Commit, mit Vorher/Nachher-Tabelle in der PR-Beschreibung.</div>
+
+    <h3>🐞 Pattern C — Bug Fix</h3>
+    <div class="prompt">Bug: GPS-Trigger feuert mehrfach, wenn man sich an einem Hotspot
+für mehr als 30 Sekunden aufhält.
+
+1. Reproduziere den Bug in einem failing Test (Vitest).
+2. Erkläre die Ursache in 2-3 Sätzen.
+3. Fix mit minimalem Diff.
+4. Test grün.
+
+Datei: /lib/player/gps-trigger.ts</div>
+
+    <h3>📝 Pattern D — Copy / Content</h3>
+    <div class="prompt">Schreibe 3 Varianten für die Hero-Headline der Berlin-Landing.
+
+Constraints (BRAND.md §7):
+- Du-Form
+- Max. 5 Wörter
+- Pointe oder Frage, keine Substantivkette
+- Lokal-bezogen (Berlin-Vibe ok, aber nicht klischeehaft)
+
+Liefere nur die 3 Varianten + 1 Satz, was die jeweilige Variante transportiert.</div>
+  </section>
+
+  <!-- ============================================================
+       4. BEISPIELE
+       ============================================================ -->
+  <section id="beispiele">
+    <h2><span class="num">04</span> Konkrete Beispiel‑Prompts</h2>
+    <p class="lead">Direkt einsetzbar. Kopieren, anpassen, los.</p>
+
+    <div class="card">
+      <h3 style="margin-top:0">📦 „Landing‑Page von 0 aufsetzen"</h3>
+      <div class="prompt">Initialisiere die Landing-Page für Strolly München auf Next.js 15 (App Router).
+
+Schritt 1 — Plan:
+- Sektionen: Hero, Features, How-it-Works, Tours, Cities, CTA
+- Komponenten-Struktur unter /components/sections/*
+- Alle Tokens aus BRAND.md, Tailwind config angepasst
+
+Schritt 2 — Setup:
+- Tailwind config mit Tokens aus BRAND.md §2
+- Google Fonts (Poppins, Inter) via next/font
+- /public/assets mit strolly-logo.svg + strolly-mark.svg
+
+Schritt 3 — Komponenten einzeln, ich gebe nach jeder OK.
+
+Starte mit Schritt 1.</div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">🎨 „Komponente nach Design bauen"</h3>
+      <div class="prompt">Baue &lt;PlayerToast&gt; nach folgendem Verhalten:
+
+- Erscheint unten am Screen, wenn eine Story getriggert wird
+- Slide-up Animation 200ms
+- Cover-Icon links (rund, teal background), Title + Dauer mittig, Play-Button rechts
+- Auto-dismiss nach 6 Sek, es sei denn user hovert/touched
+
+Code in components/player/PlayerToast.tsx.
+Storybook-Story mit 3 States: idle, hover, audio-playing.
+
+Tokens: BRAND.md §2 — keine Hex-Codes hardcoden.</div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">🧪 „Tests für vorhandene Logic"</h3>
+      <div class="prompt">Schreibe Vitest-Tests für /lib/player/distance.ts (Haversine-Berechnung).
+
+Test-Cases:
+- Distanz München → München (Identität) = 0
+- Distanz Marienplatz → Olympiapark ≈ 4.2 km (±100m)
+- Negative Koordinaten korrekt
+- Edge Case: Antipoden ≈ 20015 km
+- Throws bei NaN-Input
+
+Coverage-Ziel: 100% für die Datei.</div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">🚀 „PR vorbereiten"</h3>
+      <div class="prompt">Stage die aktuellen Änderungen als zwei Commits:
+1. feat(landing): add upcoming cities section
+2. test(landing): add vitest for cities helper
+
+Dann erstelle die PR-Beschreibung nach CLAUDE.md-Format
+(Was / Warum / Brand-Compliance / Screenshots).
+Branch-Name: feat/landing-upcoming-cities.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. WORKFLOW
+       ============================================================ -->
+  <section id="workflow">
+    <h2><span class="num">05</span> Daily Workflow</h2>
+    <p class="lead">So sieht ein normaler Strolly-Arbeitstag mit Claude Code aus.</p>
+
+    <table>
+      <thead><tr><th style="width:30%">Phase</th><th>Was du tust</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Morgens · Plan</strong></td>
+          <td>„Heute will ich X bauen. Lies BRAND.md und das relevante Verzeichnis. Schlage 3 Schritte vor."</td>
+        </tr>
+        <tr>
+          <td><strong>Implementieren</strong></td>
+          <td>Schritt für Schritt. Nach jedem Schritt: kurzer Check, dann „weiter mit Schritt 2".</td>
+        </tr>
+        <tr>
+          <td><strong>Selbst‑Review</strong></td>
+          <td>„Review deinen eigenen Diff gegen CLAUDE.md Checklist. Was würdest du als Reviewer kritisieren?"</td>
+        </tr>
+        <tr>
+          <td><strong>Tests</strong></td>
+          <td>„Was fehlt an Tests? Schreibe das fehlende Stück."</td>
+        </tr>
+        <tr>
+          <td><strong>PR</strong></td>
+          <td>„Erstelle PR mit Beschreibung im CLAUDE.md-Format."</td>
+        </tr>
+        <tr>
+          <td><strong>Nach Review</strong></td>
+          <td>„Hier die Kommentare aus dem Review: [...]. Adressiere sie, halte die Diffs klein."</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Mini-Prompts, die du täglich brauchst</h3>
+    <ul class="clean">
+      <li><strong>„Plan zuerst, kein Code"</strong> – wenn du nur ein Konzept willst.</li>
+      <li><strong>„Zeig mir den Diff"</strong> – bevor er writet.</li>
+      <li><strong>„Brand‑Check"</strong> – am Ende jeder UI‑Aufgabe.</li>
+      <li><strong>„Erkläre, warum"</strong> – wenn er etwas anders gemacht hat als gedacht.</li>
+      <li><strong>„Minimaler Diff"</strong> – wenn du Refactors klein halten willst.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================
+       6. FEHLER
+       ============================================================ -->
+  <section id="fehler">
+    <h2><span class="num">06</span> Was du vermeiden solltest</h2>
+    <p class="lead">Häufige Anti‑Patterns und ihre Gegenmittel.</p>
+
+    <div class="prompt bad"><span class="prompt-label bad">SCHLECHT</span>Mach die Landing schön.</div>
+    <div class="prompt"><span class="prompt-label good">BESSER</span>Überarbeite die Hero-Section: Headline auf 5 Wörter,
+Subline mit Mention von „GPS" und „Geschichten", CTA-Button vergrößern auf padding 16/26.</div>
+
+    <div class="prompt bad"><span class="prompt-label bad">SCHLECHT</span>Bau mir eine bessere Karte.</div>
+    <div class="prompt"><span class="prompt-label good">BESSER</span>Ersetze die aktuelle Map durch Mapbox GL (kostenpflichtig ok),
+Style: dark/Navy mit Teal Accents, Pins als &lt;StrollyPin /&gt;, Cluster ab Zoom 12.
+Komponente unter components/map/StoryMap.tsx.</div>
+
+    <div class="prompt bad"><span class="prompt-label bad">SCHLECHT</span>Mach das schneller.</div>
+    <div class="prompt"><span class="prompt-label good">BESSER</span>Profile zeigt: TourList rendert in 320ms.
+Ziel: &lt;100ms bei 50 Touren.
+Verdacht: useEffect für Distanz-Berechnung läuft pro Item.
+Fix mit useMemo + Web Worker, falls nötig.</div>
+
+    <div class="callout warn">
+      <strong>Faustregel:</strong> Wenn dein Prompt &lt; 5 Wörter ist, denk nochmal nach.
+      Wenn dein Prompt &gt; 300 Wörter ist, splitte ihn.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. CHEATSHEET
+       ============================================================ -->
+  <section id="cheatsheet">
+    <h2><span class="num">07</span> Cheatsheet</h2>
+    <p class="lead">Die Quintessenz auf einer Bildschirmseite.</p>
+
+    <div class="card" style="background: var(--navy); color:#fff; border-color: var(--navy)">
+      <h3 style="color: var(--teal); margin-top:0">Das 5-Säulen-Prompt</h3>
+      <pre style="background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); color: #cdd6f4"><code><span class="tok-yel">KONTEXT:</span>   Lies [Dateien], beachte [Section in BRAND.md]
+<span class="tok-yel">AUFGABE:</span>   Was soll getan werden (1-2 Sätze)
+<span class="tok-yel">CONSTRAINTS:</span>
+            - Verbote (keine neue Lib, keine 'use client', ...)
+            - Stack (Next.js / Vitest / Tailwind)
+            - Datei-Pfade
+<span class="tok-yel">OUTPUT:</span>    Plan → Code → Test → PR-Beschreibung
+<span class="tok-yel">CHECK:</span>     Brand-Compliance gegen BRAND.md §X bestätigen</code></pre>
+    </div>
+
+    <h3>Quick Reference</h3>
+    <table>
+      <tbody>
+        <tr><td><kbd>Plan zuerst</kbd></td><td>Statt direkt Code: „Liefere zuerst nur einen Plan, kein Code."</td></tr>
+        <tr><td><kbd>Halt, frag</kbd></td><td>„Bei jeder Unklarheit: stoppe, frag, dann weiter."</td></tr>
+        <tr><td><kbd>Lies X</kbd></td><td>„Lies BRAND.md §2 + §5 und beachte sie strikt."</td></tr>
+        <tr><td><kbd>Klein iterieren</kbd></td><td>„Splitte in 3 Commits, ich review nach jedem."</td></tr>
+        <tr><td><kbd>Brand-Check</kbd></td><td>„Am Ende: prüfe gegen BRAND.md, liste benutzte Tokens auf."</td></tr>
+        <tr><td><kbd>Selbst-Review</kbd></td><td>„Reviewe deinen Diff als wärst du ein strenger Senior."</td></tr>
+        <tr><td><kbd>Konkretisier</kbd></td><td>„Was meinst du genau mit X? Schlag 3 Varianten vor."</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Goldene Regeln in 7 Stichpunkten</h3>
+    <ol style="font-size: 16px; line-height:1.8; padding-left: 20px">
+      <li><strong>CLAUDE.md + BRAND.md im Repo-Root.</strong> Mehr Konfiguration braucht es nicht.</li>
+      <li><strong>Kontext vor Aufgabe.</strong> „Lies X, dann tue Y."</li>
+      <li><strong>Constraints explizit.</strong> Verbote sind so wichtig wie Anweisungen.</li>
+      <li><strong>Iteriere klein.</strong> 5 Mini-Prompts schlagen 1 Mega-Prompt.</li>
+      <li><strong>Plan vor Code</strong> bei allem &gt; 30 Minuten Arbeit.</li>
+      <li><strong>Brand‑Check am Ende</strong> jeder UI‑Aufgabe.</li>
+      <li><strong>Wenn er rät, frag warum.</strong> Lieber einmal nachhaken als doppelt refactorn.</li>
+    </ol>
+  </section>
+
+  <div style="text-align:center; color: var(--text-soft); font-size: 13px; font-family: var(--font-head); margin-top: 60px">
+    Strolly · Claude Code Prompting Guide · v 1.0
+  </div>
+</div>
+</body>
+</html>
