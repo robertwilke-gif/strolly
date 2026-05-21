@@ -1,5 +1,5 @@
-import { MapPin, Headphones, Play, Star } from 'lucide-react'
-import { StoreButton } from '@/components/ui/StoreButton'
+import { MapPin, Headphones, Pause, Play, Star } from 'lucide-react'
+import { Button } from '@/components/ui/Button'
 
 export function Hero() {
   return (
@@ -33,8 +33,10 @@ export function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3.5">
-            <StoreButton store="apple" />
-            <StoreButton store="google" />
+            <Button variant="primary" size="lg">
+              <Play size={16} fill="currentColor" />
+              Hier direkt testen
+            </Button>
           </div>
 
           <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-text-soft">
@@ -45,7 +47,7 @@ export function Hero() {
                   <Star key={i} size={14} fill="currentColor" strokeWidth={0} />
                 ))}
               </span>
-              <span>App Store</span>
+              <span>Web-Beta</span>
             </div>
             <div><strong className="text-navy font-head font-bold">12+</strong> Touren in München</div>
             <div><strong className="text-navy font-head font-bold">120k</strong> Strolly-Strolche</div>
@@ -96,14 +98,7 @@ function PhoneMockup() {
 
           {/* Map area */}
           <div className="flex-1 relative bg-navy-soft overflow-hidden">
-            <div
-              aria-hidden
-              className="absolute inset-0 opacity-35"
-              style={{
-                backgroundImage:
-                  'radial-gradient(circle at 30% 40%, rgba(255,255,255,.08), transparent 40%), repeating-linear-gradient(45deg, transparent 0 30px, rgba(0,179,179,.15) 30px 31px)',
-              }}
-            />
+            <MapBackdrop />
 
             {/* Pin */}
             <div className="absolute left-1/2 top-[48%] -translate-x-1/2 -translate-y-full w-11 h-14">
@@ -115,24 +110,95 @@ function PhoneMockup() {
               </div>
             </div>
 
-            {/* Story toast */}
-            <div className="absolute left-3.5 right-3.5 bottom-3.5 bg-white/95 text-navy rounded-md p-3.5 flex items-center gap-3 shadow-lg">
-              <div className="w-11 h-11 rounded-[12px] bg-teal grid place-items-center text-white shrink-0">
-                <Headphones size={20} />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="font-head font-semibold text-[13px] text-text-soft">Story · 04:32 Min.</div>
-                <div className="font-head font-bold text-[15px] text-navy truncate">
-                  Warum das Glockenspiel zweimal lügt
+            {/* Story toast — Now Playing */}
+            <div className="absolute left-3.5 right-3.5 bottom-3.5 bg-white/95 text-navy rounded-md p-3.5 shadow-lg overflow-hidden">
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-[12px] bg-teal grid place-items-center text-white shrink-0">
+                  <div className="flex items-end gap-[3px] h-4" aria-hidden>
+                    <span className="w-[3px] bg-white rounded-full h-full animate-eq-bar" />
+                    <span className="w-[3px] bg-white rounded-full h-full animate-eq-bar" style={{ animationDelay: '0.18s' }} />
+                    <span className="w-[3px] bg-white rounded-full h-full animate-eq-bar" style={{ animationDelay: '0.36s' }} />
+                    <span className="w-[3px] bg-white rounded-full h-full animate-eq-bar" style={{ animationDelay: '0.54s' }} />
+                  </div>
                 </div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-head font-semibold text-[13px] text-text-soft">Story · 01:24 / 04:32</div>
+                  <div className="font-head font-bold text-[15px] text-navy truncate">
+                    Warum das Glockenspiel zweimal lügt
+                  </div>
+                </div>
+                <button className="w-9 h-9 rounded-full bg-teal text-white grid place-items-center shrink-0" aria-label="Pausieren">
+                  <Pause size={14} fill="currentColor" />
+                </button>
               </div>
-              <button className="w-9 h-9 rounded-full bg-teal text-white grid place-items-center shrink-0" aria-label="Abspielen">
-                <Play size={14} fill="currentColor" />
-              </button>
+              <div className="absolute left-0 right-0 bottom-0 h-1 bg-teal/15">
+                <div className="h-full bg-teal animate-progress-fill" />
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  )
+}
+
+function MapBackdrop() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 200 412"
+      preserveAspectRatio="xMidYMid slice"
+      className="absolute inset-0 w-full h-full"
+    >
+      {/* Building blocks */}
+      <g fill="#ffffff" opacity="0.06">
+        <rect x="6"   y="14"  width="56" height="42" rx="3" />
+        <rect x="70"  y="14"  width="38" height="58" rx="3" />
+        <rect x="116" y="14"  width="78" height="34" rx="3" />
+        <rect x="6"   y="72"  width="50" height="48" rx="3" />
+        <rect x="64"  y="86"  width="44" height="34" rx="3" />
+        <rect x="116" y="60"  width="78" height="56" rx="3" />
+        <rect x="6"   y="138" width="38" height="58" rx="3" />
+        <rect x="52"  y="138" width="46" height="40" rx="3" />
+        <rect x="160" y="132" width="34" height="56" rx="3" />
+        <rect x="6"   y="220" width="62" height="40" rx="3" />
+        <rect x="76"  y="220" width="40" height="58" rx="3" />
+        <rect x="160" y="208" width="34" height="62" rx="3" />
+        <rect x="6"   y="288" width="58" height="46" rx="3" />
+        <rect x="72"  y="296" width="48" height="42" rx="3" />
+        <rect x="128" y="288" width="66" height="50" rx="3" />
+        <rect x="6"   y="354" width="84" height="48" rx="3" />
+        <rect x="98"  y="354" width="46" height="48" rx="3" />
+        <rect x="152" y="354" width="42" height="48" rx="3" />
+      </g>
+
+      {/* Park / square (Marienplatz vibes) */}
+      <rect x="108" y="190" width="46" height="20" rx="4" fill="#00B3B3" opacity="0.22" />
+
+      {/* Streets — horizontal */}
+      <g stroke="#ffffff" strokeOpacity="0.10" strokeWidth="1" fill="none">
+        <path d="M0 64 L200 64" />
+        <path d="M0 126 L200 126" />
+        <path d="M0 184 L200 184" />
+        <path d="M0 214 L200 214" />
+        <path d="M0 282 L200 282" />
+        <path d="M0 346 L200 346" />
+        {/* vertical */}
+        <path d="M62 0 L62 412" />
+        <path d="M112 0 L112 412" />
+        <path d="M154 0 L154 412" />
+      </g>
+
+      {/* Animated walking route — dashes move toward the pin */}
+      <path
+        d="M 22 392 Q 50 360, 70 320 T 95 240 Q 110 215, 100 198"
+        stroke="#00B3B3"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeDasharray="3 6"
+        fill="none"
+        className="animate-route-walk"
+      />
+    </svg>
   )
 }

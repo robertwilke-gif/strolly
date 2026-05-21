@@ -1,4 +1,5 @@
-import { StoreButton } from '@/components/ui/StoreButton'
+import { Play } from 'lucide-react'
+import { Button } from '@/components/ui/Button'
 
 export function CTA() {
   return (
@@ -16,11 +17,13 @@ export function CTA() {
           Kopfhörer auf, München ruft.
         </h2>
         <p className="text-white/90 text-[19px] mt-4">
-          Lade Strolly kostenlos und starte deine erste Tour in unter 2 Minuten.
+          Direkt im Browser starten – kein Download, in unter 2 Minuten unterwegs.
         </p>
         <div className="flex gap-3.5 justify-center mt-8 flex-wrap">
-          <StoreButton store="apple" />
-          <StoreButton store="google" />
+          <Button variant="secondary" size="lg">
+            <Play size={16} fill="currentColor" />
+            Hier direkt testen
+          </Button>
         </div>
       </div>
     </section>

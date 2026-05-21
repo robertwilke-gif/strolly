@@ -1,7 +1,7 @@
 import { SectionHead } from '@/components/sections/Features'
 
 const steps = [
-  { num: '01', title: 'App laden', desc: 'Kostenlos im App Store oder bei Google Play. Erste Tour gratis dabei.' },
+  { num: '01', title: 'Webapp öffnen', desc: 'Direkt im Browser starten – kein Download, kein Account. Erste Tour gratis dabei.' },
   { num: '02', title: 'Tour auswählen', desc: 'Wähle eine Route oder lass dich einfach treiben. Strolly findet die Geschichten für dich.' },
   { num: '03', title: 'Loslaufen & hören', desc: 'Kopfhörer auf, Handy in die Tasche – Strolly meldet sich, sobald es etwas zu erzählen gibt.' },
 ]

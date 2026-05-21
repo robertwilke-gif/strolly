@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Clock, MapPin } from 'lucide-react'
 import { SectionHead } from '@/components/sections/Features'
 
@@ -7,6 +8,7 @@ interface Tour {
   duration: string
   stations: string
   coverGradient: string
+  href?: string
 }
 
 const tours: Tour[] = [
@@ -16,6 +18,7 @@ const tours: Tour[] = [
     duration: '~ 75 Min',
     stations: '12 Stationen',
     coverGradient: 'linear-gradient(135deg, #00B3B3 0%, #007575 100%)',
+    href: '/touren/altstadt',
   },
   {
     area: 'Olympiapark',
@@ -45,24 +48,32 @@ export function Tours() {
         />
 
         <div className="grid md:grid-cols-3 gap-5">
-          {tours.map((tour) => (
-            <article
-              key={tour.title}
-              className="bg-navy-soft rounded-lg overflow-hidden border border-white/10 hover:border-teal hover:-translate-y-1 transition-all"
-            >
-              <div className="aspect-[16/10]" style={{ background: tour.coverGradient }} />
-              <div className="px-6 pt-5 pb-6">
-                <span className="inline-block font-head font-semibold text-[12px] tracking-wider uppercase bg-teal/20 text-teal px-2.5 py-1 rounded-full mb-3">
-                  {tour.area}
-                </span>
-                <h3 className="font-head font-semibold text-white text-[20px] mb-2">{tour.title}</h3>
-                <div className="flex gap-4 text-white/65 text-sm mt-3.5">
-                  <span className="inline-flex items-center gap-1.5"><Clock size={14} />{tour.duration}</span>
-                  <span className="inline-flex items-center gap-1.5"><MapPin size={14} />{tour.stations}</span>
+          {tours.map((tour) => {
+            const card = (
+              <article
+                className="h-full bg-navy-soft rounded-lg overflow-hidden border border-white/10 hover:border-teal hover:-translate-y-1 transition-all"
+              >
+                <div className="aspect-[16/10]" style={{ background: tour.coverGradient }} />
+                <div className="px-6 pt-5 pb-6">
+                  <span className="inline-block font-head font-semibold text-[12px] tracking-wider uppercase bg-teal/20 text-teal px-2.5 py-1 rounded-full mb-3">
+                    {tour.area}
+                  </span>
+                  <h3 className="font-head font-semibold text-white text-[20px] mb-2">{tour.title}</h3>
+                  <div className="flex gap-4 text-white/65 text-sm mt-3.5">
+                    <span className="inline-flex items-center gap-1.5"><Clock size={14} />{tour.duration}</span>
+                    <span className="inline-flex items-center gap-1.5"><MapPin size={14} />{tour.stations}</span>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            )
+            return tour.href ? (
+              <Link key={tour.title} href={tour.href} className="block">
+                {card}
+              </Link>
+            ) : (
+              <div key={tour.title}>{card}</div>
+            )
+          })}
         </div>
       </div>
 
