@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Brand CSS Custom Properties — BRAND.md §2 */
+:root {
+  /* Brand */
+  --color-teal:        #00B3B3;
+  --color-teal-dark:   #00908E;
+  --color-teal-light:  #E6F7F7;
+  --color-navy:        #0D1B2A;
+  --color-navy-soft:   #15263A;
+  --color-yellow:      #FFC107;
+
+  /* Neutrals */
+  --color-white:       #FFFFFF;
+  --color-gray-50:     #F8FAFB;
+  --color-gray-100:    #F4F6F8;
+  --color-gray-200:    #E6EAEE;
+  --color-gray-300:    #D6DCE3;
+  --color-text:        #333B45;
+  --color-text-soft:   #5B6573;
+
+  /* Semantic */
+  --color-success:     #14723E;
+  --color-success-bg:  #E8F7EE;
+  --color-error:       #8E1F2A;
+  --color-error-bg:    #FBE9EA;
+
+  /* Typography — gesetzt von next/font in layout.tsx */
+  --font-head: 'Poppins', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Spacing & Layout — BRAND.md §4 */
+  --space-1: 4px;  --space-2: 8px;   --space-3: 12px;
+  --space-4: 16px; --space-5: 20px;  --space-6: 24px;
+  --space-8: 32px; --space-10: 40px; --space-12: 48px;
+  --space-16: 64px; --space-20: 80px; --space-24: 96px;
+
+  --radius-sm:   10px;
+  --radius-md:   18px;
+  --radius-lg:   28px;
+  --radius-pill: 999px;
+
+  --container:  1200px;
+  --section-y:  90px;
+
+  /* Shadows */
+  --shadow-sm:   0 2px 6px rgba(13,27,42,.06);
+  --shadow-md:   0 12px 30px rgba(13,27,42,.10);
+  --shadow-lg:   0 30px 60px rgba(13,27,42,.18);
+  --shadow-teal: 0 8px 20px rgba(0,179,179,.35);
+}
+
+@layer base {
+  body {
+    @apply font-body text-text bg-white antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-head;
+  }
+
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-teal;
+  }
+}
