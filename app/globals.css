@@ -65,3 +65,30 @@
     @apply outline-2 outline-offset-2 outline-teal;
   }
 }
+
+@layer utilities {
+  @keyframes route-walk {
+    to { stroke-dashoffset: -16; }
+  }
+  .animate-route-walk {
+    animation: route-walk 1.4s linear infinite;
+  }
+
+  @keyframes progress-fill {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  .animate-progress-fill {
+    transform-origin: left center;
+    animation: progress-fill 18s linear infinite;
+  }
+
+  @keyframes eq-bar {
+    0%, 100% { transform: scaleY(0.35); }
+    50% { transform: scaleY(1); }
+  }
+  .animate-eq-bar {
+    transform-origin: bottom center;
+    animation: eq-bar 0.9s ease-in-out infinite;
+  }
+}
