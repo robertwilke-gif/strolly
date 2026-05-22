@@ -28,7 +28,7 @@ Diese Tour führt dich in 90 Minuten und 6,5 km von der Eisbachwelle bis zum Kle
 
 **Kategorie:** Sport / Geschichte / Subkultur
 **Dauer:** 90 Sek.
-**GPS:** 48.1437, 11.5861
+**GPS:** 48.1435, 11.5878
 **Tags:** Surfen, Geschichte, Subkultur, Kuriositäten
 
 **Hook:**
@@ -55,11 +55,41 @@ Einfach zuschauen und die Warteliste beobachten. Die Surfer wechseln nach einer 
 
 ---
 
-## POI 02 - Rumford-Denkmal
+## POI 02 - Japanisches Teehaus
+
+**Kategorie:** Kultur / Geheimtipp / Kontrast
+**Dauer:** 60 Sek.
+**GPS:** 48.1454, 11.5859
+**Tags:** Geheimtipp, Kultur, Kontrast, Natur
+
+**Hook:**
+"Mitten im bayerischen Volkspark steht seit 1972 ein originalgetreues japanisches Teehaus. Geschenk der Stadt Sapporo an München. Kaum jemand findet es - dabei liegt es direkt am Eingang."
+
+**Story:**
+Das Teehaus Kanshoan wurde 1972 als Geschenk der japanischen Partnerstadt Sapporo anlässlich der Olympischen Spiele errichtet. Originalgetreue japanische Architektur, ein kleiner Teich mit Koi, Bambus und ein Teezeremonienraum. Alles echt, nichts inszeniert.
+
+Von April bis Oktober finden hier echte Teezeremonien statt - öffentlich, gegen kleines Eintrittsgeld, auf Japanisch mit Übersetzung. Max. 25 Personen, kein Vorverkauf, First-come-first-served. Wer um 13:45 Uhr da steht, bekommt einen Platz.
+
+Was den Ort besonders macht: Er liegt keine 200 Meter vom Eisbach entfernt - vom Surflärm direkt in japanische Stille. Zwei Welten, eine Wegbiegung.
+
+**Fact:**
+München und Sapporo sind seit 1972 Partnerstädte - das Teehaus ist das einzige dauerhaft sichtbare Ergebnis dieser Partnerschaft im öffentlichen Raum. Diplomatische Beziehungen als Gartenarchitektur.
+
+**Sinnlich:**
+Das Wasser des kleinen Teichs, das leise Plätschern, der Bambus der im Wind raschelt. Nach dem Eisbach-Lärm wirkt dieser Ort fast unwirklich still. Ein akustischer Schnitt.
+
+**Tipp:**
+Reinschauen und kurz am Teich stehen. Wenn Teezeremonie-Zeit ist und du Lust hast: reingehen. Es ist eine der unerwartetsten 45 Minuten die man in München verbringen kann.
+
+**CTA:**
+"Jetzt den kleinen Hügel hoch - der Monopteros wartet. Ein griechischer Tempel in Bayern, zu Ehren eines ungeliebten Kurfürsten gebaut, der in den 60ern Hippie-Treffpunkt wurde."
+
+
+## POI 03 - Rumford-Denkmal
 
 **Kategorie:** Geschichte / Kuriositäten / Stadtgeschichte
 **Dauer:** 90 Sek.
-**GPS:** 48.1435, 11.5844
+**GPS:** 48.1440, 11.5852
 **Tags:** Geschichte, Kuriositäten, Gründer, Amerika
 
 **Hook:**
@@ -86,11 +116,11 @@ Kurz vor dem Denkmal stehenbleiben und die Information sacken lassen: Dieser Pla
 
 ---
 
-## POI 03 - Monopteros
+## POI 04 - Monopteros
 
 **Kategorie:** Architektur / Geschichte / Subkultur
 **Dauer:** 75 Sek.
-**GPS:** 48.1449, 11.5831
+**GPS:** 48.1499, 11.5909
 **Tags:** Architektur, Geschichte, Hippies, Aussicht
 
 **Hook:**
@@ -117,11 +147,11 @@ Auf den Hügel rauf, umschauen. Im Sommer abends kommen Münchner mit Bier und B
 
 ---
 
-## POI 04 - Schönfeldwiese / FKK-Zone
+## POI 05 - Schönfeldwiese / FKK-Zone
 
 **Kategorie:** Stadtgeschichte / Subkultur / Humor
 **Dauer:** 75 Sek.
-**GPS:** 48.1461, 11.5820
+**GPS:** 48.1470, 11.5845
 **Tags:** Geschichte, Humor, Subkultur, München
 
 **Hook:**
@@ -148,11 +178,11 @@ Im Sommer einfach auf die Wiese setzen. Alle tun so als wäre alles normal - wei
 
 ---
 
-## POI 05 - Chinesischer Turm + Biergarten
+## POI 06 - Chinesischer Turm + Biergarten
 
 **Kategorie:** Architektur / Geschichte / Tradition
 **Dauer:** 90 Sek.
-**GPS:** 48.1502, 11.5853
+**GPS:** 48.1526, 11.5921
 **Tags:** Architektur, Geschichte, Biergarten, Kocherlball
 
 **Hook:**
@@ -179,11 +209,11 @@ Eine Maß bestellen und an einem Tisch unter den alten Kastanien sitzen. Nicht a
 
 ---
 
-## POI 06 - Rumfordhaus
+## POI 07 - Rumfordhaus
 
 **Kategorie:** Geschichte / Architektur
 **Dauer:** 60 Sek.
-**GPS:** 48.1509, 11.5869
+**GPS:** 48.1529, 11.5935
 **Tags:** Geschichte, Architektur, Rumford, Ursprung
 
 **Hook:**
@@ -210,42 +240,11 @@ Kurz reinschauen was gerade ausgestellt ist. Oft kleine, interessante Ausstellun
 
 ---
 
-## POI 07 - Weg nach Norden / Parkcharakter
-
-**Kategorie:** Natur / Geschichte / Stadtleben
-**Dauer:** 60 Sek.
-**GPS:** 48.1540, 11.5870
-**Tags:** Natur, Geschichte, Stadtleben, Entspannung
-
-**Hook:**
-"Der Englische Garten ist größer als der Central Park in New York und der Hyde Park in London zusammen. Was kaum jemand weiß: Er wurde nie fertig gebaut. Der ursprüngliche Plan war noch viel größer."
-
-**Story:**
-Mit 384 Hektar und 5,5 Kilometern Länge ist der Englische Garten einer der größten innerstädtischen Parks weltweit. Was die Zahlen nicht sagen: Er fühlt sich noch größer an als er ist - weil er natürlich gestaltet ist, mit Sichtachsen die in die Ferne weisen und Wegen die sich durch Baumgruppen winden.
-
-Der ursprüngliche Plan von Rumford und dem Gartenarchitekten Friedrich Ludwig von Sckell sah einen Park vor der sich weit in den Münchner Norden erstrecken sollte - über die heutigen Grenzen hinaus, entlang der Isar, bis weit ins Umland. Geld, politische Veränderungen und der Tod der Initiatoren stoppten den Plan. Was blieb, war trotzdem das Beste was München hat.
-
-Heute kommen jährlich mehr als 5 Millionen Menschen. An schönen Sommertagen liegen auf den Wiesen zeitweise mehr Menschen pro Quadratmeter als in manchen Stadtzentren. München liebt seinen Park mit einer Intensität die fast religiös wirkt.
-
-**Fact:**
-Der Englische Garten steht seit 1995 als Gartenkunstwerk unter Denkmalschutz. Er ist damit eines der wenigen Parks Deutschlands der denselben Schutzstatus hat wie ein historisches Gebäude. Natur als Kulturgut.
-
-**Sinnlich:**
-Auf dem Weg nach Norden wird es ruhiger. Weniger Touristen, mehr Joggingspuren, mehr Radfahrer, mehr Hunde. Der Park wechselt den Charakter - vom kuratierten Süden zum natürlicheren Norden. Die Baumgruppen werden dichter, die Wege breiter.
-
-**Tipp:**
-Vom Hauptweg abweichen. Die Seitenwege des nördlichen Englischen Gartens sind ruhiger und oft schöner als die Hauptachsen. Kein Ziel, einfach gehen.
-
-**CTA:**
-"Der Kleinhesseloher See taucht gleich auf. Ein künstlicher See der so aussieht als wäre er immer dort gewesen. Was Gartenarchitektur bedeutet wenn sie gut gemacht ist."
-
----
-
 ## POI 08 - Kleinhesseloher See / Seehaus
 
 **Kategorie:** Natur / Geschichte / Entspannung
 **Dauer:** 75 Sek.
-**GPS:** 48.1580, 11.5912
+**GPS:** 48.1605, 11.5983
 **Tags:** Natur, Geschichte, Biergarten, See
 
 **Hook:**
@@ -276,7 +275,7 @@ Seehaus-Biergarten, falls Zeit. Einer der angenehmsten Biergärten im Englischen
 
 **Kategorie:** Natur / Stille / Stadtleben
 **Dauer:** 60 Sek.
-**GPS:** 48.1610, 11.5880
+**GPS:** 48.1630, 11.5970
 **Tags:** Natur, Stille, Stadtleben, Bach
 
 **Hook:**
@@ -307,7 +306,7 @@ Im Sommer: Schuhe ausziehen, in den Bach waten. Das klingt touristisch. Es ist d
 
 **Kategorie:** Stadtleben / Reflexion / Abschluss
 **Dauer:** 75 Sek.
-**GPS:** 48.1560, 11.5940
+**GPS:** 48.1620, 11.6027
 **Tags:** Stadtleben, Reflexion, Abschluss, München
 
 **Hook:**
@@ -348,8 +347,8 @@ sprache: de
 schwierigkeit: leicht
 beste_jahreszeit: [Frühling, Sommer, Herbst, Winter]
 beste_tageszeit: Morgen
-start_gps: [48.1437, 11.5861]
-end_gps: [48.1560, 11.5940]
+start_gps: [48.1435, 11.5878]
+end_gps: [48.1620, 11.6027]
 besonderheit: Kocherlball dritter Juli-Sonntag 6 Uhr morgens
 status: entwurf
 version: 1.0

@@ -1,7 +1,9 @@
 import type { TourPoi } from '@/content/tours/types'
 
 export function parsePois(md: string): TourPoi[] {
-  const blocks = md.split(/\n---\n/)
+  // Split at each "## POI N - Name" heading instead of at `---` separators
+  // so the parser stays robust if a separator is missing between PoIs.
+  const blocks = md.split(/(?=^##\s+POI\s+\d+\s+[-–])/m)
   const pois: TourPoi[] = []
 
   for (const block of blocks) {
@@ -47,7 +49,9 @@ function parseFields(block: string): Record<string, string> {
   while ((m = re.exec(block)) !== null) {
     const key = m[1].toLowerCase().trim()
     const value = m[2].trim()
-    if (key && value) result[key] = value
+    // First occurrence wins — protects against trailing template/example
+    // blocks (e.g. "**GPS:** [lat], [lng]") clobbering the real values.
+    if (key && value && !(key in result)) result[key] = value
   }
   return result
 }

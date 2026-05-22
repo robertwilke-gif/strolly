@@ -124,6 +124,52 @@ describe('parsePois', () => {
   it('returns [] for input without any PoI blocks', () => {
     expect(parsePois('# Just intro\n\nNo PoIs here.')).toEqual([])
   })
+
+  it('ignores trailing template/example blocks (placeholder GPS shouldn\'t override)', () => {
+    const withTemplate = `## POI 01 - Alpha
+
+**GPS:** 48.10, 11.10
+
+**Hook:**
+Real hook.
+
+---
+
+## Technische Struktur
+
+\`\`\`
+## POI [NR] - [NAME]
+**GPS:** [lat], [lng]
+**Hook:** [placeholder]
+\`\`\`
+`
+    const pois = parsePois(withTemplate)
+    expect(pois).toHaveLength(1)
+    expect(pois[0].lat).toBeCloseTo(48.1, 4)
+    expect(pois[0].story).toContain('Real hook')
+  })
+
+  it('parses adjacent PoI blocks even when the --- separator is missing', () => {
+    const noSep = `## POI 01 - Alpha
+
+**GPS:** 48.10, 11.10
+
+**Hook:**
+First hook.
+
+## POI 02 - Beta
+
+**GPS:** 48.20, 11.20
+
+**Hook:**
+Second hook.
+
+---
+`
+    const pois = parsePois(noSep)
+    expect(pois).toHaveLength(2)
+    expect(pois.map((p) => p.name)).toEqual(['Alpha', 'Beta'])
+  })
 })
 
 describe('slugify', () => {
