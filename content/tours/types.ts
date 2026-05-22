@@ -25,4 +25,11 @@ export interface Tour {
   triggerRadiusM: number
   start: { lat: number; lng: number }
   pois: TourPoi[]
+  /**
+   * Optional URL to a static JSON `Record<poiId, story>` map. When set, the
+   * TourPlayer fetches stories on demand instead of receiving them inline via
+   * RSC. Use for tours with many/long stories to avoid bloating the initial
+   * payload.
+   */
+  storiesUrl?: string
 }

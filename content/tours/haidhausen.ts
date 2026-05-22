@@ -1,14 +1,14 @@
-import { readFileSync } from 'node:fs'
-import { join } from 'node:path'
-import { parsePois } from '@/lib/parsePoi'
-import type { Tour } from '@/content/tours/types'
+import type { Tour, TourPoi } from '@/content/tours/types'
+import poisData from './haidhausen.pois.json'
 
-const md = readFileSync(
-  join(process.cwd(), 'content', 'tours', 'haidhausen.md'),
-  'utf-8',
-)
-
-const pois = parsePois(md)
+// Pre-parsed at check-in time from content/tours/haidhausen.md via
+// lib/parsePoi.ts. Stories are stripped from the SSR payload and loaded
+// lazily on the client from /public/tours/haidhausen-stories.json — keeps
+// the initial RSC payload light (~78kB instead of ~120kB).
+const pois: TourPoi[] = (poisData as TourPoi[]).map((p) => ({
+  ...p,
+  story: '',
+}))
 
 export const haidhausenTour: Tour = {
   slug: 'haidhausen',
@@ -22,4 +22,5 @@ export const haidhausenTour: Tour = {
   triggerRadiusM: 100,
   start: pois[0] ? { lat: pois[0].lat, lng: pois[0].lng } : { lat: 48.1367, lng: 11.5921 },
   pois,
+  storiesUrl: '/tours/haidhausen-stories.json',
 }

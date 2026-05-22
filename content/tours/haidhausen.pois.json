@@ -1,0 +1,422 @@
+[
+  {
+    "id": "maximiliansbuecke",
+    "order": 1,
+    "name": "Maximiliansbücke",
+    "lat": 48.1367,
+    "lng": 11.5921,
+    "blurb": "Du stehst gerade an einer der meistfotografierten Stellen Münchens - und fast niemand weiß warum.",
+    "story": "Du stehst gerade an einer der meistfotografierten Stellen Münchens - und fast niemand weiß warum. Nicht wegen der Brücke. Wegen dem, was du von hier aus siehst. Dreh dich einmal langsam um die eigene Achse.\n\nDie Maximiliansbücke ist eigentlich unspektakulär - eine Brücke aus dem 19. Jahrhundert, benannt nach König Max II, der Haidhausen mit der Innenstadt verbinden wollte. Aber von hier aus öffnet sich die Blickachse auf das Maximilianeum, und das ist kein Zufall.\n\nKönig Max II. war besessen von der Idee, Kunst und Politik zu verbinden. Er ließ die Maximilianstraße als gerade Achse planen, die direkt auf das Maximilianeum zielt - wie ein Zeigefinger der Macht. Wer von der Innenstadt kam, sollte sofort sehen: Hier regiert Bayern.\n\nWas er nicht plante: Dass sein Eliteinstitut für Hochbegabte einmal Bayerns Parlament werden würde. Die Ironie liegt in der Architektur - der König baute sich ein Denkmal, das heute Volksvertreter beherbergt.",
+    "category": "Architektur / Stadtgeschichte",
+    "durationSec": 75,
+    "tags": [
+      "Isar",
+      "Architektur",
+      "Einstieg",
+      "Panorama"
+    ],
+    "fact": "Die Brücke wurde 1903 umgebaut und hat seitdem 8 Löwenskulpturen als Wächter. München und seine Löwen - die Stadt hat mehr Löwen-Symbole als irgendeine andere Stadt Europas, die nie eine afrikanische Kolonie hatte.",
+    "sinnlich": "Horch auf das Rauschen der Isar unter dir. Im Sommer riecht es nach Wasser und Algen. Im Winter liegt manchmal Nebel über dem Fluss, und das Maximilianeum dahinter sieht aus wie eine Kulisse aus einem Wagner-Opernfilm.",
+    "tipp": "Geh auf die Brückenmitte und schau isaraufwärts - du siehst die Alpen, wenn das Wetter gut ist. An klaren Herbsttagen ist der Blick unglaublich. Münchner nennen das den \"Föhnblick\".",
+    "cta": "Geh jetzt auf die Haidhausener Seite und schau nach links. Das Gebäude auf dem Hügel wartet auf dich - mit einer Geschichte, die zeigt, dass in Bayern selbst Bildung immer auch Politik war."
+  },
+  {
+    "id": "maximilianeum",
+    "order": 2,
+    "name": "Maximilianeum",
+    "lat": 48.1363,
+    "lng": 11.5944,
+    "blurb": "Das da oben ist der Bayerische Landtag.",
+    "story": "Das da oben ist der Bayerische Landtag. Aber eigentlich sollte es eine Schule für Genies werden. Und irgendwie ist es beides gleichzeitig - was in Bayern nicht unbedingt ein Widerspruch ist.\n\nKönig Max II. hatte eine fixe Idee: Bayern braucht die klügsten Köpfe, und die soll der Staat fördern. 1852 gründete er das Maximilianeum als Stipendiatenstift - die besten Abiturienten Bayerns bekamen hier freie Unterkunft, Verpflegung und Bildung. Im Gegenzug sollten sie später dem Staat dienen.\n\nDas Gebäude wurde auf einem Hügel direkt an der Isar gebaut - als Zeichen: Bildung thront über allem. Architekt Friedrich Bürklein entwarf einen neugotischen Prachtbau, der bewusst an mittelalterliche Klöster erinnert. Lernen als fast religiöse Pflicht.\n\nDas Kurioseste: Die Stipendiaten leben bis heute hier. Gerade jetzt, während du schaust, wohnen etwa 66 Hochbegabte in den oberen Stockwerken des Bayerischen Parlaments. Sie teilen das Gebäude mit Abgeordneten, Sitzungssälen und Sicherheitspersonal. Kaffeemachen in der WG-Küche, direkt über dem Plenarsaal.",
+    "category": "Geschichte / Politik / Architektur",
+    "durationSec": 90,
+    "tags": [
+      "Geschichte",
+      "Politik",
+      "Architektur",
+      "Kuriositäten"
+    ],
+    "fact": "Das Maximilianeum gehört zu den wenigen Parlamenten der Welt, die gleichzeitig Studentenwohnheim sind. Die Aufnahme ist härter als jede Uni-Bewerbung: Nur die Jahrgangsbesten ganz Bayerns kommen rein.",
+    "sinnlich": "Schau auf die Fassade in der Abendsonne - das rötliche Licht lässt den Naturstein fast orangefarben leuchten. Ein Gebäude, das morgens wie eine Schule wirkt und abends wie eine Burg.",
+    "tipp": "Der Eingang ist öffentlich zugänglich - zumindest der Vorplatz. Geh rauf, stell dich vor das Tor und schau zurück auf die Maximilianstraße. Die Blickachse ist perfekt - du siehst bis fast zur Innenstadt. Genau so war es geplant.",
+    "cta": "Geh jetzt die Treppe runter und die Isar entlang Richtung Süden. Nach wenigen Minuten erreichst du ein Gebäude, das ein privater Münchner aus einem sehr speziellen Grund für die Allgemeinheit baute. Er fand nämlich, dass seine Mitbürger zu sehr stinken."
+  },
+  {
+    "id": "mueller-sches-volksbad",
+    "order": 3,
+    "name": "Müller'sches Volksbad",
+    "lat": 48.1324,
+    "lng": 11.5885,
+    "blurb": "Dieses Gebäude existiert, weil ein reicher Münchner Stadtrat fand, seine Mitbürger stinken zu sehr.",
+    "story": "Dieses Gebäude existiert, weil ein reicher Münchner Stadtrat fand, seine Mitbürger stinken zu sehr. Das ist kein Gerücht. Das ist belegbare Münchner Stadtgeschichte.\n\nKarl Müller, Stadtrat und Fabrikant, vermachte der Stadt München 1897 eine halbe Million Goldmark mit einer Bedingung: Das Geld muss für ein öffentliches Bad verwendet werden. Zur persönlichen Hygiene der Münchner Bevölkerung.\n\nWas nach einem netten Mäzenatentum klingt, war in Wirklichkeit ein Statement: Ende des 19. Jahrhunderts hatten die meisten Münchner keine Badewanne. Sich zu waschen war aufwändig und teuer. Das Ergebnis war - Müller drückte es im Volksmund vorsichtig aus - ein olfaktorisches Stadtproblem.\n\nDas Bad wurde 1901 eröffnet - und Stadtbaumeister Carl Hocheder baute kein Zweckgebäude, sondern einen Jugendstil-Palast. Zwei Schwimmhallen, Wannenbäder, Dampfbäder. Die Botschaft war klar: Hygiene ist keine Pflicht, sie ist ein Genuss. Das Gebäude ist bis heute eines der schönsten Badeanstalten Deutschlands - und in Betrieb. Du kannst heute Nachmittag noch schwimmen gehen.",
+    "category": "Architektur / Stadtgeschichte / Kuriositäten",
+    "durationSec": 90,
+    "tags": [
+      "Jugendstil",
+      "Geschichte",
+      "Humor",
+      "Architektur"
+    ],
+    "fact": "Das Volksbad hat zwei Schwimmhallen: eine für Männer, eine für Frauen - getrennt seit 1901. Erst Jahrzehnte später wurden sie für gemischten Betrieb geöffnet. Die Trennwand steht noch.",
+    "sinnlich": "Stell dich vor den Eingang und schau die Fassade hoch. Die Detailfreude ist unglaublich - Kacheln, Ornamente, Wassermotive überall. Ein Gebäude, das buchstäblich nach Wasser aussieht, bevor man auch nur einen Tropfen gesehen hat.",
+    "tipp": "Wenn du Zeit hast: Kauf ein Ticket und geh rein. Der Eintrittspreis ist moderat und der Anblick der Schwimmhalle von innen ist einer der unterschätzten Münchner Wow-Momente.",
+    "cta": "Weiter die Rosenheimer Straße entlang. Das rote Gebäude vor dir polarisiert München seit 40 Jahren. Die einen nennen es Kulturtempel, die anderen Backsteinmonster. Hör dir die Geschichte an und bild dir selbst ein Urteil."
+  },
+  {
+    "id": "gasteig",
+    "order": 4,
+    "name": "Gasteig",
+    "lat": 48.1316,
+    "lng": 11.5915,
+    "blurb": "München hat einen Namen für ungeliebte Gebäude, die man trotzdem täglich nutzt: Der Gasteig.",
+    "story": "München hat einen Namen für ungeliebte Gebäude, die man trotzdem täglich nutzt: Der Gasteig. Meistbesuchteste Kulturinstitution der Stadt. Und meistbeschimpfte. Beides gleichzeitig seit 1985.\n\nAls der Gasteig 1985 eröffnete, schrieb die Süddeutsche Zeitung von einem \"roten Klotz\" und einem \"Backsteinmonster\". Der Architekt Raue hatte bewusst auf Monumentalität gesetzt - groß, wuchtig, unübersehbar. München, das sich gerne schön findet, mochte das nicht.\n\nHeute kommen jedes Jahr über eine Million Menschen in den Gasteig. Philharmonie, Stadtbibliothek, Volkshochschule, Filmmuseum - alles unter einem Dach. Es ist so praktisch, dass selbst überzeugte Kritiker regelmäßig reinkommen. Das Gebäude hat gewonnen.\n\nWas kaum jemand weiß: Der Name \"Gasteig\" kommt von \"Gaißteig\" - auf Altbayerisch: steiler Ziegenweg. Hier liefen im Mittelalter tatsächlich Ziegen zur Isar runter, um zu trinken. Heute spielen dort die Münchner Philharmoniker. Die Ziegen haben sich gut entwickelt.",
+    "category": "Architektur / Stadtgeschichte / Kuriositäten",
+    "durationSec": 75,
+    "tags": [
+      "Architektur",
+      "Humor",
+      "Kultur",
+      "Geschichte"
+    ],
+    "fact": "Der Gasteig ist mit über 70.000 Quadratmetern einer der größten Kulturkomplexe Europas. Während der Sanierung 2021 bis 2025 zog er komplett nach Sendling um - und München merkte erst dann, wie sehr es ihn vermisst hatte.",
+    "sinnlich": "Steh auf dem Vorplatz und schau auf die Backsteinfassade. Im Nachmittagslicht hat das Rot fast etwas Warmes - fast. Der Isar-Wind bringt im Sommer Kühlfeuchte vom Fluss rüber. Im Winter pfeift er eisig durch die Treppenanlagen.",
+    "tipp": "Geh rein - der Durchgang ist kostenlos. Von der Rückseite hast du einen der unbekanntesten, besten Isarblicke der Stadt. Kaum Touristen, keine Selfie-Stangen.",
+    "cta": "Jetzt weiter ins Herz Haidhausens. Wir tauchen ein in ein Viertel, das Napoleon zu verdanken ist - obwohl Bayern und Frankreich heute eher keine engen Freunde sind."
+  },
+  {
+    "id": "weissenburger-platz",
+    "order": 5,
+    "name": "Weißenburger Platz",
+    "lat": 48.1288,
+    "lng": 11.5959,
+    "blurb": "Es gibt in München ungefähr 28 Weihnachtsmärkte.",
+    "story": "Es gibt in München ungefähr 28 Weihnachtsmärkte. Einer davon ist für Touristen. Einer ist für Menschen, die Glühwein trinken wollen ohne dabei in einem TikTok aufzutauchen. Das ist der hier.\n\nDer Weißenburger Platz ist im Rest des Jahres einer dieser stillen, fast unbekannten Münchner Plätze - ein paar Bäume, ein paar Bänke, Tram fährt durch. Kein Grund, extra herzukommen.\n\nIm Dezember verwandelt er sich in den vielleicht authentischsten Weihnachtsmarkt der Stadt. Klein, überschaubar, mit echten Haidhausener Händlern. Keine Glühwein-Franchise-Stände, keine Lebkuchen-Herzen mit Aufdruck. Dafür: Gespräche mit den Nachbarn, Kinder die wirklich glücklich aussehen, Buden die man von Jahr zu Jahr wiedererkennt.\n\nDer Platz selbst ist benannt nach der Stadt Weißenburg im Elsass - einem der vielen Zeugnisse der napoleonischen Zeit in Haidhausen, als Bayern unter französischem Einfluss stand und man Orte nach französischen Siegen benannte. Ein bescheidener Platz mit einem großen geopolitischen Hintergrund.",
+    "category": "Stadtleben / Tradition / Weihnachtsmarkt",
+    "durationSec": 75,
+    "tags": [
+      "Tradition",
+      "Stadtleben",
+      "Weihnachten",
+      "Authentisch"
+    ],
+    "fact": "Haidhausen hat pro Quadratkilometer mehr Weihnachtsmarkt-Dichte als jeder andere Münchner Stadtbezirk. Der am Weißenburger Platz gilt unter Einheimischen als der, den man nicht verrät.",
+    "sinnlich": "Im Dezember: der Geruch von gebrannten Mandeln und Tannenzweigen, der Klang von Kinderlachen und einer leicht schiefen Blaskapelle. Im Rest des Jahres: das leise Summen der Tram und das Rascheln der alten Kastanienbäume.",
+    "tipp": "Im Dezember: Komm am Wochenende nachmittags, am besten bei leichtem Schneefall. Kein Witz - das ist einer der wenigen Orte in München, an dem Schnee tatsächlich noch idyllisch wirkt statt nur störend.",
+    "cta": "Weiter zum Bordeauxplatz - dem Ort, der am besten zeigt, warum das Franzosenviertel seinen Namen verdient hat. Und warum Napoleon unfreiwillig einen der schönsten Plätze Münchens mitgeplant hat."
+  },
+  {
+    "id": "bordeauxplatz",
+    "order": 6,
+    "name": "Bordeauxplatz",
+    "lat": 48.1302,
+    "lng": 11.6008,
+    "blurb": "Du stehst auf einem der schönsten Plätze Münchens, den kaum ein Tourist kennt.",
+    "story": "Du stehst auf einem der schönsten Plätze Münchens, den kaum ein Tourist kennt. Der Name verrät, warum er so heißt - aber die Geschichte dahinter ist weit interessanter als nur Wein.\n\nDer Bordeauxplatz liegt im Herzen des sogenannten Franzosenviertels - einem Viertel, dessen Straßen alle nach französischen Städten und Schlachten benannt sind. Pariser Straße, Elsässer Straße, Orleansstraße. Das klingt heute exotisch, hatte damals aber einen sehr konkreten Grund.\n\nAnfang des 19. Jahrhunderts war Bayern Verbündeter Napoleons. Bayerische Truppen kämpften an der Seite Frankreichs in Russland, in Spanien, in ganz Europa. Als Gegenleistung bekam Bayern Territorien und Anerkennung. Die Straßennamen im neuen Haidhausener Stadtviertel wurden als Dankeschön an den großen Verbündeten vergeben.\n\nNapoleon verlor schließlich. Die Allianz zerbrach. Aber die Straßennamen blieben. Heute trinkt man am Bordeauxplatz Kaffee oder Weißbier unter alten Platanen, umgeben von Gründerzeitfassaden, und die meisten Anwohner wissen nicht mehr, warum der Platz so heißt.",
+    "category": "Architektur / Geschichte / Stadtleben",
+    "durationSec": 75,
+    "tags": [
+      "Franzosenviertel",
+      "Architektur",
+      "Geschichte",
+      "Geheimtipp"
+    ],
+    "fact": "Das Franzosenviertel in Haidhausen ist das einzige Viertel Münchens, das seine Straßennamen aus einer militärischen Allianz bezogen hat, die nur 10 Jahre hielt. Ein geopolitischer Flüchtigkeitsfehler, der bis heute die Beschilderung prägt.",
+    "sinnlich": "Die Platanen auf dem Platz sind im Sommer so dicht, dass die Mittagshitze draußen bleibt. Darunter ist es immer ein paar Grad kühler. Ein natürliches Freiluftgewölbe, mitten in der Stadt.",
+    "tipp": "Setz dich auf eine der Bänke und schau auf die Gründerzeitfassaden ringsum. Kein einziges Gebäude ist identisch - das ist selten geworden in München. Fast ein Freilichtmuseum für Jahrhundertwende-Architektur.",
+    "cta": "Zwei Minuten von hier liegt eine Bäckerei, die beweist: Man muss keine 800 km nach Paris fahren, um ein echtes Croissant zu bekommen. Manche sagen, es ist das beste in München."
+  },
+  {
+    "id": "claude-julien",
+    "order": 7,
+    "name": "Claude & Julien",
+    "lat": 48.1302,
+    "lng": 11.6053,
+    "blurb": "Mitten im Franzosenviertel liegt eine Bäckerei, die so französisch ist, dass ein echter Franzose sie als seinen Geheimtipp bezeichnet hat.",
+    "story": "Mitten im Franzosenviertel liegt eine Bäckerei, die so französisch ist, dass ein echter Franzose sie als seinen Geheimtipp bezeichnet hat. Das Croissant hier ist kein Souvenir - es ist eine Aussage.\n\nClaude & Julien ist das, was passiert, wenn jemand wirklich gute französische Pâtisserie in München vermisst - und beschließt, das Problem selbst zu lösen. Die kleinen Räume, die Vitrinen voller Tartelettes und Macarons, der Geruch von frisch gebackenem Blätterteig: Man glaubt kurz, an der Rue de Bretagne in Paris zu stehen.\n\nWas die Bäckerei besonders macht: Sie versucht nicht, bayerisch-französisch zu sein. Kein Fusion-Croissant mit Lebkuchengewürz, keine Brezel-Baguette. Das hier ist konsequent französisch, handwerklich und täglich frisch.\n\nDie Lage im Franzosenviertel ist natürlich kein Zufall. Der Name des Viertels stammt aus der Napoleonzeit - und eine echte französische Bäckerei schließt den Kreis auf die angenehmste aller möglichen Arten.",
+    "category": "Gastronomie / Stadtleben / Geheimtipp",
+    "durationSec": 60,
+    "tags": [
+      "Essen",
+      "Geheimtipp",
+      "Frankreich",
+      "Genuss"
+    ],
+    "fact": "Claude & Julien öffnet werktags um 7 Uhr. Wer nach 10 Uhr kommt, hat bei den Croissants oft das Nachsehen. Das ist bei guten Pariser Bäckereien genauso.",
+    "sinnlich": "Der Geruch von frisch gebackenem Butterblätterteig, der schon von der Straße durch die Tür kommt. Warm, leicht karamellig, unwiderstehlich.",
+    "tipp": "Hol dir ein Croissant oder ein Pain au Chocolat und iss es auf dem Bordeauxplatz unter den Platanen. Geht nicht besser.",
+    "cta": "Mit dem Croissant in der Hand weiter zur Preysingstraße - einer der Hauptachsen des Viertels, an der man ablesen kann wie Haidhausen tickt: immer zwei Welten gleichzeitig."
+  },
+  {
+    "id": "preysingstrasse-franzosenviertel",
+    "order": 8,
+    "name": "Preysingstraße / Franzosenviertel",
+    "lat": 48.1323,
+    "lng": 11.5964,
+    "blurb": "Diese Straße wurde nach einem bayerischen Adelsgeschlecht benannt, liegt mitten in einem Viertel voller französischer Ortsnamen und ist heute die Flaniermeile von Leuten, die keine Flaniermeilen mögen.",
+    "story": "Diese Straße wurde nach einem bayerischen Adelsgeschlecht benannt, liegt mitten in einem Viertel voller französischer Ortsnamen und ist heute die Flaniermeile von Leuten, die keine Flaniermeilen mögen. Haidhausen ist konsequent widersprüchlich.\n\nDie Preysingstraße ist eine der Hauptadern des alten Haidhausen - breit, mit Gründerzeitbauten auf beiden Seiten, kleinen Cafés, inhabergeführten Läden, gelegentlich einem türkischen Gemüsehändler neben einem Bio-Weinladen.\n\nDas Viertel ringsum ist als \"Franzosenviertel\" bekannt - was aber ein Irrtum ist. Nur der südliche Teil hat französische Straßennamen. Der nördliche Teil heißt \"Zwickerbezirk\", benannt nach dem populären Zwicker-Trinkspiel das hier früher in den Wirtshäusern gespielt wurde. Das hat nichts mit Frankreich zu tun.\n\nDas wirklich Besondere an der Preysingstraße: Du siehst hier das ungefilterte Haidhausen von heute. Ein älteres Ehepaar trägt die Einkaufstasche vom Wochenmarkt, drei Meter weiter sitzt jemand mit dem MacBook vor dem Flat White. Ein Kinderwagen, ein Lieferradfahrer, ein Rentner der die Zeitung liest. Das hier ist kein kuratiertes Lifestyle-Viertel - es ist einfach ein Ort, wo echte Münchner leben.",
+    "category": "Stadtgeschichte / Architektur / Stadtleben",
+    "durationSec": 75,
+    "tags": [
+      "Franzosenviertel",
+      "Geschichte",
+      "Stadtleben",
+      "Architektur"
+    ],
+    "fact": "Die Immobilienpreise in der Preysingstraße haben sich zwischen 2010 und 2023 mehr als verdreifacht. Trotzdem ist es eines der wenigen Münchner Viertel, das seine soziale Mischung halbwegs behalten hat. Noch.",
+    "sinnlich": "Das Geräusch der Tram die um die Kurve quietscht. Irgendwo klingt Musik aus einem offenen Fenster. Und der Geruch vom Gemüsehändler - frischer Koriander, der bis auf die Straße zieht.",
+    "tipp": "Schau mal in die Seitengassen - dort stehen die Hinterhöfe und kleinen Hausdurchgänge, die zeigen wie verdichtet Haidhausen früher gebaut wurde. Enge Passagen, überraschend große Innenhöfe dahinter.",
+    "cta": "Weiter zum Pariser Platz - dem vielleicht elegantesten kleinen Platz Haidhausens. Und gleichzeitig einem, der beweist, dass ein Platzname manchmal mehr Geschichte trägt als das ganze Viertel drumherum."
+  },
+  {
+    "id": "pariser-platz",
+    "order": 9,
+    "name": "Pariser Platz",
+    "lat": 48.131,
+    "lng": 11.5985,
+    "blurb": "Es gibt in München einen Pariser Platz.",
+    "story": "Es gibt in München einen Pariser Platz. Er liegt nicht in der Innenstadt, kaum jemand kennt ihn - und er ist deswegen vielleicht der schönste Platz in ganz Haidhausen.\n\nDer Pariser Platz in Haidhausen ist das Gegenteil seines Berliner Namensvetters am Brandenburger Tor: klein, ruhig, fast intim. Ein paar alte Kastanien, Gründerzeitfassaden ringsum, eine Atmosphäre als hätte die Zeit hier einfach beschlossen, sich ein bisschen mehr Zeit zu lassen.\n\nDer Name stammt - wie alle anderen im Franzosenviertel - aus der bayerisch-napoleonischen Allianz Anfang des 19. Jahrhunderts. Als Frankreichs wichtigste Stadt bekam Paris das Privileg, nicht nur eine Straße sondern einen ganzen Platz zu benennen.\n\nWas den Pariser Platz heute besonders macht: Er ist einer der wenigen Plätze in Haidhausen, den die Gentrifizierung noch nicht vollständig übernommen hat. Es gibt keine Rooftop-Bar, kein Instagram-Café mit Schlange davor. Nur die Platanen, die Fassaden, und manchmal einen Hund der auf eine Bank starrt.",
+    "category": "Geschichte / Architektur / Stadtleben",
+    "durationSec": 75,
+    "tags": [
+      "Franzosenviertel",
+      "Geschichte",
+      "Architektur",
+      "Ruhepol"
+    ],
+    "fact": "München hat über 30 Plätze, die nach Städten oder Orten benannt sind. Nur drei davon liegen im Franzosenviertel Haidhausen - und alle drei stammen aus derselben kurzen historischen Periode von etwa 15 Jahren.",
+    "sinnlich": "Im Sommer wirft das Blätterdach der alten Kastanien ein sich bewegendes Muster auf die Fassaden. Abends, wenn die Sonne tief steht, wird das Licht goldgelb und die Gründerzeithäuser sehen aus wie aus einer anderen Zeit - was sie ja irgendwie sind.",
+    "tipp": "Wenn du einen Moment Pause brauchst - das ist der richtige Ort. Setz dich, schau um dich, iss das Rest-Croissant von Claude & Julien. Das Leben ist manchmal einfach.",
+    "cta": "Jetzt eine der ältesten Gassen Haidhausens - An der Kreppe. Eine Straße, die so aussieht als wäre sie seit 250 Jahren nicht verändert worden. Weil sie es nicht wurde."
+  },
+  {
+    "id": "an-der-kreppe",
+    "order": 10,
+    "name": "An der Kreppe",
+    "lat": 48.133,
+    "lng": 11.5975,
+    "blurb": "Wenn du diese Gasse betrittst, machst du einen Zeitsprung.",
+    "story": "Wenn du diese Gasse betrittst, machst du einen Zeitsprung. Nicht metaphorisch. Die Bebauung hier stammt aus dem 18. Jahrhundert und wurde seitdem nicht wesentlich verändert. München hat solche Orte selten.\n\nAn der Kreppe ist eine der wenigen Gassen Haidhausens, die noch zeigen, wie das Viertel vor der Industrialisierung ausgesehen hat. Niedrige, zweigeschossige Häuser, enge Durchgänge, unebenes Pflaster. Kein Gründerzeitprunk, keine Jugendstilornaemnte - einfach das alte, vorstädtische Haidhausen aus einer Zeit als es noch nicht zu München gehörte.\n\nHaidhausen wurde erst 1854 offiziell eingemeindet. Bis dahin war es eine eigenständige Gemeinde vor den Toren der Stadt - mit eigener Gemeindeverwaltung, eigener Infrastruktur, eigenem Charakter. Diese Gasse existierte schon damals, als München noch eine Stunde Fußweg entfernt war.\n\nDer Name \"Kreppe\" kommt vermutlich von einem alten Wort für Kriechtiere oder Krüppelholz - die Gasse war wohl von niedrigem Gestrüpp gesäumt. Heute ist das Gestrüpp weg, aber das Enge und Verwinkelte ist geblieben.",
+    "category": "Geschichte / Architektur / Zeitreise",
+    "durationSec": 75,
+    "tags": [
+      "Geschichte",
+      "Architektur",
+      "Zeitreise",
+      "Geheimtipp"
+    ],
+    "fact": "Haidhausen hatte bis zur Eingemeindung 1854 eine eigene Brauerei, eine eigene Schule und ein eigenes Gericht. München hat ein Vierteljahrhundert lang versucht, die Gemeinde zu übernehmen. Haidhausen hat sich standhaft geweigert - bis die Kosten für die eigene Infrastruktur zu hoch wurden.",
+    "sinnlich": "Das Pflaster ist uneben - pass auf die Absätze. Im Regen glänzen die alten Steine so, dass man kurz glaubt, man steht in einem Film. Im Sommer riecht es nach warmem Stein und irgendeinem Kräutergarten dahinter.",
+    "tipp": "Geh langsam und schau nach oben. Die Dachlinien und Kamine sind fast unverändert seit dem 18. Jahrhundert. Ein Detail das man schnell übersieht.",
+    "cta": "Jetzt zur Hauptkirche des alten Haidhausens - St. Johann Baptist am Johannisplatz. Ein Kirchturm mit einer Geschichte, die zwischen religiöser Pflicht und sehr weltlicher Nützlichkeit schwankt."
+  },
+  {
+    "id": "st-johann-baptist-johannisplatz",
+    "order": 11,
+    "name": "St. Johann Baptist / Johannisplatz",
+    "lat": 48.1339,
+    "lng": 11.598,
+    "blurb": "Der Kirchturm hier ist 97 Meter hoch - der dritthöchste in München.",
+    "story": "Der Kirchturm hier ist 97 Meter hoch - der dritthöchste in München. Was kaum jemand weiß: Die Nazis nutzten ihn als Ausguck. Und die Glocken läuten noch heute zu einer Uhrzeit, die einen spezifischen historischen Grund hat.\n\nSt. Johann Baptist ist die Hauptkirche Alt-Haidhausens - gebaut zwischen 1852 und 1857, als die Gemeinde noch selbstständig war und beweisen wollte, dass sie zu einer echten Kirche fähig ist. Der Turm wurde bewusst hoch gebaut - sichtbar von überall, ein Zeichen: Wir sind hier.\n\nIm Zweiten Weltkrieg bekam der Turm eine andere Funktion. Die Luftwaffe nutzte ihn als Ausguck und Orientierungspunkt für die Luftabwehr. Aus einem Symbol des Glaubens wurde ein militärisches Instrument - ein Schicksal, das viele Münchner Kirchtürme in dieser Zeit teilten.\n\nNach dem Krieg begann ein stiller Brauch: jeden Freitag um 15 Uhr läuteten die Glocken - zur traditionellen Todesstunde Christi. Ein Läuten, das gleichzeitig an den Krieg, an die Toten und an den Glauben erinnerte. Der Brauch wird bis heute gepflegt.",
+    "category": "Geschichte / Religion / Architektur",
+    "durationSec": 90,
+    "tags": [
+      "Kirche",
+      "Geschichte",
+      "Architektur",
+      "Tradition"
+    ],
+    "fact": "Der Johannisplatz davor ist einer der wenigen Münchner Kirchplätze, der noch von historischer Bebauung ringsum geprägt ist. Die meisten wurden im Krieg zerstört oder danach \"modernisiert\". Hier blieb es beim Alten.",
+    "sinnlich": "Wenn die Glocken läuten - freitags um 15 Uhr - klingt es im ganzen südlichen Haidhausen. Ein Klang, der tief und voll ist und den modernen Stadtlärm für einen Moment wegdrückt.",
+    "tipp": "Geh auf die Rückseite der Kirche - dort ist der Kirchgarten fast immer leer. Ein stiller Ort mitten im Viertel, den niemand zu kennen scheint.",
+    "cta": "Zwei Minuten weiter liegt der Wiener Platz - das Herz des heutigen Haidhausen. Ein Markt, ein Name, und eine Geschichte die zeigt wie sehr sich das Viertel verändert hat."
+  },
+  {
+    "id": "wiener-platz",
+    "order": 12,
+    "name": "Wiener Platz",
+    "lat": 48.1344,
+    "lng": 11.5963,
+    "blurb": "Dieser Platz ist benannt nach Zuwanderern, die vor 150 Jahren als Problemgruppe galten.",
+    "story": "Dieser Platz ist benannt nach Zuwanderern, die vor 150 Jahren als Problemgruppe galten. Heute ist er das teuerste Pflaster östlich der Isar. Das sagt mehr über München als jeder Stadtführer.\n\nDer Wiener Platz ist nach den vielen österreichischen Einwanderern benannt, die im 19. Jahrhundert nach Haidhausen kamen. Böhmen, Österreicher, Tschechen - sie arbeiteten auf den Baustellen des wachsenden München, in den Fabriken, als Tagelöhner. Sie waren billig, zahlreich und unerwünscht.\n\nHaidhausen war ihr Viertel - das Armenviertel, das Einwandererviertel, das Viertel mit den günstigsten Mieten und den schlechtesten Straßen. Hier wohnte man, wenn man nirgendwo anders wohnen durfte oder konnte.\n\nHeute ist der Wiener Platz einer der teuersten Adressen in ganz München. Der Wochenmarkt ist bekannt und beliebt, die Cafés ringsum sind voll von Menschen mit teuren Fahrrädern. Die Einwanderer von einst haben ihre Nachkommen - und die können sich das Viertel längst nicht mehr leisten. Geschichte ist manchmal ein langer, bitterer Witz.",
+    "category": "Stadtleben / Geschichte / Markt",
+    "durationSec": 90,
+    "tags": [
+      "Markt",
+      "Geschichte",
+      "Stadtleben",
+      "Gentrifizierung"
+    ],
+    "fact": "Eine Zweizimmerwohnung am Wiener Platz kostet heute im Schnitt über 600.000 Euro. 1900 war Haidhausen das Viertel mit den niedrigsten Grundstückspreisen ganz Münchens. Die Relation hat sich komplett umgekehrt.",
+    "sinnlich": "An Markttagen: Das Stimmengewirr der Händler, der Geruch von frischem Gemüse und Fisch, das Quietschen der Tram die über den Platz fährt. Eine der lebendigsten Geräuschkulissen Münchens.",
+    "tipp": "Der Markt findet dienstags, donnerstags und samstags statt. Samstags ist am vollsten und lebendigsten - und gleichzeitig am authentischsten.",
+    "cta": "Fast am Ziel. Der Hofbräukeller direkt am Wiener Platz wartet - mit 2.000 Plätzen, Kastanienbäumen und einer Geschichte, die man besser nicht beim Eingang erklärt."
+  },
+  {
+    "id": "hofbraeukeller",
+    "order": 13,
+    "name": "Hofbräukeller",
+    "lat": 48.1342,
+    "lng": 11.5952,
+    "blurb": "Du stehst vor dem unbekannteren großen Bruder des Hofbräuhauses.",
+    "story": "Du stehst vor dem unbekannteren großen Bruder des Hofbräuhauses. 2.000 Plätze, weniger Touristen, mehr München. Und eine Geschichte, die man besser kennt, bevor man bestellt.\n\nDer Hofbräukeller wurde 1892 gebaut - als Ausschanklokal der Hofbrauerei direkt in Haidhausen. Während das Hofbräuhaus in der Innenstadt die Touristen anzog, war der Keller das Lokal der Einheimischen. Die Qualität ist identisch, der Preis war günstiger, die Gesellschaft bodenständiger.\n\nDas Gebäude hat einen historisch bemerkenswerten Auftritt: Am 24. Februar 1920 hielt Adolf Hitler hier eine der ersten großen NSDAP-Versammlungen ab und verkündete das 25-Punkte-Programm der Partei. Ein Detail, das auf keiner Speisekarte steht und das die meisten Gäste im Biergarten nicht ahnen, während sie das Hendl essen.\n\nDer Biergarten selbst ist eines der besten Beispiele für den Münchner Kastanienbaum-Brauch: Die Brauer pflanzten Bäume, um die Bierkeller darunter kühl zu halten. Wo Kastanien standen, durfte ausgeschenkt werden. Heute steht kein Keller mehr darunter - aber die Bäume und das Bier sind geblieben.",
+    "category": "Gastronomie / Geschichte / Tradition",
+    "durationSec": 90,
+    "tags": [
+      "Bier",
+      "Geschichte",
+      "Tradition",
+      "München"
+    ],
+    "fact": "Der Hofbräukeller hat 2.000 Plätze im Biergarten - damit ist er einer der größten in München. An schönen Sommertagen ist er voll. An Regentagen ist er leer. Münchner gehen nur bei Schönwetter in den Biergarten, das ist keine Option sondern eine Grundregel.",
+    "sinnlich": "Das Geräusch von Maßkrügen die aneinanderschlagen. Kinderlachen. Kastanienblätter die im Wind rauschen. Irgendwo eine Blasmusik oder zumindest ihr Echo. Das ist der Biergarten-Sound - eine der entspanntesten Akustiken der Welt.",
+    "tipp": "Bestell eine Maß und eine Brotzeit - den Obatzda unbedingt. Und setz dich unter die alten Kastanienbäume, nicht an die Ränder. Die Mitte des Biergartens ist die beste Stelle.",
+    "cta": "Du hast es verdient. Prost."
+  },
+  {
+    "id": "innere-wiener-strasse",
+    "order": 14,
+    "name": "Innere Wiener Straße",
+    "lat": 48.1331,
+    "lng": 11.593,
+    "blurb": "Das hier ist nicht die schönste Straße Haidhausens.",
+    "story": "Das hier ist nicht die schönste Straße Haidhausens. Aber es ist vielleicht die ehrlichste. An ihr lässt sich ablesen, was München wirklich ist - nicht was es von sich behauptet.\n\nDie Innere Wiener Straße ist die Hauptader zwischen Isarring und Wiener Platz - eine breite, stadtbusdurchwühlte, von Tram und Fahrrädern bevölkerte Straße mit dem vollen Querschnitt Münchens: türkischer Gemüsehändler, Naturkosmetik-Boutique, Döner, Weinbar, Kinderarzt, Spielhalle.\n\nSie ist nicht Instagram-fertig. Sie ist München.\n\nWas sie interessant macht: die Bebauung ist heterogen wie nirgendwo sonst in Haidhausen. Gründerzeit, Nachkriegsmodern, ein Flachbau aus den 70ern, ein saniertes Jugendstilhaus - alles nebeneinander, ohne Masterplan. Die Stadt hat sich hier einfach geschichtet, Jahrzehnt für Jahrzehnt.",
+    "category": "Stadtleben / Architektur / Gegenwart",
+    "durationSec": 60,
+    "tags": [
+      "Stadtleben",
+      "Gegenwart",
+      "Architektur",
+      "Alltag"
+    ],
+    "fact": "Die Innere Wiener Straße ist eine der wenigen Münchner Geschäftsstraßen, auf der noch über 60 Prozent der Läden inhabergeführt sind - also nicht von Ketten betrieben werden. Das ist in München mittlerweile eine Seltenheit.",
+    "sinnlich": "Tram quietscht. Kaffeedampf aus einem Café. Jemand telefoniert laut. Ein Kind zieht an der Hand seiner Mutter Richtung Spielplatz. Normales städtisches Leben, das man gerne vergisst wie schön es eigentlich ist.",
+    "tipp": "Geh in einen der kleinen Läden rein - einfach so. Irgendein Buchladen, eine Käserei, eine Weinhandlung. Haidhausen hat diese Läden noch. In fünf Jahren vielleicht nicht mehr.",
+    "cta": "Weiter zum Rosenheimer Platz - einer der wichtigsten Verkehrsknotenpunkte Münchens, mit einer Geschichte die zeigt, dass Infrastruktur immer auch Macht ist."
+  },
+  {
+    "id": "rosenheimer-platz",
+    "order": 15,
+    "name": "Rosenheimer Platz",
+    "lat": 48.1303,
+    "lng": 11.5895,
+    "blurb": "Dieser Platz sieht aus wie ein austauschbarer Verkehrsknotenpunkt.",
+    "story": "Dieser Platz sieht aus wie ein austauschbarer Verkehrsknotenpunkt. Er ist keiner. Hier stand mal das erste Elektrizitätswerk der Stadt München - und damit begann die Moderne.\n\n1895 bekam München am Rosenheimer Platz sein erstes städtisches Elektrizitätswerk. Von hier aus wurde die Stadt erstmals systematisch mit elektrischem Strom versorgt - Straßenbeleuchtung, später Haushalte, Fabriken. Haidhausen, das Arbeiterviertel, wurde zum Ort, von dem aus München ins elektrische Zeitalter startete.\n\nDas Werk ist längst weg. Der Platz ist heute ein Verkehrsknoten, an dem sich Tram, Bus, S-Bahn und Individualverkehr zu einem halbwegs geordneten Chaos zusammenfinden. Unspektakulär von außen. Aber wer weiß, was hier mal stand, sieht den Platz anders.\n\nDirekt daneben: der Ostbahnhof, einer der wichtigsten Frachtknotenpunkte Münchens im 19. Jahrhundert. Hier kamen die Güter an, die München wachsen ließen. Und hier wohnten die Arbeiter, die sie entluden.",
+    "category": "Stadtgeschichte / Infrastruktur / Kuriositäten",
+    "durationSec": 60,
+    "tags": [
+      "Geschichte",
+      "Infrastruktur",
+      "Kuriositäten",
+      "Stadtentwicklung"
+    ],
+    "fact": "Das erste Elektrizitätswerk München versorgte 1895 gerade mal 1.000 Haushalte. Heute hängen 800.000 Münchner Haushalte am Netz - aus demselben Versorgungsgebiet, nur exponentiell gewachsen.",
+    "sinnlich": "Der Rosenheimer Platz ist einer der lautesten Orte Haidhausens - Tram, Autos, Baustellenlärm. Und dennoch: Steh eine Minute still und beobachte den Rhythmus. Jede Stadt hat einen Herzschlag. Das hier ist einer der Pulse Münchens.",
+    "tipp": "Kein touristischer Tipp möglich - der Platz ist einfach ein Platz. Aber genau das ist der Tipp: Steh kurz still an einem Ort, den du normalerweise nur durchquerst, und schau was passiert.",
+    "cta": "Weiter zum Ostbahnhof-Areal - wo München seine wildesten Jahre hatte. Und wo heute Büros stehen."
+  },
+  {
+    "id": "ostbahnhof-ehemaliges-kultfabrik-areal",
+    "order": 16,
+    "name": "Ostbahnhof / ehemaliges Kultfabrik-Areal",
+    "lat": 48.127,
+    "lng": 11.6044,
+    "blurb": "In den 90ern und 2000ern war das hier das größte Ausgehviertel Münchens.",
+    "story": "In den 90ern und 2000ern war das hier das größte Ausgehviertel Münchens. 25 Clubs, Tausende Feiernde jede Nacht. Heute stehen hier Büros. München hat beschlossen, erwachsen zu werden.\n\nDas Areal rund um den Ostbahnhof war jahrzehntelang Industriebrache - ein riesiges Gelände mit alten Lagerhallen, Fabrikhöfen und Gleisanlagen. Kein Mensch wollte dort wohnen oder arbeiten. Also feierten sie dort.\n\nIn den 90ern entstanden auf dem Gelände nach und nach Clubs: die Kultfabrik, das Optimolwerke-Areal, das Zenith. Auf dem Höhepunkt gab es bis zu 25 Clubs auf engstem Raum - Techno, Hip-Hop, Alternative, Mainstream, alles nebeneinander. Freitagabend bis Sonntagmorgen, jede Woche, jahrelang.\n\n2011 begann der Abriss. Die Grundstücke wurden für Büros und Wohnbebauung verkauft. Heute steht dort das Werksviertel - modernes Stadtquartier, Instagram-freundlich, teuer. Die Clubs sind weg. Ein paar sind an andere Orte gezogen. Die meisten nicht.",
+    "category": "Stadtgeschichte / Popkultur / Wandel",
+    "durationSec": 75,
+    "tags": [
+      "Geschichte",
+      "Nachtleben",
+      "Wandel",
+      "Popkultur"
+    ],
+    "fact": "Auf dem Kultfabrik-Areal feierten an Spitzenabenden bis zu 20.000 Menschen gleichzeitig. Auf einem Areal, das heute ca. 3.500 Büroarbeiter beherbergt. Die Energie-Dichte war eine andere.",
+    "sinnlich": "Das Werksviertel heute: Es riecht nach frischem Beton und Kaffeebars. Sauber, designt, leer nach 20 Uhr. Wenn du dir Mühe gibst, hörst du vielleicht noch den Bass aus den Erinnerungen von jemandem, der dabei war.",
+    "tipp": "Das Werksviertel hat einen riesigen Konzertturm und interessante Streetart. Tagsüber ist es einen Spaziergang wert - vor allem um zu sehen wie Stadtentwicklung aussieht, wenn Geld und Masterplan aufeinandertreffen.",
+    "cta": "Zurück ins ruhigere Haidhausen - zum Friedhof. Klingt makaber. Ist einer der schönsten Orte im Viertel."
+  },
+  {
+    "id": "friedhof-au-haidhausen",
+    "order": 17,
+    "name": "Friedhof Au-Haidhausen",
+    "lat": 48.1268,
+    "lng": 11.5936,
+    "blurb": "Wer sagt, Friedhöfe seien trostlos, war noch nie auf einem guten.",
+    "story": "Wer sagt, Friedhöfe seien trostlos, war noch nie auf einem guten. Der Friedhof Au-Haidhausen ist einer der schönsten Orte im Viertel - und gleichzeitig ein Stadtarchiv aus Stein.\n\nDer Friedhof Au-Haidhausen ist einer der ältesten im Münchner Osten - angelegt im 19. Jahrhundert, als die Gemeinde Haidhausen noch selbstständig war und einen eigenen Begräbnisplatz brauchte. Hier liegen Haidhausener Bürger aus drei Jahrhunderten - Fabrikarbeiter, Händler, Handwerker, aber auch bekannte Münchner Namen.\n\nWas den Friedhof besonders macht: Er ist keine Touristenattraktion und trotzdem gepflegt und schön. Alte Grabmäler aus dem 19. Jahrhundert stehen neben schlichten modernen Steinen. Hohe Bäume, die im Sommer Schatten werfen. Stille, die man in Haidhausen sonst kaum findet.\n\nIn München gilt: Wer Zeit hat und Ruhe sucht, geht auf einen Friedhof. Es ist keine makabre Tradition, sondern eine pragmatische - Münchner Friedhöfe sind oft Parks, die sich Friedhof nennen.",
+    "category": "Geschichte / Stille / Architektur",
+    "durationSec": 75,
+    "tags": [
+      "Geschichte",
+      "Stille",
+      "Architektur",
+      "Geheimtipp"
+    ],
+    "fact": "Auf dem Friedhof Au-Haidhausen liegt unter anderem das Grab von Elise Aulinger - einer der ersten weiblichen Kabarettistinnen Bayerns, Volksschauspielerin und Radioikone der 30er Jahre. Fast vergessen, fast unbekannt.",
+    "sinnlich": "Das Geräusch des Windes in den hohen Bäumen. Vögel. Manchmal eine Gießkanne die irgendwo klingelt. Die Stille hier ist eine andere als sonst in der Stadt - dicht und merkwürdig wohltuend.",
+    "tipp": "Geh rein. Einfach so. Ein paar Minuten zwischen den alten Grabmälern spazieren, die Inschriften lesen, die Zeit vergessen. Geht auch ohne Trauer.",
+    "cta": "Weiter zum Kulturdreieck rund um die Lothringer Straße - einem fast unsichtbaren Kreativcluster, den selbst viele Münchner nicht kennen."
+  },
+  {
+    "id": "lothringer-strasse-kulturbereich",
+    "order": 18,
+    "name": "Lothringer Straße / Kulturbereich",
+    "lat": 48.1298,
+    "lng": 11.587,
+    "blurb": "Es gibt in Haidhausen ein kleines, fast unsichtbares Kulturviertel.",
+    "story": "Es gibt in Haidhausen ein kleines, fast unsichtbares Kulturviertel. Keine großen Schilder, keine Touristenbusse. Nur Ateliers, eine alte Halle und Menschen, die Dinge machen.\n\nDie Gegend rund um die Lothringer Straße ist eines dieser seltenen Münchner Areale, die noch nicht vollständig kommerzialisiert wurden. Hier gibt es Ateliers, Werkstätten, kleine Galerien, die Stadtbibliothek des Stadtbezirks - ein organisch gewachsenes Kreativcluster ohne Masterplan.\n\nDie Tonhalle, ein altes Industriegebäude das zeitweise als Konzertort genutzt wurde, war jahrelang Zentrum der alternativen Münchner Kulturszene. Heute ist das Areal umgebaut und teilweise neu genutzt, aber der Charakter hat sich gehalten: rau, kreativ, nicht perfekt.\n\nWas es besonders macht: Es ist ein Arbeitsort, kein Konsumort. Die Leute hier stellen aus, proben, produzieren. Nicht für Touristen, sondern für sich selbst und ihr Publikum.",
+    "category": "Kunst / Kultur / Geheimtipp",
+    "durationSec": 60,
+    "tags": [
+      "Kunst",
+      "Kultur",
+      "Geheimtipp",
+      "Kreativszene"
+    ],
+    "fact": "München gibt pro Einwohner weniger für Kulturförderung aus als Hamburg, Berlin oder Wien - obwohl es die reichste Großstadt Deutschlands ist. Trotzdem hat es eine lebhafte Kulturszene. Sie findet statt in Räumen wie diesen.",
+    "sinnlich": "Manchmal hört man Probengeräusche aus einem Fenster - Schlagzeug, eine Geige, jemand der einen Text laut spricht. Die Soundtrack-Zufälligkeit des kreativen Arbeitens.",
+    "tipp": "Schau auf die Aushänge und Plakate an den Hauseingängen. Hier kündigen sich Vernissagen, kleine Konzerte und Lesungen an - meistens eintrittslos oder günstig, meistens interessant.",
+    "cta": "Fast zurück zum Anfang - an die Isar. Die Uferpromenade auf Haidhausener Seite ist der ruhige Gegenpart zu allem, was du heute gesehen hast."
+  },
+  {
+    "id": "isarpromenade-haidhausen",
+    "order": 19,
+    "name": "Isarpromenade Haidhausen",
+    "lat": 48.131,
+    "lng": 11.587,
+    "blurb": "Die Isar die du hier siehst, ist nicht die Isar die hier immer war.",
+    "story": "Die Isar die du hier siehst, ist nicht die Isar die hier immer war. Sie wurde begradigt, kanalisiert, reguliert - und dann auf Bürgerinitiative hin renaturiert. Ein Fluss als Demokratiegeschichte.\n\nDie Isar war jahrhundertelang ein wilder, unberechenbarer Fluss - der jedes Frühjahr bei der Schneeschmelze über die Ufer trat und Haidhausen und Au überschwemmte. Im 19. und frühen 20. Jahrhundert wurde sie systematisch begradigt und eingedämmt. Effizienz über Wildheit.\n\nDas Ergebnis war ein zahmer, kanalisierter Fluss mit Betonufern - grau, technisch, langweilig. In den 90ern begann eine Bürgerbewegung, die Isar wieder natürlicher zu gestalten. Zwischen 2000 und 2011 wurden große Abschnitte renaturiert: Kiesbänke, natürliche Ufer, Flachwasserzonen.\n\nDas Ergebnis siehst du hier. Der Fluss ist zurück. Nicht der wilde Isar von 1800 - aber mehr Fluss als er seit Jahrzehnten war. Im Sommer liegt halb München auf den Kiesbänken. Im Frühling rauscht das Wasser grün und kalt. Ein Stück Natur, das sich die Stadt zurückgekämpft hat.",
+    "category": "Natur / Geschichte / Stadtleben",
+    "durationSec": 75,
+    "tags": [
+      "Natur",
+      "Isar",
+      "Geschichte",
+      "Entspannung"
+    ],
+    "fact": "Die Isarrenaturierung kostete 30 Millionen Euro und dauerte 10 Jahre. Heute ist das renaturierte Isarufer eine der meistgenutzten Freizeit- und Erholungsflächen Münchens - und hat mehrere internationale Stadtplanungspreise gewonnen.",
+    "sinnlich": "Das Rauschen des Flusses, das Knirschen des Kieses unter den Füßen, das Licht das vom Wasser reflektiert wird. Im Sommer der Geruch von Sonnencreme und Grillkohle von den Kiesbänken.",
+    "tipp": "Wenn du Zeit hast - geh runter ans Ufer und sitz auf einem Stein. Der Blick flussaufwärts ist einer der schönsten in München. Kein Ticket, keine Schlange, kein Eintritt.",
+    "cta": "Eine letzte Station noch - eine Straße, an der man ablesen kann wie Haidhausen wirklich funktioniert. Und warum Gentrifizierung manchmal aussieht wie Fortschritt, sich aber anfühlt wie Verlust."
+  },
+  {
+    "id": "steinhauser-strasse-ehemaliges-arbeiterviertel",
+    "order": 20,
+    "name": "Steinhauser Straße / ehemaliges Arbeiterviertel",
+    "lat": 48.1355,
+    "lng": 11.5992,
+    "blurb": "Diese Straße zeigt Haidhausen wie es wirklich ist: ein Viertel, das sich selbst nicht mehr erkennt.",
+    "story": "Diese Straße zeigt Haidhausen wie es wirklich ist: ein Viertel, das sich selbst nicht mehr erkennt. Und das trotzdem irgendwie bleibt, was es war.\n\nDie Steinhauser Straße im nördlichen Haidhausen ist eine der wenigen Straßen im Viertel, wo noch die alten Arbeitermietskasernen aus der Gründerzeit stehen - fünfgeschossige Klinkerbauten, enge Treppenhäuser, kleine Wohnungen, die früher von Fabrikarbeitern und Tagelöhnern bewohnt wurden.\n\nHeute sind dieselben Wohnungen saniert, renoviert und unbezahlbar. Wo früher drei Generationen einer Arbeiterfamilie auf 60 Quadratmetern lebten, wohnt heute ein junges Paar mit einem Kind und zwei Homeoffice-Ecken. Die Substanz ist dieselbe. Der Kontext ist eine andere Welt.\n\nDas ist Gentrifizierung im Zeitraffer - und Haidhausen ist ihr Lehrbuchbeispiel in München. Das Viertel wurde billig, weil es arm war. Dann wurde es interessant, weil es authentisch war. Dann wurde es teuer, weil es interessant war. Und jetzt ist es so teuer, dass das Authentische langsam verschwindet. Ein Prozess der sich selbst auffrisst.",
+    "category": "Stadtgeschichte / Gentrifizierung / Gegenwart",
+    "durationSec": 75,
+    "tags": [
+      "Geschichte",
+      "Gentrifizierung",
+      "Architektur",
+      "Gegenwart"
+    ],
+    "fact": "Haidhausen hatte 1990 die günstigsten Mietpreise aller innenstadtnahen Münchner Viertel. 2024 hat es die zweithöchsten östlich der Isar. Eine Verdreifachung in 35 Jahren - während die Löhne in der gleichen Zeit um ca. 80 Prozent gestiegen sind.",
+    "sinnlich": "Die alten Klinkerfassaden haben eine eigene Schwere - nicht das helle Stuck der Gründerzeit, sondern das ernstere, dunklere Industrierot. Ein Farbe, die Arbeit und Alltag ausdrückt, nicht Anspruch.",
+    "tipp": "Schau in die Innenhöfe - viele der alten Mietskasernen haben Hinterhöfe die man durch offene Torbögen sieht. Früher Kohlekeller und Waschküchen. Heute oft bepflanzt, mit Fahrrädern voll und kleinen Sitzecken.",
+    "cta": "Du hast Haidhausen jetzt gesehen. Nicht das kuratierte, nicht das Instagram-Haidhausen. Das echte. Und weißt jetzt warum es so heißt wie es heißt, so ist wie es ist, und was es war bevor es das wurde was es ist. Prost darauf - am Hofbräukeller wartet noch ein Platz."
+  }
+]
