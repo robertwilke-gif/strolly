@@ -9,5 +9,11 @@ export const metadata: Metadata = {
 }
 
 export default function GenussTourPage() {
-  return <TourPageShell tour={genussTour} />
+  return (
+    <TourPageShell
+      tour={genussTour}
+      coverImage="/tours/genuss-cover.png"
+      coverImageAlt="Feinschmecker mit Brezn-Krone und Weißwurst am Münchner Bauernmarkt"
+    />
+  )
 }

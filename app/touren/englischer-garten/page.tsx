@@ -9,5 +9,11 @@ export const metadata: Metadata = {
 }
 
 export default function EnglischerGartenTourPage() {
-  return <TourPageShell tour={englischerGartenTour} />
+  return (
+    <TourPageShell
+      tour={englischerGartenTour}
+      coverImage="/tours/englischer-garten-cover.png"
+      coverImageAlt="Bayerischer Feldherr mit Maßkrug im Englischen Garten – daneben ein Surfer mit Brett und ein Schlafender"
+    />
+  )
 }

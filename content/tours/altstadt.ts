@@ -6,6 +6,9 @@ export const altstadtTour: Tour = {
   slug: 'altstadt',
   area: 'Altstadt',
   title: 'Märchenkönige & Mordsgeschichten',
+  subtitle: 'Eine Stunde durchs Münchner Wohnzimmer – von Marienplatz bis Hofbräuhaus',
+  description:
+    'Glockenspiele die lügen, Teufelstritte die keinen Sinn ergeben, ein Wirtshaus berühmter als seine Gäste: die Münchner Altstadt erzählt am liebsten die Geschichten, die im Reiseführer fehlen. 12 Stationen, zwölf Pointen.',
   durationMin: 75,
   triggerRadiusM: 100,
   start: { lat: 48.1374, lng: 11.5755 },

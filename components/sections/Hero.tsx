@@ -33,7 +33,7 @@ export function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3.5">
-            <Button variant="primary" size="lg">
+            <Button variant="primary" size="lg" href="/demo">
               <Play size={16} fill="currentColor" />
               Hier direkt testen
             </Button>

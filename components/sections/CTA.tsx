@@ -20,7 +20,7 @@ export function CTA() {
           Direkt im Browser starten – kein Download, in unter 2 Minuten unterwegs.
         </p>
         <div className="flex gap-3.5 justify-center mt-8 flex-wrap">
-          <Button variant="secondary" size="lg">
+          <Button variant="secondary" size="lg" href="/demo">
             <Play size={16} fill="currentColor" />
             Hier direkt testen
           </Button>

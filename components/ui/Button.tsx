@@ -1,11 +1,19 @@
-import type { ButtonHTMLAttributes } from 'react'
+import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import Link from 'next/link'
 
 type ButtonVariant = 'primary' | 'secondary' | 'ghost'
 type ButtonSize = 'sm' | 'md' | 'lg'
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   variant?: ButtonVariant
   size?: ButtonSize
+  /**
+   * When set, the button renders as a Next.js <Link>. Mutually exclusive
+   * with onClick handlers that prevent navigation — for those, keep using
+   * the plain button form.
+   */
+  href?: string
+  children?: ReactNode
 }
 
 const variants: Record<ButtonVariant, string> = {
@@ -24,6 +32,8 @@ export function Button({
   variant = 'primary',
   size = 'md',
   className = '',
+  href,
+  children,
   ...props
 }: ButtonProps) {
   const classes = [
@@ -35,5 +45,17 @@ export function Button({
     className,
   ].join(' ')
 
-  return <button className={classes} {...props} />
+  if (href) {
+    return (
+      <Link href={href} className={classes}>
+        {children}
+      </Link>
+    )
+  }
+
+  return (
+    <button className={classes} {...props}>
+      {children}
+    </button>
+  )
 }

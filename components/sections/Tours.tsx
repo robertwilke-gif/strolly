@@ -8,6 +8,9 @@ const tours: TourCardProps[] = [
     duration: '~ 75 Min',
     stations: '12 Stationen',
     coverGradient: 'linear-gradient(135deg, #00B3B3 0%, #007575 100%)',
+    coverImage: '/tours/altstadt-cover.png',
+    coverImageAlt:
+      'Märchenkönig mit Krone und Brezn auf einer Münchner Parkbank, dahinter die Frauenkirche',
     href: '/touren/altstadt',
   },
   {
@@ -27,6 +30,9 @@ const tours: TourCardProps[] = [
     duration: '~ 90 Min',
     stations: '10 Stationen',
     coverGradient: 'linear-gradient(135deg, #14723E 0%, #0A4023 100%)',
+    coverImage: '/tours/englischer-garten-cover.png',
+    coverImageAlt:
+      'Bayerischer Feldherr mit Maßkrug im Englischen Garten – daneben ein Surfer mit Brett und ein Schlafender',
     href: '/touren/englischer-garten',
   },
   {
@@ -35,6 +41,9 @@ const tours: TourCardProps[] = [
     duration: '~ 105 Min',
     stations: '12 Stationen',
     coverGradient: 'linear-gradient(135deg, #FFC107 0%, #C77B00 100%)',
+    coverImage: '/tours/genuss-cover.png',
+    coverImageAlt:
+      'Feinschmecker mit Brezn-Krone und Weißwurst am Münchner Bauernmarkt',
     href: '/touren/genuss',
   },
   {

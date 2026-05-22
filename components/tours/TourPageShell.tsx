@@ -9,9 +9,15 @@ interface TourPageShellProps {
   tour: Tour
   coverImage?: string
   coverImageAlt?: string
+  demoMode?: boolean
 }
 
-export function TourPageShell({ tour, coverImage, coverImageAlt }: TourPageShellProps) {
+export function TourPageShell({
+  tour,
+  coverImage,
+  coverImageAlt,
+  demoMode,
+}: TourPageShellProps) {
   return (
     <>
       <Header />
@@ -75,7 +81,7 @@ export function TourPageShell({ tour, coverImage, coverImageAlt }: TourPageShell
           )}
         </div>
 
-        <TourPlayer tour={tour} />
+        <TourPlayer tour={tour} demoMode={demoMode} />
       </main>
     </>
   )

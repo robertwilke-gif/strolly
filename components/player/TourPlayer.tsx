@@ -33,11 +33,18 @@ type Status = 'idle' | 'walking' | 'playing' | 'paused' | 'completed'
 
 interface TourPlayerProps {
   tour: Tour
+  /**
+   * When true, skips the geolocation watch and auto-progresses through PoIs
+   * in tour order. Each story plays back-to-back; "Überspringen" still works
+   * to jump ahead. Used by the /demo route so non-Munich visitors can preview
+   * the experience.
+   */
+  demoMode?: boolean
 }
 
 const MAP_PADDING = 0.08
 
-export function TourPlayer({ tour }: TourPlayerProps) {
+export function TourPlayer({ tour, demoMode = false }: TourPlayerProps) {
   const [status, setStatus] = useState<Status>('idle')
   const [visitedIds, setVisitedIds] = useState<Set<string>>(() => new Set())
   const [playingPoiId, setPlayingPoiId] = useState<string | null>(null)
@@ -160,6 +167,18 @@ export function TourPlayer({ tour }: TourPlayerProps) {
         // Some older browsers throw on volume=0; ignore.
       }
     }
+
+    if (demoMode) {
+      // Skip geolocation entirely — jump straight to the first PoI so the
+      // proximity effect fires and the first story plays.
+      const first = tour.pois[0]
+      if (first) {
+        setUserPos({ lat: first.lat, lng: first.lng })
+      }
+      setStatus('walking')
+      return
+    }
+
     if (!('geolocation' in navigator)) {
       setGeoError('Dein Browser kann kein GPS. Nutze den Demo-Button unten.')
     } else {
@@ -218,11 +237,9 @@ export function TourPlayer({ tour }: TourPlayerProps) {
     const newSize = visitedIds.size + (alreadyVisited ? 0 : 1)
 
     setPlayingPoiId(null)
-    setVisitedIds((prev) => {
-      const next = new Set(prev)
-      next.add(finishedId)
-      return next
-    })
+    const nextVisited = new Set(visitedIds)
+    nextVisited.add(finishedId)
+    setVisitedIds(nextVisited)
 
     if (newSize >= tour.pois.length) {
       setStatus('completed')
@@ -232,6 +249,16 @@ export function TourPlayer({ tour }: TourPlayerProps) {
       }
     } else {
       setStatus('walking')
+      if (demoMode) {
+        // Auto-jump to the next unvisited PoI in tour order. Short delay so
+        // the user sees the "walking" panel briefly between stories.
+        const nextPoi = tour.pois.find((p) => !nextVisited.has(p.id))
+        if (nextPoi) {
+          setTimeout(() => {
+            setUserPos({ lat: nextPoi.lat, lng: nextPoi.lng })
+          }, 700)
+        }
+      }
     }
   }
 
@@ -262,7 +289,7 @@ export function TourPlayer({ tour }: TourPlayerProps) {
 
       <aside className="flex flex-col gap-4 min-w-0">
         {status === 'idle' && (
-          <IdlePanel tour={tour} onStart={startTour} />
+          <IdlePanel tour={tour} onStart={startTour} demoMode={demoMode} />
         )}
 
         {status === 'walking' && targetPoi && (
@@ -300,7 +327,41 @@ export function TourPlayer({ tour }: TourPlayerProps) {
   )
 }
 
-function IdlePanel({ tour, onStart }: { tour: Tour; onStart: () => void }) {
+function IdlePanel({
+  tour,
+  onStart,
+  demoMode,
+}: {
+  tour: Tour
+  onStart: () => void
+  demoMode?: boolean
+}) {
+  if (demoMode) {
+    return (
+      <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
+        <div className="inline-flex items-center gap-2 bg-sunshine/20 text-navy px-3 py-1 rounded-full font-head font-semibold text-[12px] tracking-wide mb-4">
+          <Sparkles size={14} />
+          Demo-Modus
+        </div>
+        <h2 className="font-head font-bold text-navy text-[26px] leading-tight mb-2">
+          Willst du eine Demo machen?
+        </h2>
+        <p className="text-text-soft text-[15px] leading-relaxed mb-5">
+          Wir zeigen dir die Tour ohne dass du in München sein musst. Die Stationen
+          spielen automatisch hintereinander – {tour.pois.length} kurze Geschichten,
+          ca. {tour.durationMin} Min wenn du alle hörst.
+        </p>
+        <Button variant="primary" size="lg" onClick={onStart} className="w-full">
+          <Play size={16} fill="currentColor" />
+          Ja, los geht's
+        </Button>
+        <p className="text-text-soft text-[12px] mt-3 text-center">
+          Du kannst jede Station mit „Überspringen" abbrechen.
+        </p>
+      </div>
+    )
+  }
+
   return (
     <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
       <div className="inline-flex items-center gap-2 bg-teal-light text-teal-dark px-3 py-1 rounded-full font-head font-semibold text-[12px] tracking-wide mb-4">

@@ -30,7 +30,7 @@ export function Header() {
 
         <div className="flex items-center gap-3.5">
           <Button variant="ghost" size="sm" className="hidden sm:inline-flex">Anmelden</Button>
-          <Button variant="primary" size="md">Hier direkt testen</Button>
+          <Button variant="primary" size="md" href="/demo">Hier direkt testen</Button>
         </div>
       </div>
     </nav>
