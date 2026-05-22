@@ -1,21 +1,6 @@
-import type { PoiLike } from '@/lib/geo'
+import type { Tour } from '@/content/tours/types'
 
-export interface TourPoi extends PoiLike {
-  order: number
-  name: string
-  blurb: string
-  story: string
-}
-
-export interface Tour {
-  slug: string
-  area: string
-  title: string
-  durationMin: number
-  triggerRadiusM: number
-  start: { lat: number; lng: number }
-  pois: TourPoi[]
-}
+export type { Tour, TourPoi } from '@/content/tours/types'
 
 export const altstadtTour: Tour = {
   slug: 'altstadt',

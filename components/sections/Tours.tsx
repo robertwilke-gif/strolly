@@ -1,17 +1,7 @@
-import Link from 'next/link'
-import { Clock, MapPin } from 'lucide-react'
 import { SectionHead } from '@/components/sections/Features'
+import { TourCard, type TourCardProps } from '@/components/ui/TourCard'
 
-interface Tour {
-  area: string
-  title: string
-  duration: string
-  stations: string
-  coverGradient: string
-  href?: string
-}
-
-const tours: Tour[] = [
+const tours: TourCardProps[] = [
   {
     area: 'Altstadt',
     title: 'Märchenkönige & Mordsgeschichten',
@@ -19,6 +9,14 @@ const tours: Tour[] = [
     stations: '12 Stationen',
     coverGradient: 'linear-gradient(135deg, #00B3B3 0%, #007575 100%)',
     href: '/touren/altstadt',
+  },
+  {
+    area: 'Haidhausen',
+    title: 'Wo München vergisst, dass es München ist',
+    duration: '~ 90 Min',
+    stations: '20 Stationen',
+    coverGradient: 'linear-gradient(135deg, #C73E5A 0%, #6B2138 100%)',
+    href: '/touren/haidhausen',
   },
   {
     area: 'Olympiapark',
@@ -42,38 +40,15 @@ export function Tours() {
       <div className="relative z-10 max-w-container mx-auto px-6">
         <SectionHead
           kicker="Touren in München"
-          title="Drei Wege, die Stadt neu zu hören."
-          subtitle="Von der Altstadt bis zum Olympiapark – jede Strolly-Tour erzählt München aus einer anderen, schräg-sympathischen Perspektive."
+          title="Vier Wege, die Stadt neu zu hören."
+          subtitle="Von der Altstadt bis Haidhausen – jede Strolly-Tour erzählt München aus einer anderen, schräg-sympathischen Perspektive."
           inverse
         />
 
-        <div className="grid md:grid-cols-3 gap-5">
-          {tours.map((tour) => {
-            const card = (
-              <article
-                className="h-full bg-navy-soft rounded-lg overflow-hidden border border-white/10 hover:border-teal hover:-translate-y-1 transition-all"
-              >
-                <div className="aspect-[16/10]" style={{ background: tour.coverGradient }} />
-                <div className="px-6 pt-5 pb-6">
-                  <span className="inline-block font-head font-semibold text-[12px] tracking-wider uppercase bg-teal/20 text-teal px-2.5 py-1 rounded-full mb-3">
-                    {tour.area}
-                  </span>
-                  <h3 className="font-head font-semibold text-white text-[20px] mb-2">{tour.title}</h3>
-                  <div className="flex gap-4 text-white/65 text-sm mt-3.5">
-                    <span className="inline-flex items-center gap-1.5"><Clock size={14} />{tour.duration}</span>
-                    <span className="inline-flex items-center gap-1.5"><MapPin size={14} />{tour.stations}</span>
-                  </div>
-                </div>
-              </article>
-            )
-            return tour.href ? (
-              <Link key={tour.title} href={tour.href} className="block">
-                {card}
-              </Link>
-            ) : (
-              <div key={tour.title}>{card}</div>
-            )
-          })}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {tours.map((tour) => (
+            <TourCard key={tour.title} {...tour} />
+          ))}
         </div>
       </div>
 

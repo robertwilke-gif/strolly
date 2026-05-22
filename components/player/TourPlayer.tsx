@@ -42,9 +42,30 @@ export function TourPlayer({ tour }: TourPlayerProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [userPos, setUserPos] = useState<LatLng | null>(null)
   const [geoError, setGeoError] = useState<string | null>(null)
+  const [stories, setStories] = useState<Record<string, string>>(() =>
+    Object.fromEntries(tour.pois.map((p) => [p.id, p.story])),
+  )
 
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
   const watchIdRef = useRef<number | null>(null)
+
+  // Lazy-load stories when tour ships them externally (avoids bloating the
+  // RSC payload — see content/tours/haidhausen.ts).
+  useEffect(() => {
+    if (!tour.storiesUrl) return
+    let cancelled = false
+    fetch(tour.storiesUrl)
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.statusText))))
+      .then((data: Record<string, string>) => {
+        if (!cancelled) setStories(data)
+      })
+      .catch((err) => {
+        if (!cancelled) console.error('Failed to load tour stories:', err)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [tour.storiesUrl])
 
   const currentPoi = tour.pois[currentIndex] ?? null
   const isDone = currentIndex >= tour.pois.length
@@ -102,12 +123,13 @@ export function TourPlayer({ tour }: TourPlayerProps) {
   }
 
   function playStory(poi: TourPoi) {
-    if (typeof window === 'undefined' || !window.speechSynthesis) {
+    const text = stories[poi.id] || poi.story
+    if (typeof window === 'undefined' || !window.speechSynthesis || !text) {
       setStatus('playing')
       return
     }
     window.speechSynthesis.cancel()
-    const u = new SpeechSynthesisUtterance(poi.story)
+    const u = new SpeechSynthesisUtterance(text)
     u.lang = 'de-DE'
     u.rate = 1
     u.pitch = 1
@@ -174,7 +196,7 @@ export function TourPlayer({ tour }: TourPlayerProps) {
         />
       </div>
 
-      <aside className="flex flex-col gap-4">
+      <aside className="flex flex-col gap-4 min-w-0">
         {status === 'idle' && (
           <IdlePanel tour={tour} onStart={startTour} />
         )}
@@ -194,6 +216,7 @@ export function TourPlayer({ tour }: TourPlayerProps) {
         {(status === 'playing' || status === 'paused') && currentPoi && (
           <PlayingPanel
             poi={currentPoi}
+            storyText={stories[currentPoi.id] || currentPoi.story || currentPoi.blurb}
             stepNumber={currentIndex + 1}
             total={tour.pois.length}
             paused={status === 'paused'}
@@ -299,6 +322,7 @@ function WalkingPanel({
 
 function PlayingPanel({
   poi,
+  storyText,
   stepNumber,
   total,
   paused,
@@ -307,6 +331,7 @@ function PlayingPanel({
   onStop,
 }: {
   poi: TourPoi
+  storyText: string
   stepNumber: number
   total: number
   paused: boolean
@@ -339,7 +364,7 @@ function PlayingPanel({
             <EqBar paused={paused} delay="0.54s" />
           </div>
         </div>
-        <p className="text-white/85 text-[14px] leading-snug line-clamp-3">{poi.story}</p>
+        <p className="text-white/85 text-[14px] leading-snug line-clamp-3">{storyText}</p>
       </div>
 
       <div className="flex gap-2">
