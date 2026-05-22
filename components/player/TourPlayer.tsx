@@ -39,7 +39,8 @@ const MAP_PADDING = 0.08
 
 export function TourPlayer({ tour }: TourPlayerProps) {
   const [status, setStatus] = useState<Status>('idle')
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [visitedIds, setVisitedIds] = useState<Set<string>>(() => new Set())
+  const [playingPoiId, setPlayingPoiId] = useState<string | null>(null)
   const [userPos, setUserPos] = useState<LatLng | null>(null)
   const [geoError, setGeoError] = useState<string | null>(null)
   const [stories, setStories] = useState<Record<string, string>>(() =>
@@ -67,8 +68,39 @@ export function TourPlayer({ tour }: TourPlayerProps) {
     }
   }, [tour.storiesUrl])
 
-  const currentPoi = tour.pois[currentIndex] ?? null
-  const isDone = currentIndex >= tour.pois.length
+  const isPlaying = status === 'playing' || status === 'paused'
+  const isDone = visitedIds.size >= tour.pois.length
+
+  const playingPoi = useMemo(
+    () => (playingPoiId ? tour.pois.find((p) => p.id === playingPoiId) ?? null : null),
+    [playingPoiId, tour.pois],
+  )
+
+  const unvisitedPois = useMemo(
+    () => tour.pois.filter((p) => !visitedIds.has(p.id)),
+    [tour.pois, visitedIds],
+  )
+
+  // The PoI the UI focuses on: the playing one when playing/paused, otherwise
+  // the nearest unvisited (or first unvisited if no GPS fix yet).
+  const targetPoi: TourPoi | null = useMemo(() => {
+    if (isPlaying && playingPoi) return playingPoi
+    if (unvisitedPois.length === 0) return null
+    if (!userPos) return unvisitedPois[0]
+    let nearest = unvisitedPois[0]
+    let minDist = haversineDistance(userPos, nearest)
+    for (const p of unvisitedPois.slice(1)) {
+      const d = haversineDistance(userPos, p)
+      if (d < minDist) {
+        nearest = p
+        minDist = d
+      }
+    }
+    return nearest
+  }, [isPlaying, playingPoi, unvisitedPois, userPos])
+
+  const distanceToTarget =
+    userPos && targetPoi ? Math.round(haversineDistance(userPos, targetPoi)) : null
 
   const bounds = useMemo(() => computeBounds(tour.pois), [tour.pois])
   const initialZoom = useMemo(
@@ -99,14 +131,16 @@ export function TourPlayer({ tour }: TourPlayerProps) {
     }
   }, [])
 
-  // Proximity check whenever userPos or currentIndex changes
+  // Proximity check: any unvisited PoI within trigger radius starts the story.
+  // Re-runs when the user moves or when the set of unvisited PoIs changes
+  // (e.g. after a story finishes and the just-visited PoI is removed).
   useEffect(() => {
-    if (status !== 'walking' || !userPos || !currentPoi) return
-    const hit = findPoiInRadius(userPos, [currentPoi], tour.triggerRadiusM)
+    if (status !== 'walking' || !userPos || unvisitedPois.length === 0) return
+    const hit = findPoiInRadius(userPos, unvisitedPois, tour.triggerRadiusM)
     if (hit) {
-      playStory(currentPoi)
+      playStory(hit)
     }
-  }, [userPos, currentIndex, status]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [userPos, status, unvisitedPois]) // eslint-disable-line react-hooks/exhaustive-deps
 
   function startTour() {
     setGeoError(null)
@@ -123,6 +157,7 @@ export function TourPlayer({ tour }: TourPlayerProps) {
   }
 
   function playStory(poi: TourPoi) {
+    setPlayingPoiId(poi.id)
     const text = stories[poi.id] || poi.story
     if (typeof window === 'undefined' || !window.speechSynthesis || !text) {
       setStatus('playing')
@@ -155,34 +190,41 @@ export function TourPlayer({ tour }: TourPlayerProps) {
   }
 
   function advance() {
-    const next = currentIndex + 1
-    if (next >= tour.pois.length) {
+    if (!playingPoiId) return
+    const finishedId = playingPoiId
+    const alreadyVisited = visitedIds.has(finishedId)
+    const newSize = visitedIds.size + (alreadyVisited ? 0 : 1)
+
+    setPlayingPoiId(null)
+    setVisitedIds((prev) => {
+      const next = new Set(prev)
+      next.add(finishedId)
+      return next
+    })
+
+    if (newSize >= tour.pois.length) {
       setStatus('completed')
-      setCurrentIndex(next)
       if (watchIdRef.current !== null) {
         navigator.geolocation.clearWatch(watchIdRef.current)
         watchIdRef.current = null
       }
     } else {
-      setCurrentIndex(next)
       setStatus('walking')
     }
   }
 
   function demoJump() {
-    if (!currentPoi) return
-    setUserPos({ lat: currentPoi.lat, lng: currentPoi.lng })
+    if (!targetPoi) return
+    setUserPos({ lat: targetPoi.lat, lng: targetPoi.lng })
   }
-
-  const distanceToNext =
-    userPos && currentPoi ? Math.round(haversineDistance(userPos, currentPoi)) : null
 
   return (
     <section className="max-w-container mx-auto px-6 pb-16 grid lg:grid-cols-[1.4fr_1fr] gap-6">
       <div className="bg-gray-100 rounded-lg overflow-hidden border border-gray-200 aspect-[4/5] lg:aspect-auto lg:min-h-[560px] relative">
         <TourMap
           pois={tour.pois}
-          currentIndex={currentIndex}
+          visitedIds={visitedIds}
+          highlightPoiId={targetPoi?.id ?? null}
           userPos={userPos}
           bounds={bounds}
           zoom={mapZoom}
@@ -201,23 +243,23 @@ export function TourPlayer({ tour }: TourPlayerProps) {
           <IdlePanel tour={tour} onStart={startTour} />
         )}
 
-        {status === 'walking' && currentPoi && (
+        {status === 'walking' && targetPoi && (
           <WalkingPanel
-            poi={currentPoi}
-            stepNumber={currentIndex + 1}
+            poi={targetPoi}
+            visitedCount={visitedIds.size}
             total={tour.pois.length}
-            distanceM={distanceToNext}
+            distanceM={distanceToTarget}
             triggerRadiusM={tour.triggerRadiusM}
             onDemoJump={demoJump}
             geoError={geoError}
           />
         )}
 
-        {(status === 'playing' || status === 'paused') && currentPoi && (
+        {isPlaying && playingPoi && (
           <PlayingPanel
-            poi={currentPoi}
-            storyText={stories[currentPoi.id] || currentPoi.story || currentPoi.blurb}
-            stepNumber={currentIndex + 1}
+            poi={playingPoi}
+            storyText={stories[playingPoi.id] || playingPoi.story || playingPoi.blurb}
+            stepNumber={visitedIds.size + 1}
             total={tour.pois.length}
             paused={status === 'paused'}
             onPause={pause}
@@ -230,7 +272,7 @@ export function TourPlayer({ tour }: TourPlayerProps) {
           <CompletedPanel tour={tour} />
         )}
 
-        <PoiList pois={tour.pois} currentIndex={currentIndex} done={isDone} />
+        <PoiList pois={tour.pois} visitedIds={visitedIds} highlightPoiId={targetPoi?.id ?? null} />
       </aside>
     </section>
   )
@@ -263,7 +305,7 @@ function IdlePanel({ tour, onStart }: { tour: Tour; onStart: () => void }) {
 
 function WalkingPanel({
   poi,
-  stepNumber,
+  visitedCount,
   total,
   distanceM,
   triggerRadiusM,
@@ -271,7 +313,7 @@ function WalkingPanel({
   geoError,
 }: {
   poi: TourPoi
-  stepNumber: number
+  visitedCount: number
   total: number
   distanceM: number | null
   triggerRadiusM: number
@@ -282,12 +324,15 @@ function WalkingPanel({
     <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
       <div className="flex items-center justify-between mb-4">
         <span className="font-head font-semibold text-[12px] tracking-wider uppercase text-teal-dark">
-          Station {stepNumber} / {total}
+          {visitedCount} / {total} gehört
         </span>
         <span className="inline-flex items-center gap-1.5 text-text-soft text-[13px]">
           <Navigation size={13} />
           unterwegs
         </span>
+      </div>
+      <div className="text-text-soft text-[12px] uppercase tracking-wider font-head font-semibold mb-1">
+        Nächste Station
       </div>
       <h2 className="font-head font-bold text-navy text-[24px] leading-tight mb-1">
         {poi.name}
@@ -302,7 +347,8 @@ function WalkingPanel({
           <span className="text-text-soft text-[13px]">bis zur Station</span>
         </div>
         <div className="text-text-soft text-[12px] mt-1">
-          Die Story startet automatisch ab {triggerRadiusM} m Entfernung.
+          Sobald du auf {triggerRadiusM} m an eine beliebige Station rankommst,
+          startet die Story automatisch.
         </div>
       </div>
 
@@ -314,7 +360,7 @@ function WalkingPanel({
 
       <Button variant="secondary" size="md" onClick={onDemoJump} className="w-full">
         <ChevronRight size={16} />
-        Demo: springe zur Station
+        Demo: springe zur nächsten Station
       </Button>
     </div>
   )
@@ -426,18 +472,18 @@ function CompletedPanel({ tour }: { tour: Tour }) {
 
 function PoiList({
   pois,
-  currentIndex,
-  done,
+  visitedIds,
+  highlightPoiId,
 }: {
   pois: TourPoi[]
-  currentIndex: number
-  done: boolean
+  visitedIds: Set<string>
+  highlightPoiId: string | null
 }) {
   return (
     <ol className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-      {pois.map((poi, i) => {
-        const isPast = done || i < currentIndex
-        const isCurrent = !done && i === currentIndex
+      {pois.map((poi) => {
+        const isPast = visitedIds.has(poi.id)
+        const isCurrent = !isPast && poi.id === highlightPoiId
         return (
           <li
             key={poi.id}
@@ -499,14 +545,16 @@ function computeBounds(pois: TourPoi[]): MapBounds {
 
 function TourMap({
   pois,
-  currentIndex,
+  visitedIds,
+  highlightPoiId,
   userPos,
   bounds,
   zoom,
   showRoute,
 }: {
   pois: TourPoi[]
-  currentIndex: number
+  visitedIds: Set<string>
+  highlightPoiId: string | null
   userPos: LatLng | null
   bounds: MapBounds
   zoom: number
@@ -530,7 +578,7 @@ function TourMap({
 
   const points = pois.map((p) => ({ poi: p, ...projectToViewport(p, vp) }))
   const userPoint = userPos ? projectToViewport(userPos, vp) : null
-  const target = pois[currentIndex] ? points[currentIndex] : null
+  const target = highlightPoiId ? points.find((pt) => pt.poi.id === highlightPoiId) ?? null : null
 
   return (
     <>
@@ -578,9 +626,9 @@ function TourMap({
         )}
 
         {/* PoI markers */}
-        {points.map(({ poi, x, y }, i) => {
-          const isPast = i < currentIndex
-          const isCurrent = i === currentIndex
+        {points.map(({ poi, x, y }) => {
+          const isPast = visitedIds.has(poi.id)
+          const isCurrent = !isPast && poi.id === highlightPoiId
           const color = isPast ? '#14723E' : isCurrent ? '#00B3B3' : '#ffffff'
           const radius = isCurrent ? 13 : 10
           return (
