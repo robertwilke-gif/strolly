@@ -19,6 +19,8 @@ const meta: Meta<typeof TourCard> = {
     duration: { control: 'text' },
     stations: { control: 'text' },
     coverGradient: { control: 'text' },
+    coverImage: { control: 'text' },
+    coverImageAlt: { control: 'text' },
     href: { control: 'text' },
   },
   decorators: [
@@ -52,6 +54,51 @@ export const Haidhausen: Story = {
     stations: '20 Stationen',
     coverGradient: 'linear-gradient(135deg, #C73E5A 0%, #6B2138 100%)',
     href: '/touren/haidhausen',
+  },
+}
+
+export const HaidhausenWithImage: Story = {
+  name: 'Haidhausen (mit Cover-Foto)',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Bild-Cover statt Gradient. Hover-State zoomt das Bild leicht hinein.',
+      },
+    },
+  },
+  args: {
+    area: 'Haidhausen',
+    title: 'Wo München vergisst, dass es München ist',
+    duration: '~ 90 Min',
+    stations: '20 Stationen',
+    coverGradient: 'linear-gradient(135deg, #C73E5A 0%, #6B2138 100%)',
+    coverImage: '/tours/haidhausen-cover.png',
+    coverImageAlt:
+      'Hipster mit Matcha-Latte und älterer Münchner in Lederhose am Café Haidhausen',
+    href: '/touren/haidhausen',
+  },
+}
+
+export const EnglischerGarten: Story = {
+  args: {
+    area: 'Englischer Garten',
+    title: 'Ein Amerikaner, ein Biergarten und 5.000 nackte Münchner',
+    duration: '~ 90 Min',
+    stations: '10 Stationen',
+    coverGradient: 'linear-gradient(135deg, #14723E 0%, #0A4023 100%)',
+    href: '/touren/englischer-garten',
+  },
+}
+
+export const Genuss: Story = {
+  args: {
+    area: 'Genuss',
+    title: 'Zwischen Weißwurst und Weltstadt',
+    duration: '~ 105 Min',
+    stations: '12 Stationen',
+    coverGradient: 'linear-gradient(135deg, #FFC107 0%, #C77B00 100%)',
+    href: '/touren/genuss',
   },
 }
 

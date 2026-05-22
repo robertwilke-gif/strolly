@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { Clock, MapPin } from 'lucide-react'
 
@@ -7,13 +8,37 @@ export interface TourCardProps {
   duration: string
   stations: string
   coverGradient: string
+  coverImage?: string
+  coverImageAlt?: string
   href?: string
 }
 
-export function TourCard({ area, title, duration, stations, coverGradient, href }: TourCardProps) {
+export function TourCard({
+  area,
+  title,
+  duration,
+  stations,
+  coverGradient,
+  coverImage,
+  coverImageAlt,
+  href,
+}: TourCardProps) {
   const card = (
     <article className="group h-full bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm transition-all hover:shadow-md hover:-translate-y-1">
-      <div className="aspect-[16/10]" style={{ background: coverGradient }} />
+      <div
+        className="relative aspect-[16/10] overflow-hidden"
+        style={coverImage ? undefined : { background: coverGradient }}
+      >
+        {coverImage && (
+          <Image
+            src={coverImage}
+            alt={coverImageAlt ?? title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        )}
+      </div>
       <div className="px-7 pt-5 pb-6">
         <span className="inline-block font-head font-semibold text-[12px] tracking-wider uppercase bg-teal-light text-teal-dark px-2.5 py-1 rounded-pill mb-3">
           {area}

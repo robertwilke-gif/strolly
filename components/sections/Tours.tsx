@@ -16,21 +16,40 @@ const tours: TourCardProps[] = [
     duration: '~ 90 Min',
     stations: '20 Stationen',
     coverGradient: 'linear-gradient(135deg, #C73E5A 0%, #6B2138 100%)',
+    coverImage: '/tours/haidhausen-cover.png',
+    coverImageAlt:
+      'Hipster mit Matcha-Latte und älterer Münchner in Lederhose am Café Haidhausen',
     href: '/touren/haidhausen',
+  },
+  {
+    area: 'Englischer Garten',
+    title: 'Ein Amerikaner, ein Biergarten und 5.000 nackte Münchner',
+    duration: '~ 90 Min',
+    stations: '10 Stationen',
+    coverGradient: 'linear-gradient(135deg, #14723E 0%, #0A4023 100%)',
+    href: '/touren/englischer-garten',
+  },
+  {
+    area: 'Genuss',
+    title: 'Zwischen Weißwurst und Weltstadt',
+    duration: '~ 105 Min',
+    stations: '12 Stationen',
+    coverGradient: 'linear-gradient(135deg, #FFC107 0%, #C77B00 100%)',
+    href: '/touren/genuss',
   },
   {
     area: 'Olympiapark',
     title: '1972 – als München tanzte',
     duration: '~ 60 Min',
     stations: '9 Stationen',
-    coverGradient: 'linear-gradient(135deg, #FFC107 0%, #FF9800 100%)',
+    coverGradient: 'linear-gradient(135deg, #5B4BFF 0%, #2A1F8A 100%)',
   },
   {
     area: 'Isar & Schwabing',
     title: 'Bohème, Bier & ein bisschen Skandal',
     duration: '~ 90 Min',
     stations: '14 Stationen',
-    coverGradient: 'linear-gradient(135deg, #5B4BFF 0%, #2A1F8A 100%)',
+    coverGradient: 'linear-gradient(135deg, #E5733D 0%, #92410B 100%)',
   },
 ]
 
@@ -40,12 +59,12 @@ export function Tours() {
       <div className="relative z-10 max-w-container mx-auto px-6">
         <SectionHead
           kicker="Touren in München"
-          title="Vier Wege, die Stadt neu zu hören."
+          title="Sechs Wege, die Stadt neu zu hören."
           subtitle="Von der Altstadt bis Haidhausen – jede Strolly-Tour erzählt München aus einer anderen, schräg-sympathischen Perspektive."
           inverse
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {tours.map((tour) => (
             <TourCard key={tour.title} {...tour} />
           ))}
