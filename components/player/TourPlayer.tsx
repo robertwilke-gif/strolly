@@ -145,6 +145,21 @@ export function TourPlayer({ tour }: TourPlayerProps) {
 
   function startTour() {
     setGeoError(null)
+    // Prime SpeechSynthesis during the user gesture. iOS Safari (and Chrome
+    // on Android in some modes) silently refuses speak() that fires
+    // asynchronously after a click — including via GPS proximity triggers.
+    // Speaking a silent utterance here unlocks the API for the rest of the
+    // session.
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      const prime = new SpeechSynthesisUtterance(' ')
+      prime.volume = 0
+      prime.lang = 'de-DE'
+      try {
+        window.speechSynthesis.speak(prime)
+      } catch {
+        // Some older browsers throw on volume=0; ignore.
+      }
+    }
     if (!('geolocation' in navigator)) {
       setGeoError('Dein Browser kann kein GPS. Nutze den Demo-Button unten.')
     } else {
