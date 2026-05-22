@@ -132,15 +132,16 @@ export function TourPlayer({ tour }: TourPlayerProps) {
   }, [])
 
   // Proximity check: any unvisited PoI within trigger radius starts the story.
-  // Re-runs when the user moves or when the set of unvisited PoIs changes
-  // (e.g. after a story finishes and the just-visited PoI is removed).
+  // Re-runs when the user moves, when the set of unvisited PoIs changes
+  // (e.g. after a story finishes), or when lazy-loaded stories finally arrive
+  // (covers the GPS-resolves-before-fetch race).
   useEffect(() => {
     if (status !== 'walking' || !userPos || unvisitedPois.length === 0) return
     const hit = findPoiInRadius(userPos, unvisitedPois, tour.triggerRadiusM)
     if (hit) {
       playStory(hit)
     }
-  }, [userPos, status, unvisitedPois]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [userPos, status, unvisitedPois, stories]) // eslint-disable-line react-hooks/exhaustive-deps
 
   function startTour() {
     setGeoError(null)
@@ -157,10 +158,17 @@ export function TourPlayer({ tour }: TourPlayerProps) {
   }
 
   function playStory(poi: TourPoi) {
+    const text = stories[poi.id] || poi.story || poi.blurb
+    if (!text) {
+      // Story not loaded yet (lazy fetch still in flight). Stay in walking
+      // so the proximity effect retries once `stories` updates.
+      return
+    }
+
     setPlayingPoiId(poi.id)
-    const text = stories[poi.id] || poi.story
-    if (typeof window === 'undefined' || !window.speechSynthesis || !text) {
-      setStatus('playing')
+    setStatus('playing')
+
+    if (typeof window === 'undefined' || !window.speechSynthesis) {
       return
     }
     window.speechSynthesis.cancel()
@@ -171,7 +179,6 @@ export function TourPlayer({ tour }: TourPlayerProps) {
     u.onend = () => advance()
     utteranceRef.current = u
     window.speechSynthesis.speak(u)
-    setStatus('playing')
   }
 
   function pause() {
