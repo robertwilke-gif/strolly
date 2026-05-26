@@ -9,9 +9,9 @@ interface City {
 
 const cities: City[] = [
   { name: 'München', status: 'live', active: true },
+  { name: 'Köln', status: 'live', active: true },
   { name: 'Berlin', status: "Herbst '26" },
   { name: 'Hamburg', status: "Winter '26" },
-  { name: 'Köln', status: '2027' },
   { name: 'Wien', status: '2027' },
   { name: '+ deine Stadt?', status: '', faded: true },
 ]

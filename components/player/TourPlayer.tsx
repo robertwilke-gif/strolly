@@ -5,6 +5,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import {
+  ChevronDown,
   ChevronRight,
   CircleCheck,
   Headphones,
@@ -321,7 +322,12 @@ export function TourPlayer({ tour, demoMode = false }: TourPlayerProps) {
           <CompletedPanel tour={tour} />
         )}
 
-        <PoiList pois={tour.pois} visitedIds={visitedIds} highlightPoiId={targetPoi?.id ?? null} />
+        <PoiList
+          pois={tour.pois}
+          visitedIds={visitedIds}
+          highlightPoiId={targetPoi?.id ?? null}
+          stories={stories}
+        />
       </aside>
     </section>
   )
@@ -557,48 +563,83 @@ function PoiList({
   pois,
   visitedIds,
   highlightPoiId,
+  stories,
 }: {
   pois: TourPoi[]
   visitedIds: Set<string>
   highlightPoiId: string | null
+  stories: Record<string, string>
 }) {
   return (
     <ol className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
       {pois.map((poi) => {
         const isPast = visitedIds.has(poi.id)
         const isCurrent = !isPast && poi.id === highlightPoiId
+        const story = stories[poi.id] || poi.story
         return (
-          <li
-            key={poi.id}
-            className={`flex items-center gap-3 px-5 py-3 border-b border-gray-200 last:border-0 ${
-              isCurrent ? 'bg-teal-light' : ''
-            }`}
-          >
-            <span
-              className={`w-7 h-7 rounded-full grid place-items-center font-head font-semibold text-[12px] shrink-0 ${
-                isPast
-                  ? 'bg-success text-white'
-                  : isCurrent
-                    ? 'bg-teal text-white'
-                    : 'bg-gray-100 text-text-soft'
-              }`}
-            >
-              {isPast ? <CircleCheck size={14} /> : poi.order}
-            </span>
-            <div className="min-w-0">
-              <div
-                className={`font-head font-semibold text-[14px] truncate ${
-                  isCurrent ? 'text-navy' : isPast ? 'text-text-soft' : 'text-navy'
-                }`}
-              >
-                {poi.name}
-              </div>
-              <div className="text-text-soft text-[12px] truncate">{poi.blurb}</div>
-            </div>
+          <li key={poi.id} className="border-b border-gray-200 last:border-0">
+            <details className={`group ${isCurrent ? 'bg-teal-light' : ''}`}>
+              <summary className="flex items-center gap-3 px-5 py-3 cursor-pointer list-none hover:bg-gray-50 transition-colors focus-visible:outline-none focus-visible:bg-gray-50">
+                <span
+                  className={`w-7 h-7 rounded-full grid place-items-center font-head font-semibold text-[12px] shrink-0 ${
+                    isPast
+                      ? 'bg-success text-white'
+                      : isCurrent
+                        ? 'bg-teal text-white'
+                        : 'bg-gray-100 text-text-soft'
+                  }`}
+                >
+                  {isPast ? <CircleCheck size={14} /> : poi.order}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div
+                    className={`font-head font-semibold text-[14px] truncate ${
+                      isPast ? 'text-text-soft' : 'text-navy'
+                    }`}
+                  >
+                    {poi.name}
+                  </div>
+                  <div className="text-text-soft text-[12px] truncate">{poi.blurb}</div>
+                </div>
+                <ChevronDown
+                  size={16}
+                  className="text-text-soft shrink-0 transition-transform group-open:rotate-180"
+                  aria-hidden
+                />
+              </summary>
+              <PoiDetails poi={poi} story={story} />
+            </details>
           </li>
         )
       })}
     </ol>
+  )
+}
+
+function PoiDetails({ poi, story }: { poi: TourPoi; story: string }) {
+  const subBlocks: { label: string; text: string }[] = []
+  if (poi.fact) subBlocks.push({ label: 'Wusstest du?', text: poi.fact })
+  if (poi.sinnlich) subBlocks.push({ label: 'Vor Ort', text: poi.sinnlich })
+  if (poi.tipp) subBlocks.push({ label: 'Tipp', text: poi.tipp })
+
+  return (
+    <div className="px-5 pb-5 pt-1 pl-[60px] bg-white">
+      {story && (
+        <p className="text-text text-[14px] leading-relaxed whitespace-pre-line">{story}</p>
+      )}
+      {subBlocks.length > 0 && (
+        <div className="mt-4 space-y-3">
+          {subBlocks.map((b) => (
+            <div key={b.label}>
+              <span className="inline-block font-head font-semibold text-[11px] tracking-wider uppercase bg-teal-light text-teal-dark px-2 py-0.5 rounded-pill mb-1.5">
+                {b.label}
+              </span>
+              <p className="text-text text-[13px] leading-relaxed">{b.text}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   )
 }
 

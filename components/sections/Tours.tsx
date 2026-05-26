@@ -1,8 +1,21 @@
+'use client'
+
+// Client Component, weil der Stadt-Filter clientseitigen State (useState) braucht.
+// Kein Datenfetch, reine Interaktion.
+
+import { useMemo, useState } from 'react'
 import { SectionHead } from '@/components/sections/Features'
 import { TourCard, type TourCardProps } from '@/components/ui/TourCard'
 
-const tours: TourCardProps[] = [
+type City = 'München' | 'Köln'
+
+interface TourEntry extends TourCardProps {
+  city: City
+}
+
+const tours: TourEntry[] = [
   {
+    city: 'München',
     area: 'Altstadt',
     title: 'Märchenkönige & Mordsgeschichten',
     duration: '~ 75 Min',
@@ -14,6 +27,7 @@ const tours: TourCardProps[] = [
     href: '/touren/altstadt',
   },
   {
+    city: 'München',
     area: 'Haidhausen',
     title: 'Wo München vergisst, dass es München ist',
     duration: '~ 90 Min',
@@ -25,6 +39,7 @@ const tours: TourCardProps[] = [
     href: '/touren/haidhausen',
   },
   {
+    city: 'München',
     area: 'Englischer Garten',
     title: 'Ein Amerikaner, ein Biergarten und 5.000 nackte Münchner',
     duration: '~ 90 Min',
@@ -36,6 +51,7 @@ const tours: TourCardProps[] = [
     href: '/touren/englischer-garten',
   },
   {
+    city: 'München',
     area: 'Genuss',
     title: 'Zwischen Weißwurst und Weltstadt',
     duration: '~ 105 Min',
@@ -47,6 +63,7 @@ const tours: TourCardProps[] = [
     href: '/touren/genuss',
   },
   {
+    city: 'München',
     area: 'Olympiapark',
     title: '1972 – als München tanzte',
     duration: '~ 60 Min',
@@ -54,29 +71,95 @@ const tours: TourCardProps[] = [
     coverGradient: 'linear-gradient(135deg, #5B4BFF 0%, #2A1F8A 100%)',
   },
   {
+    city: 'München',
     area: 'Isar & Schwabing',
     title: 'Bohème, Bier & ein bisschen Skandal',
     duration: '~ 90 Min',
     stations: '14 Stationen',
     coverGradient: 'linear-gradient(135deg, #E5733D 0%, #92410B 100%)',
   },
+  {
+    city: 'Köln',
+    area: 'Köln · Altstadt',
+    title: 'Kölsch, Köbes und Kathedrale',
+    duration: '~ 210 Min',
+    stations: '14 Stationen',
+    coverGradient: 'linear-gradient(135deg, #C8102E 0%, #7A0A1C 100%)',
+    coverImage: '/tours/koelsch-koeln-cover.png',
+    coverImageAlt:
+      'Vier Läufer in CMT-City-Tours-Trikots prosten mit Kölsch-Stangen am Rheinufer an, im Hintergrund Kölner Dom und Hohenzollernbrücke im Abendlicht',
+    href: '/touren/koelsch-koeln',
+  },
 ]
 
+const cityCopy: Record<City, { kicker: string; title: string; subtitle: string }> = {
+  München: {
+    kicker: 'Touren in München',
+    title: 'Sechs Wege, die Stadt neu zu hören.',
+    subtitle:
+      'Von der Altstadt bis Haidhausen – jede Strolly-Tour erzählt München aus einer anderen, schräg-sympathischen Perspektive.',
+  },
+  Köln: {
+    kicker: 'Touren in Köln',
+    title: 'Eine Stadt, vier Brauhäuser, ein Tag.',
+    subtitle:
+      'Vom Dom bis ins Friesenviertel – mit Köbes, Karneval und Kölsch im 0,2-Liter-Glas.',
+  },
+}
+
+const cities: City[] = ['München', 'Köln']
+
 export function Tours() {
+  const [selectedCity, setSelectedCity] = useState<City>('München')
+
+  const visibleTours = useMemo(
+    () => tours.filter((tour) => tour.city === selectedCity),
+    [selectedCity],
+  )
+
+  const copy = cityCopy[selectedCity]
+
   return (
     <section id="touren" className="relative overflow-hidden py-24 bg-navy text-white">
       <div className="relative z-10 max-w-container mx-auto px-6">
         <SectionHead
-          kicker="Touren in München"
-          title="Sechs Wege, die Stadt neu zu hören."
-          subtitle="Von der Altstadt bis Haidhausen – jede Strolly-Tour erzählt München aus einer anderen, schräg-sympathischen Perspektive."
+          kicker={copy.kicker}
+          title={copy.title}
+          subtitle={copy.subtitle}
           inverse
         />
 
+        <div
+          role="tablist"
+          aria-label="Stadt auswählen"
+          className="flex flex-wrap gap-3 justify-center mb-10"
+        >
+          {cities.map((city) => {
+            const count = tours.filter((tour) => tour.city === city).length
+            const isActive = city === selectedCity
+            const classes = isActive
+              ? 'bg-teal text-white'
+              : 'bg-white/10 text-white hover:bg-white/20'
+            return (
+              <button
+                key={city}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                onClick={() => setSelectedCity(city)}
+                className={`px-5 py-2.5 rounded-pill font-head font-semibold text-[15px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-navy ${classes}`}
+              >
+                {city} · {count} {count === 1 ? 'Tour' : 'Touren'}
+              </button>
+            )
+          })}
+        </div>
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {tours.map((tour) => (
-            <TourCard key={tour.title} {...tour} />
-          ))}
+          {visibleTours.map((tour) => {
+            const { city: _city, ...cardProps } = tour
+            return <TourCard key={tour.title} {...cardProps} />
+          })}
         </div>
       </div>
 
