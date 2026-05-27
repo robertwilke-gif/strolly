@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import type { ReactNode } from 'react'
 import { ChevronLeft, Clock, MapPin, Ruler } from 'lucide-react'
 import { Header } from '@/components/layout/Header'
 import { TourPlayer } from '@/components/player/TourPlayer'
@@ -10,6 +11,11 @@ interface TourPageShellProps {
   coverImage?: string
   coverImageAlt?: string
   demoMode?: boolean
+  squareMap?: boolean
+  idleBadgeText?: string
+  idleHeadline?: string
+  idleDescription?: string
+  belowGridSlot?: ReactNode
 }
 
 export function TourPageShell({
@@ -17,6 +23,11 @@ export function TourPageShell({
   coverImage,
   coverImageAlt,
   demoMode,
+  squareMap,
+  idleBadgeText,
+  idleHeadline,
+  idleDescription,
+  belowGridSlot,
 }: TourPageShellProps) {
   return (
     <>
@@ -81,7 +92,15 @@ export function TourPageShell({
           )}
         </div>
 
-        <TourPlayer tour={tour} demoMode={demoMode} />
+        <TourPlayer
+          tour={tour}
+          demoMode={demoMode}
+          squareMap={squareMap}
+          idleBadgeText={idleBadgeText}
+          idleHeadline={idleHeadline}
+          idleDescription={idleDescription}
+          belowGridSlot={belowGridSlot}
+        />
       </main>
     </>
   )

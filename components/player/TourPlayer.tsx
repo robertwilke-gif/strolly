@@ -3,7 +3,7 @@
 // Client component: needs navigator.geolocation, window.speechSynthesis,
 // and play/pause state. Page shell remains a Server Component.
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import {
   ChevronDown,
   ChevronRight,
@@ -41,11 +41,32 @@ interface TourPlayerProps {
    * the experience.
    */
   demoMode?: boolean
+  /**
+   * When true, map is rendered 1:1 on all breakpoints and the PoI sidebar
+   * scrolls internally on lg+ so its height matches the map.
+   */
+  squareMap?: boolean
+  /** Overrides the idle-state badge ("Bereit, München zu erlaufen?"). */
+  idleBadgeText?: string
+  /** Overrides the idle-state headline. */
+  idleHeadline?: string
+  /** Overrides the idle-state description paragraph. */
+  idleDescription?: string
+  /** Optional content rendered below the map + PoI grid. */
+  belowGridSlot?: ReactNode
 }
 
 const MAP_PADDING = 0.08
 
-export function TourPlayer({ tour, demoMode = false }: TourPlayerProps) {
+export function TourPlayer({
+  tour,
+  demoMode = false,
+  squareMap = false,
+  idleBadgeText,
+  idleHeadline,
+  idleDescription,
+  belowGridSlot,
+}: TourPlayerProps) {
   const [status, setStatus] = useState<Status>('idle')
   const [visitedIds, setVisitedIds] = useState<Set<string>>(() => new Set())
   const [playingPoiId, setPlayingPoiId] = useState<string | null>(null)
@@ -268,67 +289,83 @@ export function TourPlayer({ tour, demoMode = false }: TourPlayerProps) {
     setUserPos({ lat: targetPoi.lat, lng: targetPoi.lng })
   }
 
+  const mapContainerClasses = squareMap
+    ? 'bg-gray-100 rounded-lg overflow-hidden border border-gray-200 aspect-square relative'
+    : 'bg-gray-100 rounded-lg overflow-hidden border border-gray-200 aspect-[4/5] lg:aspect-auto lg:min-h-[560px] relative'
+  const asideClasses = squareMap
+    ? 'flex flex-col gap-4 min-w-0 min-h-0 lg:overflow-y-auto'
+    : 'flex flex-col gap-4 min-w-0'
+
   return (
-    <section className="max-w-container mx-auto px-6 pb-16 grid lg:grid-cols-[1.4fr_1fr] gap-6">
-      <div className="bg-gray-100 rounded-lg overflow-hidden border border-gray-200 aspect-[4/5] lg:aspect-auto lg:min-h-[560px] relative">
-        <TourMap
-          pois={tour.pois}
-          visitedIds={visitedIds}
-          highlightPoiId={targetPoi?.id ?? null}
-          userPos={userPos}
-          bounds={bounds}
-          zoom={mapZoom}
-          showRoute={status === 'walking' && !isDone}
-        />
-        <MapZoomControls
-          onZoomIn={zoomIn}
-          onZoomOut={zoomOut}
-          canZoomIn={mapZoom < maxMapZoom}
-          canZoomOut={mapZoom > minMapZoom}
-        />
+    <section className="max-w-container mx-auto px-6 pb-16">
+      <div className="grid lg:grid-cols-[1.4fr_1fr] gap-6">
+        <div className={mapContainerClasses}>
+          <TourMap
+            pois={tour.pois}
+            visitedIds={visitedIds}
+            highlightPoiId={targetPoi?.id ?? null}
+            userPos={userPos}
+            bounds={bounds}
+            zoom={mapZoom}
+            showRoute={status === 'walking' && !isDone}
+          />
+          <MapZoomControls
+            onZoomIn={zoomIn}
+            onZoomOut={zoomOut}
+            canZoomIn={mapZoom < maxMapZoom}
+            canZoomOut={mapZoom > minMapZoom}
+          />
+        </div>
+
+        <aside className={asideClasses}>
+          {status === 'idle' && (
+            <IdlePanel
+              tour={tour}
+              onStart={startTour}
+              demoMode={demoMode}
+              badgeText={idleBadgeText}
+              headline={idleHeadline}
+              description={idleDescription}
+            />
+          )}
+
+          {status === 'walking' && targetPoi && (
+            <WalkingPanel
+              poi={targetPoi}
+              visitedCount={visitedIds.size}
+              total={tour.pois.length}
+              distanceM={distanceToTarget}
+              triggerRadiusM={tour.triggerRadiusM}
+              onDemoJump={demoJump}
+              geoError={geoError}
+            />
+          )}
+
+          {isPlaying && playingPoi && (
+            <PlayingPanel
+              poi={playingPoi}
+              storyText={stories[playingPoi.id] || playingPoi.story || playingPoi.blurb}
+              stepNumber={visitedIds.size + 1}
+              total={tour.pois.length}
+              paused={status === 'paused'}
+              onPause={pause}
+              onResume={resume}
+              onStop={stop}
+            />
+          )}
+
+          {status === 'completed' && <CompletedPanel tour={tour} />}
+
+          <PoiList
+            pois={tour.pois}
+            visitedIds={visitedIds}
+            highlightPoiId={targetPoi?.id ?? null}
+            stories={stories}
+          />
+        </aside>
       </div>
 
-      <aside className="flex flex-col gap-4 min-w-0">
-        {status === 'idle' && (
-          <IdlePanel tour={tour} onStart={startTour} demoMode={demoMode} />
-        )}
-
-        {status === 'walking' && targetPoi && (
-          <WalkingPanel
-            poi={targetPoi}
-            visitedCount={visitedIds.size}
-            total={tour.pois.length}
-            distanceM={distanceToTarget}
-            triggerRadiusM={tour.triggerRadiusM}
-            onDemoJump={demoJump}
-            geoError={geoError}
-          />
-        )}
-
-        {isPlaying && playingPoi && (
-          <PlayingPanel
-            poi={playingPoi}
-            storyText={stories[playingPoi.id] || playingPoi.story || playingPoi.blurb}
-            stepNumber={visitedIds.size + 1}
-            total={tour.pois.length}
-            paused={status === 'paused'}
-            onPause={pause}
-            onResume={resume}
-            onStop={stop}
-          />
-        )}
-
-        {status === 'completed' && (
-          <CompletedPanel tour={tour} />
-        )}
-
-        <PoiList
-          pois={tour.pois}
-          visitedIds={visitedIds}
-          highlightPoiId={targetPoi?.id ?? null}
-          stories={stories}
-        />
-      </aside>
+      {belowGridSlot && <div className="mt-8">{belowGridSlot}</div>}
     </section>
   )
 }
@@ -337,10 +374,16 @@ function IdlePanel({
   tour,
   onStart,
   demoMode,
+  badgeText,
+  headline,
+  description,
 }: {
   tour: Tour
   onStart: () => void
   demoMode?: boolean
+  badgeText?: string
+  headline?: string
+  description?: string
 }) {
   if (demoMode) {
     return (
@@ -372,14 +415,14 @@ function IdlePanel({
     <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
       <div className="inline-flex items-center gap-2 bg-teal-light text-teal-dark px-3 py-1 rounded-full font-head font-semibold text-[12px] tracking-wide mb-4">
         <Sparkles size={14} />
-        Bereit, München zu erlaufen?
+        {badgeText ?? 'Bereit, München zu erlaufen?'}
       </div>
       <h2 className="font-head font-bold text-navy text-[26px] leading-tight mb-2">
-        Kopfhörer auf, dann geht's los.
+        {headline ?? 'Kopfhörer auf, dann geht’s los.'}
       </h2>
       <p className="text-text-soft text-[15px] leading-relaxed mb-5">
-        Strolly schickt dich von Station zu Station. Sobald du auf {tour.triggerRadiusM} m an
-        einen Ort rankommst, erzählen wir dir die Geschichte. Pausieren geht jederzeit.
+        {description ??
+          `Strolly schickt dich von Station zu Station. Sobald du auf ${tour.triggerRadiusM} m an einen Ort rankommst, erzählen wir dir die Geschichte. Pausieren geht jederzeit.`}
       </p>
       <Button variant="primary" size="lg" onClick={onStart} className="w-full">
         <Play size={16} fill="currentColor" />
