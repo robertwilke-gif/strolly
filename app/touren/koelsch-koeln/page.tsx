@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { TourPageShell } from '@/components/tours/TourPageShell'
+import { KoelschPuzzleBox } from '@/components/tours/KoelschPuzzleBox'
 import { koelschKoelnTour } from '@/content/tours/koelsch-koeln'
 
 export const metadata: Metadata = {
@@ -14,6 +15,9 @@ export default function KoelschKoelnTourPage() {
       tour={koelschKoelnTour}
       coverImage="/tours/koelsch-koeln-cover.png"
       coverImageAlt="Vier Läufer in CMT-City-Tours-Trikots prosten mit Kölsch-Stangen am Rheinufer an, im Hintergrund Kölner Dom und Hohenzollernbrücke im Abendlicht"
+      squareMap
+      idleBadgeText="Ist das CMT-Team bereit, Köln zu erleben?"
+      belowGridSlot={<KoelschPuzzleBox />}
     />
   )
 }
