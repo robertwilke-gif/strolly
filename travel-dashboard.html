@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reise-Dashboard – Robert Wilke</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1f2937;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --blue: #58a6ff;
+    --blue-bg: #0c2d6b;
+    --blue-border: #1f6feb;
+    --green: #3fb950;
+    --green-bg: #0d3320;
+    --green-border: #238636;
+    --orange: #f0883e;
+    --orange-bg: #3d1f00;
+    --orange-border: #9e4c00;
+    --purple: #bc8cff;
+    --purple-bg: #271052;
+    --purple-border: #6e40c9;
+    --yellow: #e3b341;
+    --yellow-bg: #2d1f00;
+    --today: #ff7b72;
+    --today-bg: #3d0000;
+    --today-border: #da3633;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  header .date-badge {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-left: auto;
+  }
+
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .dot-blue { background: var(--blue); }
+  .dot-green { background: var(--green); }
+  .dot-orange { background: var(--orange); }
+  .dot-purple { background: var(--purple); }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
+  .trip-group {
+    margin-bottom: 40px;
+  }
+
+  .trip-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .trip-header h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .trip-dates {
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2px 10px;
+  }
+
+  .past-tag {
+    font-size: 11px;
+    color: var(--text-muted);
+    background: var(--surface2);
+    border-radius: 10px;
+    padding: 2px 8px;
+    margin-left: auto;
+  }
+
+  .upcoming-tag {
+    font-size: 11px;
+    color: var(--today);
+    background: var(--today-bg);
+    border: 1px solid var(--today-border);
+    border-radius: 10px;
+    padding: 2px 8px;
+    margin-left: auto;
+    animation: pulse 2s infinite;
+  }
+
+  .future-tag {
+    font-size: 11px;
+    color: var(--yellow);
+    background: var(--yellow-bg);
+    border-radius: 10px;
+    padding: 2px 8px;
+    margin-left: auto;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card {
+    border-radius: 10px;
+    border: 1px solid;
+    padding: 14px 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .card:hover {
+    transform: translateX(4px);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.07);
+  }
+
+  .card.flight {
+    background: var(--blue-bg);
+    border-color: var(--blue-border);
+  }
+  .card.train {
+    background: var(--green-bg);
+    border-color: var(--green-border);
+  }
+  .card.hotel {
+    background: var(--orange-bg);
+    border-color: var(--orange-border);
+  }
+  .card.car {
+    background: var(--purple-bg);
+    border-color: var(--purple-border);
+  }
+  .card.today-card {
+    background: var(--today-bg);
+    border-color: var(--today-border);
+    box-shadow: 0 0 12px rgba(218, 54, 51, 0.25);
+  }
+
+  .card-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .card-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .card-route {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .card.flight .card-route { color: var(--blue); }
+  .card.train .card-route { color: var(--green); }
+  .card.hotel .card-route { color: var(--orange); }
+  .card.car .card-route { color: var(--purple); }
+  .card.today-card .card-route { color: var(--today); }
+
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  .tag-ref {
+    background: rgba(255,255,255,0.07);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  .tag-time {
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .tag-price {
+    background: rgba(255,255,255,0.05);
+    color: var(--yellow);
+    border: 1px solid rgba(88,80,0,0.5);
+  }
+
+  .card-date {
+    font-size: 12px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    text-align: right;
+    min-width: 80px;
+  }
+
+  .card-detail {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+
+  .today-banner {
+    background: linear-gradient(135deg, var(--today-bg), #1a0000);
+    border: 1px solid var(--today-border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .today-banner .icon { font-size: 24px; }
+  .today-banner .text { flex: 1; }
+  .today-banner .text strong { color: var(--today); font-size: 15px; display: block; margin-bottom: 2px; }
+  .today-banner .text span { font-size: 12px; color: var(--text-muted); }
+
+  .sep {
+    height: 1px;
+    background: var(--border);
+    margin: 32px 0;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 14px 16px; }
+    .container { padding: 16px; }
+    .card { padding: 12px; gap: 10px; }
+    .card-icon { font-size: 18px; }
+    .card-date { display: none; }
+    .legend { padding: 10px 16px; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>✈️ Reise-Dashboard</h1>
+  </div>
+  <div style="font-size:12px;color:var(--text-muted)">Robert Wilke</div>
+  <div class="date-badge">Heute: 18. Juni 2026</div>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><div class="dot dot-blue"></div>Flug</div>
+  <div class="legend-item"><div class="dot dot-green"></div>Zug</div>
+  <div class="legend-item"><div class="dot dot-orange"></div>Hotel / Unterkunft</div>
+  <div class="legend-item"><div class="dot dot-purple"></div>Mietwagen</div>
+</div>
+
+<div class="container">
+
+  <!-- Today Banner -->
+  <div class="today-banner">
+    <div class="icon">📍</div>
+    <div class="text">
+      <strong>Heute: Check-in Berlin</strong>
+      <span>ibis Berlin Hauptbahnhof – Invalidenstrasse 53 · Check-in ab 15:00 Uhr · Ref: 8601AFH0620</span>
+    </div>
+  </div>
+
+  <!-- TRIP 1 -->
+  <div class="trip-group">
+    <div class="trip-header">
+      <h2>🇩🇰 Kopenhagen – Silvester</h2>
+      <div class="trip-dates">30.12.2025 – 02.01.2026</div>
+      <div class="past-tag">Vergangen</div>
+    </div>
+    <div class="cards">
+      <div class="card flight">
+        <div class="card-icon">✈️</div>
+        <div class="card-body">
+          <div class="card-route">MUC → CPH</div>
+          <div class="card-title">Lufthansa – Business Class</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">74F2OK</span>
+            <span class="tag tag-time">30.12.2025</span>
+          </div>
+        </div>
+        <div class="card-date">30. Dez<br>2025</div>
+      </div>
+      <div class="card flight">
+        <div class="card-icon">✈️</div>
+        <div class="card-body">
+          <div class="card-route">CPH → MUC</div>
+          <div class="card-title">Lufthansa – Economy Class</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">8FLSCF</span>
+            <span class="tag tag-time">02.01.2026</span>
+          </div>
+        </div>
+        <div class="card-date">2. Jan<br>2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRIP 2 -->
+  <div class="trip-group">
+    <div class="trip-header">
+      <h2>🇿🇦 Südafrika – Kapstadt &amp; Port Elizabeth</h2>
+      <div class="trip-dates">21.03. – 04.04.2026</div>
+      <div class="past-tag">Vergangen</div>
+    </div>
+    <div class="cards">
+      <div class="card hotel">
+        <div class="card-icon">🏠</div>
+        <div class="card-body">
+          <div class="card-route">Sea Point Apartment with Mountain View</div>
+          <div class="card-title">Airbnb Kapstadt · 343C Bellevue Rd, Sea Point</div>
+          <div class="card-detail">Check-in: Sa. 21.03. 14:00 · Check-out: Di. 24.03. 10:00 · 2 Erwachsene</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">HMWWYPEEAP</span>
+            <span class="tag tag-price">234 €</span>
+          </div>
+        </div>
+        <div class="card-date">21.–24. Mär<br>2026</div>
+      </div>
+      <div class="card car">
+        <div class="card-icon">🚗</div>
+        <div class="card-body">
+          <div class="card-route">Port Elizabeth – Mietwagen</div>
+          <div class="card-title">BSP Auto via billiger-mietwagen.de</div>
+          <div class="card-detail">24.03.2026 – 04.04.2026</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">923751152222</span>
+          </div>
+        </div>
+        <div class="card-date">24. Mär –<br>4. Apr 2026</div>
+      </div>
+      <div class="card train">
+        <div class="card-icon">🚂</div>
+        <div class="card-body">
+          <div class="card-route">Frankfurt Flughafen → Osnabrück</div>
+          <div class="card-title">Deutsche Bahn · Super Sparpreis 2. Kl.</div>
+          <div class="card-detail">07:10 → 10:21</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">764630178568</span>
+            <span class="tag tag-time">05.04.2026</span>
+            <span class="tag tag-price">48,98 €</span>
+          </div>
+        </div>
+        <div class="card-date">5. Apr<br>2026</div>
+      </div>
+      <div class="card train">
+        <div class="card-icon">🚂</div>
+        <div class="card-body">
+          <div class="card-route">Osnabrück → München Hbf</div>
+          <div class="card-title">Deutsche Bahn · Super Sparpreis 2. Kl.</div>
+          <div class="card-detail">15:37 → 22:29</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">469045594208</span>
+            <span class="tag tag-time">07.04.2026</span>
+            <span class="tag tag-price">115,48 €</span>
+          </div>
+        </div>
+        <div class="card-date">7. Apr<br>2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRIP 3: Berlin May -->
+  <div class="trip-group">
+    <div class="trip-header">
+      <h2>🇩🇪 Berlin (Mai)</h2>
+      <div class="trip-dates">07.05.2026</div>
+      <div class="past-tag">Vergangen</div>
+    </div>
+    <div class="cards">
+      <div class="card train">
+        <div class="card-icon">🚂</div>
+        <div class="card-body">
+          <div class="card-route">Mannheim Hbf → Berlin Hbf</div>
+          <div class="card-title">ICE 278 · Flexpreis 1. Kl. · Wg. 10 Pl. 25</div>
+          <div class="card-detail">16:30 → 21:31</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">758165133208</span>
+            <span class="tag tag-time">07.05.2026</span>
+            <span class="tag tag-price">179,50 €</span>
+          </div>
+        </div>
+        <div class="card-date">7. Mai<br>2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRIP 4: Tschechien + Pendelzüge -->
+  <div class="trip-group">
+    <div class="trip-header">
+      <h2>🇨🇿 Tschechien – Jáchymov (Erzgebirge)</h2>
+      <div class="trip-dates">08.–10.05.2026 + Pendelzüge</div>
+      <div class="past-tag">Vergangen</div>
+    </div>
+    <div class="cards">
+      <div class="card hotel">
+        <div class="card-icon">🏡</div>
+        <div class="card-body">
+          <div class="card-route">Zelená chalupa pod Klínovcem</div>
+          <div class="card-title">Airbnb · Suchá 118, 363 01 Jáchymov-Ostrov nad Ohří, CZ</div>
+          <div class="card-detail">Check-in: Fr. 08.05. 16:00 · Check-out: So. 10.05. 10:00 · 8 Erw., 1 Kleinkind · Matthews Family</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">HMT5X55XH4</span>
+          </div>
+        </div>
+        <div class="card-date">8.–10. Mai<br>2026</div>
+      </div>
+      <div class="card train">
+        <div class="card-icon">🚂</div>
+        <div class="card-body">
+          <div class="card-route">München Hbf → Mannheim Hbf</div>
+          <div class="card-title">ICE 692 · Flexpreis 1. Kl. · Wg. 12 Pl. 66</div>
+          <div class="card-detail">06:42 → 09:26</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">772392523510</span>
+            <span class="tag tag-time">11.05.2026</span>
+            <span class="tag tag-price">115,00 €</span>
+          </div>
+        </div>
+        <div class="card-date">11. Mai<br>2026</div>
+      </div>
+      <div class="card train">
+        <div class="card-icon">🚂</div>
+        <div class="card-body">
+          <div class="card-route">München Hbf → Mannheim Hbf</div>
+          <div class="card-title">ICE 692 · Super Sparpreis 1. Kl.</div>
+          <div class="card-detail">06:42 → 09:26</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">931357177316</span>
+            <span class="tag tag-time">18.05.2026</span>
+            <span class="tag tag-price">62,39 €</span>
+          </div>
+        </div>
+        <div class="card-date">18. Mai<br>2026</div>
+      </div>
+      <div class="card train">
+        <div class="card-icon">🚂</div>
+        <div class="card-body">
+          <div class="card-route">Mannheim Hbf → München Hbf</div>
+          <div class="card-title">ICE 691 · Flexpreis 1. Kl. · Wg. 10 Pl. 35</div>
+          <div class="card-detail">18:33 → 21:15</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">997313429746</span>
+            <span class="tag tag-time">20.05.2026</span>
+            <span class="tag tag-price">118,10 €</span>
+          </div>
+        </div>
+        <div class="card-date">20. Mai<br>2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRIP 5: Mallorca -->
+  <div class="trip-group">
+    <div class="trip-header">
+      <h2>🇪🇸 Mallorca</h2>
+      <div class="trip-dates">26.04. + 03.–07.06.2026</div>
+      <div class="past-tag">Vergangen</div>
+    </div>
+    <div class="cards">
+      <div class="card flight">
+        <div class="card-icon">✈️</div>
+        <div class="card-body">
+          <div class="card-route">Hamburg → München</div>
+          <div class="card-title">Eurowings EW 7172 · SMART Tarif · Sitz 17F</div>
+          <div class="card-detail">Boarding: 13:30 · Gate A39 · Sequenz: 90</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">83TVLP</span>
+            <span class="tag tag-time">26.04.2026</span>
+          </div>
+        </div>
+        <div class="card-date">26. Apr<br>2026</div>
+      </div>
+      <div class="card car">
+        <div class="card-icon">🚗</div>
+        <div class="card-body">
+          <div class="card-route">Mietwagen Palma de Mallorca</div>
+          <div class="card-title">Centauro – Flughafen Palma · AutoEurope via billiger-mietwagen.de</div>
+          <div class="card-detail">Abholung: 03.06. 19:30 Uhr · Rückgabe: 07.06. 16:00 Uhr</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">157844905</span>
+            <span class="tag tag-ref">ER26169971</span>
+          </div>
+        </div>
+        <div class="card-date">3.–7. Jun<br>2026</div>
+      </div>
+      <div class="card car">
+        <div class="card-icon">🚗</div>
+        <div class="card-body">
+          <div class="card-route">Mietwagen Palma de Mallorca (2. Voucher)</div>
+          <div class="card-title">Centauro – Flughafen Palma · AutoEurope via billiger-mietwagen.de</div>
+          <div class="card-detail">Abholung: 03.06. 21:15 Uhr · Rückgabe: 07.06. 16:00 Uhr</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">206988453</span>
+            <span class="tag tag-ref">ER26266716</span>
+          </div>
+        </div>
+        <div class="card-date">3.–7. Jun<br>2026</div>
+      </div>
+      <div class="card hotel">
+        <div class="card-icon">🏨</div>
+        <div class="card-body">
+          <div class="card-route">Protur Atalaya – Cala Millor</div>
+          <div class="card-title">Sol Naixent s/n, 07560 Cala Millor, Spanien</div>
+          <div class="card-detail">Check-in: Mi. 03.06. 14:00 · Check-out: Fr. 05.06. 11:00 · 3 Erwachsene · 2 Nächte</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">5614703456</span>
+            <span class="tag tag-price">278,06 €</span>
+          </div>
+        </div>
+        <div class="card-date">3.–5. Jun<br>2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRIP 6: Berlin TODAY -->
+  <div class="trip-group">
+    <div class="trip-header">
+      <h2>🇩🇪 Berlin</h2>
+      <div class="trip-dates">18.–19.06.2026</div>
+      <div class="upcoming-tag">HEUTE</div>
+    </div>
+    <div class="cards">
+      <div class="card today-card">
+        <div class="card-icon">🏨</div>
+        <div class="card-body">
+          <div class="card-route">ibis Berlin Hauptbahnhof</div>
+          <div class="card-title">Invalidenstrasse 53, 10557 Berlin · Tel: +49 30 7109600</div>
+          <div class="card-detail">Check-in: Do. 18.06. ab 15:00 · Check-out: Fr. 19.06. bis 12:00 · 2 Erwachsene · Standard Doppelzimmer</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">8601AFH0620</span>
+            <span class="tag tag-ref">PIN: 081011</span>
+            <span class="tag tag-price">120,60 €</span>
+          </div>
+        </div>
+        <div class="card-date">18.–19. Jun<br>2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRIP 7: Jakobsweg -->
+  <div class="trip-group">
+    <div class="trip-header">
+      <h2>⛪ Jakobsweg – Saint-Jean-Pied-de-Port &amp; Pamplona</h2>
+      <div class="trip-dates">04.–08.07.2026</div>
+      <div class="future-tag">Bald</div>
+    </div>
+    <div class="cards">
+      <div class="card hotel">
+        <div class="card-icon">🏨</div>
+        <div class="card-body">
+          <div class="card-route">Maison Simonenia – Saint-Jean-Pied-de-Port</div>
+          <div class="card-title">12 Rue de la Citadelle, 64220 Saint-Jean-Pied-de-Port, Frankreich</div>
+          <div class="card-detail">Check-in: Sa. 04.07. 16:00–20:00 · Check-out: So. 05.07. bis 11:00 · 1 Nacht · Superior Doppelzimmer · Frühstück: 10 €/Person</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">5272548413</span>
+            <span class="tag tag-ref">PIN: 3054</span>
+            <span class="tag tag-price">97,30 €</span>
+          </div>
+        </div>
+        <div class="card-date">4.–5. Jul<br>2026</div>
+      </div>
+      <div class="card hotel">
+        <div class="card-icon">🏠</div>
+        <div class="card-body">
+          <div class="card-route">Hostal Rural Oricáin – bei Pamplona</div>
+          <div class="card-title">Carretera Irún 9, 31194 Oricáin, Spanien · Tel: +34 688 43 32 60</div>
+          <div class="card-detail">Check-in: Di. 07.07. 14:00–22:30 · Check-out: Mi. 08.07. 07:30–12:00 · 1 Nacht · Standard Doppelzimmer</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">6303194613</span>
+            <span class="tag tag-ref">PIN: 626264</span>
+            <span class="tag tag-price">130,91 €</span>
+          </div>
+        </div>
+        <div class="card-date">7.–8. Jul<br>2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRIP 8: Duesseldorf -->
+  <div class="trip-group">
+    <div class="trip-header">
+      <h2>🇩🇪 Düsseldorf</h2>
+      <div class="trip-dates">26.–27.07.2026</div>
+      <div class="future-tag">Bald</div>
+    </div>
+    <div class="cards">
+      <div class="card hotel">
+        <div class="card-icon">🏨</div>
+        <div class="card-body">
+          <div class="card-route">ibis Hotel Düsseldorf Hauptbahnhof</div>
+          <div class="card-title">Konrad-Adenauer-Platz 14, 40210 Düsseldorf · Tel: +49 211 16720</div>
+          <div class="card-detail">Check-in: So. 26.07. ab 15:00 · Check-out: Mo. 27.07. bis 12:00 · 2 Erwachsene · Standard Kingsize</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">5850201442</span>
+            <span class="tag tag-ref">PIN: 8276</span>
+            <span class="tag tag-price">68,10 €</span>
+          </div>
+        </div>
+        <div class="card-date">26.–27. Jul<br>2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRIP 9: Fieberbrunn -->
+  <div class="trip-group">
+    <div class="trip-header">
+      <h2>🇦🇹 Fieberbrunn – Österreich</h2>
+      <div class="trip-dates">14.–16.08.2026</div>
+      <div class="future-tag">Geplant</div>
+    </div>
+    <div class="cards">
+      <div class="card hotel">
+        <div class="card-icon">🏔️</div>
+        <div class="card-body">
+          <div class="card-route">Langerwegh Apartments AP1</div>
+          <div class="card-title">4c Gruberau, 6391 Fieberbrunn, Österreich · Tel: +43 676 3377058</div>
+          <div class="card-detail">Check-in: Fr. 14.08. 15:00–19:00 · Check-out: So. 16.08. bis 10:00 · 4 Erwachsene · 2 Nächte · Apartment auf 2 Etagen</div>
+          <div class="card-meta">
+            <span class="tag tag-ref">5894291161</span>
+            <span class="tag tag-ref">PIN: 2985</span>
+            <span class="tag tag-price">393,64 €</span>
+          </div>
+        </div>
+        <div class="card-date">14.–16. Aug<br>2026</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;color:var(--text-muted);font-size:11px;margin-top:40px;padding-top:20px;border-top:1px solid var(--border)">
+    Generiert am 18. Juni 2026 · robert.wilke@googlemail.com
+  </div>
+
+</div>
+
+<script>
+  // Highlight today's date and sort upcoming
+  document.addEventListener('DOMContentLoaded', function() {
+    // Add scroll indicator for mobile
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+      card.addEventListener('click', function() {
+        this.style.transform = 'translateX(8px)';
+        setTimeout(() => this.style.transform = '', 200);
+      });
+    });
+  });
+</script>
+</body>
+</html>
